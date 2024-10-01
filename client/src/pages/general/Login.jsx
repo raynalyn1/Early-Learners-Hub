@@ -10,14 +10,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#b6ab9d] flex items-center justify-center">
-      <div className="max-w-md w-full bg-[#EBCEA8] shadow-md p-8 rounded-lg">
-        <h1 className="text-2xl font-bold text-[#5B3A29] text-center">Login</h1>
+    <div className="min-h-screen bg-[#EB9721] opacity-80 flex items-center justify-center">
+      <div className="max-w-md w-full bg-[#EDC080] shadow-md p-8 rounded-lg">
+        <h1 className="text-2xl font-bold text-[#181C14] text-center">Login</h1>
         <form onSubmit={handleLogin} className="mt-6 space-y-4">
           <div>
             <input 
               type="email"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 border border-orange-500 opacity-80 rounded mt-1"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Username'
@@ -27,7 +27,7 @@ const Login = () => {
           <div>
             <input 
               type="password"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
+              className="w-full p-2 border border-orange-500 opacity-80 rounded mt-1"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
@@ -36,7 +36,7 @@ const Login = () => {
           </div>
           <button 
             type="submit"
-            className="w-full bg-[#ECB671] text-white py-2 rounded"
+            className="w-full bg-[#EB9721] text-black py-2 rounded block font-bold"
           >
             Login
           </button>
