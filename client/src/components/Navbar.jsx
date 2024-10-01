@@ -4,9 +4,8 @@ import img from "../images/footer/logo.png";
 
 const Navbar = () => {
   return (
-    <nav className="bg-[#F5F5F5] w-full a top-0 left-0 shadow-l z-999">
+    <nav className="bg-[#D9D9D9] w-full top-0 left-0 shadow-md" style={{ boxShadow: '20px 20px 20px rgba(0, 0, 0, 0.100)' }}>
       <div className="container mx-auto flex justify-between items-center">
-        
         {/* Logo and Text Section */}
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center">
@@ -17,27 +16,24 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="text-black  border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition duration-300">
-            Home
+          <Link to="/" className="text-black border-gray-300 px-4 py-2 rounded-md ">
+            <span className="underline decoration-4 decoration-gray-300 decoration-4 hover:decoration-orange-300 transition-all duration-300">Home</span>
           </Link>
-          <Link to="/about" className="text-black  border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition duration-300">
-            About Us
+          <Link to="/about" className="text-black border-gray-300 px-4 py-2 rounded-md ">
+            <span className="underline decoration-4 decoration-gray-300 hover:decoration-orange-300 transition-all duration-300">About Us</span>
           </Link>
           
           {/* Login Button */}
-          <Link
-            to="/login"
-            className="text-black  border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition duration-300"
-          >
-            Login
+          <Link to="/login" className="text-black  border-gray-300 px-4 py-2 rounded-md ">
+            <span className="underline decoration-4 decoration-gray-300 hover:decoration-orange-300 transition-all duration-300">Login</span>
+          
+            
           </Link>
 
           {/* Register Button */}
-          <Link
-            to="/register"
-            className="text-black  border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100 transition duration-300"
-          >
-            Register
+          <Link to="/register" className="text-black  border-gray-300 px-4 py-2 rounded-md ">
+            <span className="underline decoration-4 decoration-gray-300 hover:decoration-orange-300 transition-all duration-300">Register</span>
+     
           </Link>
         </div>
 
