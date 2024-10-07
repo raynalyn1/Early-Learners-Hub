@@ -11,7 +11,7 @@ import img9 from "../../images/brain.png";
 import img10 from "../../images/handshake.png";
 import img11 from "../../images/Bullseye.png";
 import img12 from "../../images/coin.png";
-import img17 from "../../images/light.png";  // Updated from img
+import img17 from "../../images/light.png"; 
 import img18 from "../../images/gem.png";   
 import img19 from "../../images/cutesy.png";
 import Buttons from "../../components/Buttons";
@@ -26,18 +26,12 @@ const LandingPage = () => {
         <div className="bg-[#EBCEA8] w-full flex justify-center items-center pb-20 relative">
           <div className="w-full max-w-[1200px] flex md:flex-row flex-col-reverse gap-5 items-center">
             <div className="w-full md:w-[50%] flex flex-col gap-[2rem] justify-center">
-              <div 
-                className="text-[45px] md:text-[50px] font-[800] leading-tight text-black ml-[1rem] mt-[5rem]"
-                style={{
-                  WebkitTextStroke: '1px #EB9721',
-                  textStroke: '3px #EB9721'
-                }}
-              >
-                Enhance Learning with Group Tutoring at EarlyLearnersHub
-                Tutorial Services!
+
               </div>
+              
               <div className="flex justify-start">
-                <Buttons styleType="primary" label="ENROLL NOW!" />
+                
+                <Buttons styleType="primary" label="Start Exploring!" />
               </div>
             </div>
             <div className="w-full md:w-[58%] flex justify-end items-center ">
