@@ -13,9 +13,9 @@ const Footer = () => {
       <div className='w-full flex flex-col lg:flex-row gap-5 p-5'>
         {/* Left Section: Logo and Address */}
         <div className='w-full lg:w-1/3 flex flex-col gap-2 p-2'>
-          <img src={logo} alt='Logo' className='w-[20%] lg:w-[7vw] mx-auto lg:ml-5' />
+  
           <p className='text-center lg:text-left'>
-            LearningLane Hub Tutorial Services, where learning meets excellence!
+           
           </p>
           <div className='flex gap-5 mt-5 justify-center lg:justify-start'>
             <img src={location} alt='Location' className='h-[8vh] lg:h-[10vh] border border-[#EB9721] rounded-full' />

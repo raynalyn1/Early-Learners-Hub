@@ -11,7 +11,7 @@ import img9 from "../../images/brain.png";
 import img10 from "../../images/handshake.png";
 import img11 from "../../images/Bullseye.png";
 import img12 from "../../images/coin.png";
-import img17 from "../../images/light.png";  // Updated from img
+import img17 from "../../images/light.png"; 
 import img18 from "../../images/gem.png";   
 import img19 from "../../images/cutesy.png";
 import Buttons from "../../components/Buttons";
@@ -27,11 +27,12 @@ const LandingPage = () => {
           <div className="w-full max-w-[1200px] flex md:flex-row flex-col-reverse gap-9 items-center">
             <div className="w-full md:w-[50%] flex flex-col gap-[2rem] justify-center">
               <div className="text-[45px] md:text-[50px] font-[700] leading-tight text-black ml-[3rem] mt-[2rem] ">
-                Enhance Learning <br /> with Group Tutoring at EarlyLearnersHub
-                Tutorial Services!
+                Early Learners Hub <br />A place for children to  grow and develop
               </div>
+              
               <div className="flex justify-start">
-                <Buttons styleType="primary" label="ENROLL NOW!" />
+                
+                <Buttons styleType="primary" label="Start Exploring!" />
               </div>
             </div>
             <div className="w-full md:w-[50%] flex justify-end items-center ">
