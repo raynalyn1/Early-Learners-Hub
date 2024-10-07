@@ -21,13 +21,12 @@ import mainImg from "../../images/landingimg.png";
 const LandingPage = () => {
   return (
     <div>
-      <div className="bg-[#F1F1F1] w-full px-10 pb-10 relative">
+      <div className="bg-[#EB9721] w-full px-10 pb-10 relative">
         {/* Header Section */}
         <div className="bg-[#EBCEA8] w-full flex justify-center items-center pb-20 relative">
-          <div className="w-full max-w-[1200px] flex md:flex-row flex-col-reverse gap-9 items-center">
+          <div className="w-full max-w-[1200px] flex md:flex-row flex-col-reverse gap-5 items-center">
             <div className="w-full md:w-[50%] flex flex-col gap-[2rem] justify-center">
-              <div className="text-[45px] md:text-[50px] font-[700] leading-tight text-black ml-[3rem] mt-[2rem] ">
-                Early Learners Hub <br />A place for children to  grow and develop
+
               </div>
               
               <div className="flex justify-start">
@@ -35,11 +34,11 @@ const LandingPage = () => {
                 <Buttons styleType="primary" label="Start Exploring!" />
               </div>
             </div>
-            <div className="w-full md:w-[50%] flex justify-end items-center ">
+            <div className="w-full md:w-[58%] flex justify-end items-center ">
               <img
                 src={mainImg}
                 alt="pic"
-                className="h-[67vh] max-h-[100vh] object-contain w-full mt-[1rem] "
+                className="h-[67vh] max-h-[100vh] object-contain w-full mt-[1rem] transition-transform duration-2000 transform hover:translate-x-40" // Added transition
               />
             </div>
           </div>
@@ -56,7 +55,7 @@ const LandingPage = () => {
               <img
                 src={img1}
                 alt="Happy Learning"
-                className="rounded-lg object-cover w-full h-[200px]"
+                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
               />
               <div className="text-lg font-semibold mt-4">Happy Learning</div>
               <div className="text-black-500">Imagination Center</div>
@@ -65,7 +64,7 @@ const LandingPage = () => {
               <img
                 src={img2}
                 alt="Creative Playtime"
-                className="rounded-lg object-cover w-full h-[200px]"
+                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
               />
               <div className="text-lg font-semibold mt-4">
                 Creative Playtime
@@ -76,7 +75,7 @@ const LandingPage = () => {
               <img
                 src={img3}
                 alt="Giggle and Learn"
-                className="rounded-lg object-cover w-full h-[200px]"
+                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
               />
               <div className="text-lg font-semibold mt-4">Giggle and Learn</div>
               <div className="text-black-500">Laughing Academy</div>
@@ -85,7 +84,7 @@ const LandingPage = () => {
               <img
                 src={img4}
                 alt="Let's Explore"
-                className="rounded-lg object-cover w-full h-[200px]"
+                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
               />
               <div className="text-lg font-semibold mt-4">Let's Explore</div>
               <div className="text-black-500">Discovering New Things</div>
@@ -94,7 +93,7 @@ const LandingPage = () => {
               <img
                 src={img5}
                 alt="Fun is Here!"
-                className="rounded-lg object-cover w-full h-[200px]"
+                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
               />
               <div className="text-lg font-semibold mt-4">Fun is Here!</div>
               <div className="text-black-500">Lily Colors, ABCs</div>
@@ -161,47 +160,68 @@ const LandingPage = () => {
                 <img
                   src={img19}
                   alt="Kid with ABC blocks"
-                  className="w-[100%] h-auto"
+                  className="w-[100%] h-auto transition-transform duration-300 transform hover:scale-125" // Added animation class
                 />
-               
-               
-                
               </div>
             </div>
           </div>
 
          
-          <div className="text-center text-[24px] font-semibold mt-[5rem]">
-  PILLARS OF STRENGTH
-</div>
+          <div 
+            className="text-center text-[40px] font-bold mt-[6rem]"
+            style={{
+              textStroke: '6px #EB9721',
+                fontFamily: "'Poppins'"
+            }}
+          >
+            PILLARS OF STRENGTH
+          </div>
           {/* New Section Below Button */}
-<div className="flex justify-around py-10 gap-6">
-  <div className="text-center border border-gray-300 p-10 rounded-lg w-[30%] bg-white shadow-md">
-    <img src={img11} alt="Bullseye Icon" className="mx-auto mb-4 w-[70px]" />
-    <h3 className="text-lg font-semibold">Our Mission</h3>
-    <p>
+<div className="flex justify-around py-10 gap-">
+  <div 
+    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
+    style={{ 
+      border: '2px solid #EB9721',
+      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
+      
+                
+                }
+    }
+  >
+    <img src={img11} alt="Bullseye Icon" className="mx-auto mb-6 w-[90px]" />
+    <h3 className="text-lg font-semibold mb-4">Our Mission</h3>
+    <p className="-ml-5 text-left align-left">
       To create a safe, engaging, and enjoyable learning platform that supports
-      early childhood education, providing interactive content that helps kids
+      early childhood  education, providing interactive content that helps kids 
       learn and grow.
     </p>
   </div>
 
-  <div className="text-center border border-gray-300 p-10 rounded-lg w-[30%] bg-white shadow-md">
-    <img src={img17} alt="Light Bulb Icon" className="mx-auto mb-4 w-[70px]" />
-    <h3 className="text-lg font-semibold">Our Vision</h3>
-    <p>
+  <div 
+    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
+    style={{ 
+      border: '2px solid #EB9721',
+      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
+    }}
+  >
+    <img src={img17} alt="Light Bulb Icon" className="mx-auto mb-6 w-[90px]" />
+    <h3 className="text-lg font-bold mb-2">Our Vision</h3>
+    <p className="-ml-5 text-center align-left">
       To inspire a love of learning in kindergarten kids through fun,
-      interactive, and educational activities.
+      interactive,  and educational activities.
     </p>
   </div>
 
-  <div className="text-center border border-gray-300 p-10 rounded-lg w-[30%] bg-white shadow-md">
-    <img src={img18} alt="Gem Icon" className="mx-auto mb-4 w-[70px]" />
-    <h3 className="text-lg font-semibold">Our Values</h3>
-    <p>
-      Our values prioritize fun, basic skills, creativity, safety, and inclusion,
-      collaborating with teachers, parents, and experts to create a secure,
-      kid-friendly platform.
+  <div 
+    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
+    style={{ 
+      border: '2px solid #EB9721',
+      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
+    }}  >
+    <img src={img18} alt="Gem Icon" className="mx-auto mb-6 w-[90px]" />
+    <h3 className="text-lg font-semibold mb-2">Our Values</h3>
+    <p className="-ml-5 text-center align-left ">
+      Our values prioritize fun, basic skills, creativity, safety, and <br /> inclusion collaborating  with teachers, parents,  and experts to create a secure, kid-friendly <br /> platform.
     </p>
   </div>
 </div>

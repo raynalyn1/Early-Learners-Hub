@@ -16,17 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      {/* Navbar Section */}
-      <nav className="bg-[#F5F5F5] w-full top-0 left-0 shadow-l z-999 px-[5%]">
-        <div className="container  flex justify-between items-center">
 
-          {/* Logo Section */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img src={img} alt="Logo" className="w-[100%] h-[100%] py-1" />
-            </Link>
-          </div>
 
           {/* Centered Games and Videos Links with Icons Inside the Colored Background */}
           <div className="flex items-start space-x-8 w-[100%] px-[10%] ">

@@ -21,7 +21,7 @@ const Services = () => {
         alt="About Us Image"
       >
         <h1
-          className='text-[#5B3A29] text-[5rem] font-semibold'
+          className='text-[#181C14] text-[5rem] font-semibold'
         >
           Services
         </h1>
