@@ -26,7 +26,7 @@ const AboutUs = () => {
 
   return (
     <div>
-    <div className="flex flex-col justify-center items-center px-9 bg-[#EB9721]">
+    <div className="flex flex-col justify-center items-center px-5 bg-[#EB9721]">
       {/* Header Section */}
       <div
         className="flex justify-center items-center relative w-full h-[400px] mt-0 overflow-hidden"
