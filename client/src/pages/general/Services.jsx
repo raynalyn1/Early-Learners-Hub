@@ -7,7 +7,8 @@ import lets from '../../images/lets.png'
 
 const Services = () => {
   return (
-    <div className='flex flex-col justify-center items-center px-9'>
+    <div>
+    <div className='flex flex-col justify-center items-center px-5 bg-[#EB9721]'>
       <div
         className='flex justify-between items-end p-9 '
         style={{
@@ -96,6 +97,7 @@ const Services = () => {
           <h1 className='w-[50vw] text-[1.8rem]'>Choose EarlyLearners Hub for an engaging, supportive, and effective learning journey that empowers your child to succeed!</h1>
           <img src={lets} alt="run"/>
         </div>
+      </div>
       </div>
       <Footer />
     </div>

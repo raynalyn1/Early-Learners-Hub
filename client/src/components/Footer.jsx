@@ -13,8 +13,6 @@ const Footer = () => {
       <div className='w-full flex flex-col lg:flex-row gap-5 p-5'>
         {/* Left Section: Logo and Address */}
         <div className='w-full lg:w-1/3 flex flex-col gap-2 p-2'>
-
-          </p>
           <div className='flex gap-5 mt-5 justify-center lg:justify-start'>
             <FaLocationDot className='text-4xl' style={{ color: '#000000', border: '2px solid #EB9721', borderRadius: '50%', }} />
             <p className='text-[.8rem] font-poppins'>
@@ -28,15 +26,12 @@ const Footer = () => {
         <div className='w-full lg:w-1/3 flex flex-col justify-center items-center'>
           <h1 className='font-bold'>About E-Learners</h1>
           <div className='flex gap-3 items-center mt-3'>
-            {/* <img src={family} alt='Team' className='h-[6vh] border border-[#EB9721] rounded-full' /> */}
             <p>Our Team</p>
           </div>
           <div className='flex gap-3 items-center mt-3'>
-            {/* <img src={question} alt='FAQ' className='h-[7vh] border border-[#EB9721] rounded-full ml-[-3vh]' /> */}
             <p className='ml-[1vh]'>About Us</p>
           </div>
           <div className='flex gap-3 items-center mt-3'>
-            {/* <img src={question} alt='FAQ' className='h-[7vh] border border-[#EB9721] rounded-full ml-[-3vh]' /> */}
             <p className='ml-[1vh]'>FAQ's</p>
           </div>
         </div>
@@ -53,11 +48,10 @@ const Footer = () => {
           </div>
           <div className='flex gap-3 text-[.9rem] justify-center lg:justify-start items-center'>
             <BiLogoGmail className='text-4xl' style={{color: '#000000', border: '2px solid #EB9721', borderRadius: '70%' }}/>
-            {/* <img src={email} alt='Email' className='border border-[#EB9721] rounded-full p-1' /> */}
             <p className='font-poppins'>learninglanehub07@gmail.com</p>
           </div>
           <div className='flex gap-3 text-[.8rem] justify-center lg:justify-start items-center'>
-             <MdOutlineFacebook className='text-4xl' style={{ border: '2px solid #EB9721', borderRadius: '50%' }} />
+            <MdOutlineFacebook className='text-4xl' style={{ border: '2px solid #EB9721', borderRadius: '50%' }} />
             <p className='font-poppins'>LearningLane Hub Tutorial Services</p>
           </div>
         </div>

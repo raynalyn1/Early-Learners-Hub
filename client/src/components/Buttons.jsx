@@ -5,7 +5,7 @@ const Buttons = ({ label, onClick, styleType, icon }) => {
     const baseStyle3 = "w-[25%] h-10 rounded-lg font-semibold "
   
     const styles = {
-      primary: `${baseStyle3} bg-[#EB9721] hover:bg-[#EBA732] ml-[12rem] mt-[2rem] `,
+      primary: `${baseStyle3} bg-[#EB9721] hover:bg-[#EBA732] ml-[15rem] mt-[5rem] `,
       primary1: `${baseStyle1} bg-[#EB9721] hover:bg-[#EBA732] mx-auto w-auto mt-[6rem] `,
     };
   
