@@ -8,11 +8,11 @@ import img6 from "../../images/star.png";
 import img7 from "../../images/book.png";
 import img8 from "../../images/titser.png";
 import img9 from "../../images/brain.png";
-import img10 from "../../images/handshake.png";
-import img11 from "../../images/Bullseye.png";
-import img12 from "../../images/coin.png";
-import img17 from "../../images/light.png"; 
-import img18 from "../../images/gem.png";   
+
+import img10 from "../../images/ey.png";
+
+import img17 from "../../images/light.png";
+import img18 from "../../images/gem.png";
 import img19 from "../../images/cutesy.png";
 import Buttons from "../../components/Buttons";
 import Footer from "../../components/Footer";
@@ -21,137 +21,75 @@ import mainImg from "../../images/landingimg.png";
 const LandingPage = () => {
   return (
     <div>
-      <div className="bg-[#EB9721] w-full px-10 pb-10 relative">
-        {/* Header Section */}
-        <div className="bg-[#EBCEA8] w-full flex justify-center items-center pb-20 relative">
+      <div className="bg-[#EB9721] w-full px-5 relative ">
+        
+       
+        
+        {/* Tagline Section with updated styling */}
+        <div className="bg-[#EBCEA8] w-full flex justify-center items-center pb-20 relative h-[100%]">
+          {/* Add tagline beside the image */}
+          <div className="mt-4 max-w-[50%] ml-[3rem]">
+            <h1 className="text-[3rem] font-bold leading-tight  flex items-center w-[100%]  ml-[10rem] mt-[12vh]">Early Learners Hub</h1>
+            <p className="text-[1.5rem] leading-snug font-medium  ml-[10rem]">
+              Where learning meets play, you can game your way to growth!
+            </p>
+            {/* <Buttons styleType="primary" label="Start Exploring!" /> */}
+          </div>
           <div className="w-full max-w-[1200px] flex md:flex-row flex-col-reverse gap-5 items-center">
-            <div className="w-full md:w-[50%] flex flex-col gap-[2rem] justify-center">
-
-              </div>
-              
-              <div className="flex justify-start">
-                
-                <Buttons styleType="primary" label="Start Exploring!" />
-              </div>
-            </div>
-            <div className="w-full md:w-[58%] flex justify-end items-center ">
+            <div className="w-full flex justify-end items-center">
               <img
                 src={mainImg}
                 alt="pic"
-                className="h-[67vh] max-h-[100vh] object-contain w-full mt-[1rem] transition-transform duration-2000 transform hover:translate-x-40" // Added transition
+                className="h-[60vh] max-h-[60vh] object-contain w-full   transform ml-[5rem] "
               />
             </div>
           </div>
         </div>
 
         {/* Activities Section */}
-        <div className="bg-[#EBCEA8] w-full  relative  ">
-          <div className="text-[20px] font-semibold mb-7 flex-start ml-[5rem] ">
-            Explore Fun Activities
-          </div>
-
+        <div className="bg-[#EBCEA8] w-full relative">
+          <div className="text-[20px] font-semibold mb-7 flex-start ml-[5rem] ">Explore Fun Activities</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-[5rem] ">
-            <div className="text-center">
-              <img
-                src={img1}
-                alt="Happy Learning"
-                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
-              />
-              <div className="text-lg font-semibold mt-4">Happy Learning</div>
-              <div className="text-black-500">Imagination Center</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={img2}
-                alt="Creative Playtime"
-                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
-              />
-              <div className="text-lg font-semibold mt-4">
-                Creative Playtime
-              </div>
-              <div className="text-black-500">Imagination Center</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={img3}
-                alt="Giggle and Learn"
-                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
-              />
-              <div className="text-lg font-semibold mt-4">Giggle and Learn</div>
-              <div className="text-black-500">Laughing Academy</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={img4}
-                alt="Let's Explore"
-                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
-              />
-              <div className="text-lg font-semibold mt-4">Let's Explore</div>
-              <div className="text-black-500">Discovering New Things</div>
-            </div>
-            <div className="text-center">
-              <img
-                src={img5}
-                alt="Fun is Here!"
-                className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105" // Added transition
-              />
-              <div className="text-lg font-semibold mt-4">Fun is Here!</div>
-              <div className="text-black-500">Lily Colors, ABCs</div>
-            </div>
+            {[{ img: img1, title: "Happy Learning"}, 
+               { img: img2, title: "Creative Playtime" },
+               { img: img3, title: "Giggle and Learn"},
+               { img: img4, title: "Let's Explore" },
+               { img: img5, title: "Fun is Here!" }]
+              .map((item, idx) => (
+                <div className="text-center" key={idx}>
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="rounded-lg object-cover w-full h-[200px] border-2 border-[#EB9721] transition-transform duration-300 transform hover:scale-105"
+                  />
+                  <div className="text-lg font-semibold mt-4">{item.title}</div>
+                  <div className="text-black-500">{item.subtitle}</div>
+                </div>
+              ))}
           </div>
         </div>
 
         {/* Benefits Section */}
-        <div className="bg-[#EBCEA8] w-full px-20 py-20 relative  ">
+        <div className="bg-[#EBCEA8] w-full px-20 py-5 relative ">
           <div className="flex justify-between items-center">
-            {/* Left Side: List of benefits */}
-            <div className="flex flex-col gap-4 w-full md:w-[50%]">
-              <div className="text-[20px] font-semibold ">
-                Discover the benefits of our group tutoring sessions:
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img6} alt="Star" className="w-[60px]" />
-                <span className="font-semibold text-[18px]">
-                  Collaborative Learning
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img7} alt="Book" className="w-[55px]" />
-                <span className="font-semibold text-[18px]">
-                  Interactive Sessions
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img8} alt="Teacher" className="w-[60px]" />
-                <span className="font-semibold text-[18px] mr-[5rem]">
-                  Expert Guidance
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img9} alt="Brain" className="w-[60px]" />
-                <span className="font-semibold text-[18px]">
-                  Enhanced Problem-Solving Skills
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img10} alt="Handshake" className="w-[50px]" />
-                <span className="font-semibold text-[18px]">
-                  Social Skills Development
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src={img11} alt="Bullseye" className="w-[50px]" />
-                <span className="font-semibold text-[18px]">
-                  Diverse Perspectives
-                </span>
-              </div>
-              <div className="flex items-center gap-4 mr-[5rem]">
-                <img src={img12} alt="Coin" className="w-[55px]  " />
-
-                <span className="font-semibold text-[18px] ">
-                  Affordable Learning
-                </span>
-              </div>
+        
+            <div className="flex flex-col gap-4 w-full md:w-[50%] ml-[10rem]">
+               <div className="text-[20px] font-semibold">
+                Discover  more benefits:
+              </div> 
+               {[{ img: img6, title: "Collaborative Learning" },
+                { img: img7, title: "Interactive Sessions" },
+                { img: img8, title: "Expert Guidance" },
+                { img: img9, title: "Enhanced Problem-Solving Skills" },
+                
+               
+              ]
+                .map((benefit, idx) => (
+                  <div className="flex items-center gap-4" key={idx}>
+                    <img src={benefit.img} alt={benefit.title} className="w-[10%] h-[50%]" />
+                    <span className="font-semibold text-[18px]">{benefit.title}</span>
+                  </div>
+                ))} 
             </div>
 
             {/* Right Side: Main Image with ABC blocks */}
@@ -160,74 +98,37 @@ const LandingPage = () => {
                 <img
                   src={img19}
                   alt="Kid with ABC blocks"
-                  className="w-[100%] h-auto transition-transform duration-300 transform hover:scale-125" // Added animation class
+                  className="w-[100%] h-auto transition-transform duration-300 transform hover:scale-125"
                 />
               </div>
             </div>
           </div>
 
-         
-          <div 
-            className="text-center text-[40px] font-bold mt-[6rem]"
-            style={{
-              textStroke: '6px #EB9721',
-                fontFamily: "'Poppins'"
-            }}
-          >
+          {/* Pillars of Strength Section */}
+          <div className="text-center text-[40px]  mt-[6rem]" style={{ fontFamily: "'Poppins'" }}>
             PILLARS OF STRENGTH
           </div>
-          {/* New Section Below Button */}
-<div className="flex justify-around py-10 gap-">
-  <div 
-    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
-    style={{ 
-      border: '2px solid #EB9721',
-      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
-      
-                
-                }
-    }
-  >
-    <img src={img11} alt="Bullseye Icon" className="mx-auto mb-6 w-[90px]" />
-    <h3 className="text-lg font-semibold mb-4">Our Mission</h3>
-    <p className="-ml-5 text-left align-left">
-      To create a safe, engaging, and enjoyable learning platform that supports
-      early childhood  education, providing interactive content that helps kids 
-      learn and grow.
-    </p>
-  </div>
 
-  <div 
-    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
-    style={{ 
-      border: '2px solid #EB9721',
-      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
-    }}
-  >
-    <img src={img17} alt="Light Bulb Icon" className="mx-auto mb-6 w-[90px]" />
-    <h3 className="text-lg font-bold mb-2">Our Vision</h3>
-    <p className="-ml-5 text-center align-left">
-      To inspire a love of learning in kindergarten kids through fun,
-      interactive,  and educational activities.
-    </p>
-  </div>
-
-  <div 
-    className="text-center p-20 rounded-lg w-[24%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg" // Added transition and hover effects
-    style={{ 
-      border: '2px solid #EB9721',
-      // boxShadow: '5px 5px 7px rgba(0, 0, 0, 0.3)'
-    }}  >
-    <img src={img18} alt="Gem Icon" className="mx-auto mb-6 w-[90px]" />
-    <h3 className="text-lg font-semibold mb-2">Our Values</h3>
-    <p className="-ml-5 text-center align-left ">
-      Our values prioritize fun, basic skills, creativity, safety, and <br /> inclusion collaborating  with teachers, parents,  and experts to create a secure, kid-friendly <br /> platform.
-    </p>
-  </div>
-</div>
-
+          {/* Mission, Vision, Values Section  */}
+          <div className="flex justify-around mt-[2rem] ">
+            {[{ img: img10, title: "Our Mission", description: "To create a safe, engaging, and enjoyable learning platform that supports early childhood education, providing interactive content that helps kids learn and grow." },
+              { img: img17, title: "Our Vision", description: "To inspire a love of learning in kindergarten kids through fun, interactive, and educational activities." },
+              { img: img18, title: "Our Values", description: "Our values prioritize fun, basic skills, creativity, safety, and inclusion collaborating with teachers, parents, and experts to create a secure, kid-friendly platform." }]
+              .map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="text-center mb-[5rem] p-[1rem] rounded-lg w-[20%] h-[35vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
+                  style={{ border: '2px solid #EB9721 ' }}
+                >
+                  <img src={pillar.img} alt={pillar.title} className="mx-auto mb-6 w-[30%]" />
+                  <h3 className="text-lg font-semibold mb-4 text-center">{pillar.title}</h3>
+                  <p className="text-center">{pillar.description}</p>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
+
       <Footer />
     </div>
   );
