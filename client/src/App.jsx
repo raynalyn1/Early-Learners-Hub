@@ -5,6 +5,7 @@ import GeneralLayout from './layouts/GeneralLayout';
 import ParentLayout from './layouts/ParentLayout';
 import Loader from './components/Loader'; // Loader component
 import Services from './pages/general/Services';
+import GameSection from './pages/general/GameSection';
 
 // Lazy load the pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
@@ -16,7 +17,7 @@ const LandingPage = lazy(() => import('./pages/general/LandingPage'));
 const AboutUs = lazy(() => import('./pages/general/AboutUs'));
 const Login = lazy(() => import('./pages/general/Login'));
 const Register = lazy(() => import('./pages/general/Register'));
-const StartExploring = lazy(() => import('./pages/general/StartExploring')); 
+// const StartExploring = lazy(() => import('./pages/general/StartExploring')); 
 const ArtsSection = lazy(() => import('./pages/general/ArtsSection')); // Only lazy import
 
 // Custom hook to track page changes and trigger loader
@@ -63,8 +64,10 @@ const AppRoutes = () => {
       <Route path="/login" element={<GeneralLayout><Login /></GeneralLayout>} />
       <Route path="/register" element={<GeneralLayout><Register /></GeneralLayout>} />
       <Route path="/services" element={<GeneralLayout><Services /></GeneralLayout>} />
-      <Route path="/StartExploring" element={<GeneralLayout><StartExploring /></GeneralLayout>} />
-      <Route path="/arts" element={<GeneralLayout><ArtsSection /></GeneralLayout>} /> {/* ArtsSection Route */}
+      {/* <Route path="/StartExploring" element={<GeneralLayout><StartExploring /></GeneralLayout>} /> */}
+      <Route path="/VideoSection" element={<GeneralLayout><GameSection/></GeneralLayout>} />
+      {/* <Route path="/Sign Up" element={<GeneralLayout><SignUp/></GeneralLayout>} /> */}
+      <Route path="/arts" element={<GeneralLayout><ArtsSection /></GeneralLayout>} /> 
 
       {/* Admin Pages */}
       <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
