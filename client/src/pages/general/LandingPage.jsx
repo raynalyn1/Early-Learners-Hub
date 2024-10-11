@@ -23,10 +23,7 @@ const LandingPage = () => {
     <div>
       <div className="bg-[#EB9721] w-full px-5 relative ">
         
-        {/* Header Section */}
-        <div>
-          
-        </div>
+       
         
         {/* Tagline Section with updated styling */}
         <div className="bg-[#EBCEA8] w-full flex justify-center items-center pb-20 relative h-[100%]">
@@ -76,7 +73,7 @@ const LandingPage = () => {
         <div className="bg-[#EBCEA8] w-full px-20 py-5 relative ">
           <div className="flex justify-between items-center">
         
-            <div className="flex flex-col gap-4 w-full md:w-[50%]">
+            <div className="flex flex-col gap-4 w-full md:w-[50%] ml-[10rem]">
                <div className="text-[20px] font-semibold">
                 Discover  more benefits:
               </div> 
@@ -89,7 +86,7 @@ const LandingPage = () => {
               ]
                 .map((benefit, idx) => (
                   <div className="flex items-center gap-4" key={idx}>
-                    <img src={benefit.img} alt={benefit.title} className="w-[60px]" />
+                    <img src={benefit.img} alt={benefit.title} className="w-[10%] h-[50%]" />
                     <span className="font-semibold text-[18px]">{benefit.title}</span>
                   </div>
                 ))} 
@@ -120,10 +117,10 @@ const LandingPage = () => {
               .map((pillar, idx) => (
                 <div
                   key={idx}
-                  className="text-center   mb-[5rem] p-[1rem] rounded-lg w-[25%] h-[60vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
-                  style={{ border: '2px solid #EB9721' }}
+                  className="text-center mb-[5rem] p-[1rem] rounded-lg w-[20%] h-[35vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
+                  style={{ border: '2px solid #EB9721 ' }}
                 >
-                  <img src={pillar.img} alt={pillar.title} className="mx-auto mb-6 w-[90px]" />
+                  <img src={pillar.img} alt={pillar.title} className="mx-auto mb-6 w-[30%]" />
                   <h3 className="text-lg font-semibold mb-4 text-center">{pillar.title}</h3>
                   <p className="text-center">{pillar.description}</p>
                 </div>
