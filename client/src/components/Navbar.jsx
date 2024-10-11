@@ -24,7 +24,7 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img src={img} alt="Logo" className="w-[15vh] h-[9vh] py-1" />
+              <img src={img} alt="Logo" className="w-[12vh] h-[9vh] py-1" />
             </Link>
           </div>
 
@@ -40,7 +40,7 @@ const Navbar = () => {
             </Link>
 
             {/* Videos Button */}
-            <Link to="/videos" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
+            <Link to="/VideoSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
               <span className="flex items-center bg-[#F6A619] text-black px-4 py-2 rounded-lg">
                 <img src={img2} alt="Videos" className="w-6 h-6 mr-2" />
                 Videos
