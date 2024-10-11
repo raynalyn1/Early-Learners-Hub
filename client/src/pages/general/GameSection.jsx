@@ -98,5 +98,5 @@ function GameSection() {
     
   );
 }
+export default GameSection
 
-export default GameSection;
