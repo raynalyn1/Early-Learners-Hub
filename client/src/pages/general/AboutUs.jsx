@@ -1,7 +1,7 @@
 import React from 'react';
 import about from '../../images/about.png';
-import book from '../../images/book-about.png';
-import paper from '../../images/paper-about.png';
+// import book from '../../images/book-about.png';
+// import paper from '../../images/paper-about.png';
 import many from '../../images/many-book.png';
 import hand from '../../images/hand.png';
 import symp from '../../images/symbol.png';
@@ -13,7 +13,7 @@ import teaching from '../../images/teaching.png';
 import Buttons from '../../components/Buttons';
 import teach from '../../images/teach.png';
 import play from '../../images/play.png';
-import Card from '../../components/Card';
+// import Card from '../../components/Card';
 import teachi from '../../images/teacher/teach.png';
 import { useNavigate } from 'react-router-dom';
 

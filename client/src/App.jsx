@@ -2,23 +2,23 @@ import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 import GeneralLayout from './layouts/GeneralLayout';
-import ParentLayout from './layouts/ParentLayout';
 import Loader from './components/Loader'; // Loader component
 import Services from './pages/general/Services';
 import GameSection from './pages/general/GameSection';
+import GameSect from './pages/general/GameSect';
+import MemoryGame from './pages/Games/MemoryGames';
+import MathGame from './pages/Games/MathGame';
+import WordMatch from './pages/Games/WordMatch';
 
 // Lazy load the pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
 const Games = lazy(() => import('./pages/admin/Games'));
 const Videos = lazy(() => import('./pages/admin/Videos'));
-const ParentDashboard = lazy(() => import('./pages/parent/Dashboard'));
-const Feedback = lazy(() => import('./pages/parent/Feedback'));
 const LandingPage = lazy(() => import('./pages/general/LandingPage'));
 const AboutUs = lazy(() => import('./pages/general/AboutUs'));
 const Login = lazy(() => import('./pages/general/Login'));
 const Register = lazy(() => import('./pages/general/Register'));
 // const StartExploring = lazy(() => import('./pages/general/StartExploring')); 
-const ArtsSection = lazy(() => import('./pages/general/ArtsSection')); // Only lazy import
 
 // Custom hook to track page changes and trigger loader
 const usePageLoader = () => {
@@ -67,7 +67,7 @@ const AppRoutes = () => {
       {/* <Route path="/StartExploring" element={<GeneralLayout><StartExploring /></GeneralLayout>} /> */}
       <Route path="/VideoSection" element={<GeneralLayout><GameSection/></GeneralLayout>} />
       {/* <Route path="/Sign Up" element={<GeneralLayout><SignUp/></GeneralLayout>} /> */}
-      <Route path="/arts" element={<GeneralLayout><ArtsSection /></GeneralLayout>} /> 
+      <Route path="/GamesSection" element={<GeneralLayout><GameSect/></GeneralLayout>} />
 
       {/* Admin Pages */}
       <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
@@ -75,10 +75,11 @@ const AppRoutes = () => {
       <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
       <Route path="/admin/videos" element={<AdminLayout><Videos /></AdminLayout>} />
 
-      {/* Parent Pages */}
-      <Route path="/parent" element={<Navigate to="/parent/dashboard" />} /> {/* Default to parent dashboard */}
-      <Route path="/parent/dashboard" element={<ParentLayout><ParentDashboard /></ParentLayout>} />
-      <Route path="/parent/feedback" element={<ParentLayout><Feedback /></ParentLayout>} />
+      {/* {Games} */}
+      <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame/></GeneralLayout>} />
+      <Route path="/MathGames" element={<GeneralLayout><MathGame/></GeneralLayout>} />
+      <Route path="/WordGames" element={<GeneralLayout><WordMatch/></GeneralLayout>} />
+
     </Routes>
   );
 };

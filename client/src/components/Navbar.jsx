@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4 ml-[rem]"> {/* Added ml-4 to move all buttons right */}
             
             {/* Games Button */}
-            <Link to="/games" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
+            <Link to="/GamesSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
               <span className="flex items-center bg-[#F6A619] text-black px-4 py-2 rounded-lg">
                 <img src={img1} alt="Games" className="w-6 h-6 mr-2" />
                 Games

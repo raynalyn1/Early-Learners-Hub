@@ -1,0 +1,19 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font for kids */
+}
+
+button {
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds shadow to the title */
+}
+
+.grid {
+    padding: 20px;
+}

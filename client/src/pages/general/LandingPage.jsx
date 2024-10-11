@@ -14,7 +14,7 @@ import img10 from "../../images/ey.png";
 import img17 from "../../images/light.png";
 import img18 from "../../images/gem.png";
 import img19 from "../../images/cutesy.png";
-import Buttons from "../../components/Buttons";
+// import Buttons from "../../components/Buttons";
 import Footer from "../../components/Footer";
 import mainImg from "../../images/landingimg.png";
 

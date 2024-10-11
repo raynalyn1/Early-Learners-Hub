@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '../images/footer/logo.png';
+// import logo from '../images/footer/logo.png';
 import { FaLocationDot } from "react-icons/fa6";
-import family from '../images/footer/family.png';
-import question from '../images/footer/question.png';
+// import family from '../images/footer/family.png';
+// import question from '../images/footer/question.png';
 import { PiPhoneCallFill } from "react-icons/pi";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdOutlineFacebook } from "react-icons/md";

@@ -39,8 +39,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%] ">
           <img src={img} alt="Animal Nursery Rhyme" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Animal Nursery Rhyme</h3>
-          <p className="text-black">A fun and engaging nursery rhyme featuring animated animals.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600">A fun and engaging nursery rhyme featuring animated animals.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
@@ -48,8 +48,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img1} alt="Magical Forest Adventure" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Magical Forest Adventure</h3>
-          <p className="text-black">Follow the adventures of a little girl in a magical forest.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600">Follow the adventures of a little girl in a magical forest.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
@@ -57,8 +57,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img2} alt="Learning Numbers Song" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Learning Numbers Song</h3>
-          <p className="text-black">A catchy song that helps children learn numbers.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600">A catchy song that helps children learn numbers.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
@@ -66,8 +66,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img3} alt="Space Exploration" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Space Exploration</h3>
-          <p className="text-black">An animated journey through the solar system in a spaceship.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600">An animated journey through the solar system in a spaceship.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
@@ -75,8 +75,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img4} alt="Alphabet Song" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Alphabet Song</h3>
-          <p className="text-black">A fun and engaging song to help children learn the alphabet.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600-black">A fun and engaging song to help children learn the alphabet.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
@@ -84,8 +84,8 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img5} alt="Farm Life Song" className="rounded-md w-full" />
           <h3 className="text-lg font-bold mt-2">Farm Life Song</h3>
-          <p className="text-black">An animated song about life on a farm with various animals.</p>
-          <button className="mt-4 px-4 py-2 text-white bg-[#ECA23B] rounded-md hover:bg-yellow-600">
+          <p className="text-gray-600text-black">An animated song about life on a farm with various animals.</p>
+          <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
         </div>
