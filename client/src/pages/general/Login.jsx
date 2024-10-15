@@ -9,7 +9,7 @@ const SignIn = () => {
     <div className="font-poppins">
       <div className="bg-[#EB9721] w-full px-5 relative">
         <div className="flex justify-center items-center min-h-screen bg-[#e5bb92]">
-          <div className="bg-[#F1F1F1] p-10 rounded-lg shadow-lg w-[55%] h-[55vh]">
+          <div className="bg-[#F1F1F1] p-10 rounded-lg shadow-lg w-[55%] h-[75vh]">
             <div className="grid grid-cols-2 gap-8 ml-[3%]">
               {/* Left Side: Sign In Form */}
               <div>

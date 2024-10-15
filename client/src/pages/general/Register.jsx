@@ -6,7 +6,7 @@ const SignUp = () => {
     <div>
       <div className="bg-[#EB9721] w-full px-5 relative">
         <div className="flex justify-center items-center min-h-screen bg-[#f4d7b2]">
-          <div className="bg-[#F1F1F1] p-10 rounded-lg shadow-lg w-[55%] h-[55vh] grid grid-cols-2 gap-10 ">
+          <div className="bg-[#F1F1F1] p-10 rounded-lg shadow-lg w-[55%] h-[70vh] grid grid-cols-2 gap-10 ">
             
             {/* Left Side: Welcome and Info */}
             <div className="">

@@ -161,7 +161,7 @@ const AboutUs = () => {
             <h1 className="text-4xl font-bold mb-6 text-center text-[#181C14]">Services Offered</h1>
             <div className="w-full flex flex-col md:flex-row gap-16 pl-[10vh]">
               <div 
-                className="w-full md:w-[40%] h-[35vh] bg-white bg-opacity-60 rounded-lg p-12 transition-transform duration-300 transform hover:scale-125" // Background opacity set to 80%
+                className="  w-[80%] h-[52vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 transform hover:scale-125" // Background opacity set to 80%
                 style={{ 
                   border: '2px solid #EB9721'
                 }}
@@ -172,13 +172,13 @@ const AboutUs = () => {
                 </p>
               </div>
               <div 
-                className="w-full md:w-[40%] h-[35vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 transform hover:scale-125" // Background opacity set to 80%
+                className=" w-[80%] h-[54vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 transform hover:scale-125 " // Background opacity set to 80%
                 style={{ 
                   border: '2px solid #EB9721'
                 }}
               >
-                <h1 className="font-bold" style={{ fontSize: '22px' }}>Parental Involvement</h1>
-                <p className="text-left mt-[4vh]" style={{ fontSize: '22px' }}>
+                <h1 className="font-bold " style={{ fontSize: '20px' }}>Parental Involvement</h1>
+                <p className="text-left mt-[4vh] text-center" style={{ fontSize: '20px' }}>
                   We believe in collaborating with parents to create a holistic learning experience, ensuring alignment between home and school learning.
                 </p>
               </div>

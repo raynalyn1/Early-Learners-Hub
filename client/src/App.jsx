@@ -18,7 +18,6 @@ const LandingPage = lazy(() => import('./pages/general/LandingPage'));
 const AboutUs = lazy(() => import('./pages/general/AboutUs'));
 const Login = lazy(() => import('./pages/general/Login'));
 const Register = lazy(() => import('./pages/general/Register'));
-// const StartExploring = lazy(() => import('./pages/general/StartExploring')); 
 
 // Custom hook to track page changes and trigger loader
 const usePageLoader = () => {
@@ -64,10 +63,8 @@ const AppRoutes = () => {
       <Route path="/login" element={<GeneralLayout><Login /></GeneralLayout>} />
       <Route path="/register" element={<GeneralLayout><Register /></GeneralLayout>} />
       <Route path="/services" element={<GeneralLayout><Services /></GeneralLayout>} />
-      {/* <Route path="/StartExploring" element={<GeneralLayout><StartExploring /></GeneralLayout>} /> */}
-      <Route path="/VideoSection" element={<GeneralLayout><GameSection/></GeneralLayout>} />
-      {/* <Route path="/Sign Up" element={<GeneralLayout><SignUp/></GeneralLayout>} /> */}
-      <Route path="/GamesSection" element={<GeneralLayout><GameSect/></GeneralLayout>} />
+      <Route path="/VideoSection" element={<GeneralLayout><GameSection /></GeneralLayout>} />
+      <Route path="/GamesSection" element={<GeneralLayout><GameSect /></GeneralLayout>} />
 
       {/* Admin Pages */}
       <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
@@ -75,11 +72,10 @@ const AppRoutes = () => {
       <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
       <Route path="/admin/videos" element={<AdminLayout><Videos /></AdminLayout>} />
 
-      {/* {Games} */}
-      <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame/></GeneralLayout>} />
-      <Route path="/MathGames" element={<GeneralLayout><MathGame/></GeneralLayout>} />
-      <Route path="/WordGames" element={<GeneralLayout><WordMatch/></GeneralLayout>} />
-
+      {/* Game Pages */}
+      <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame /></GeneralLayout>} />
+      <Route path="/MathGames" element={<GeneralLayout><MathGame /></GeneralLayout>} />
+      <Route path="/WordGames" element={<GeneralLayout><WordMatch /></GeneralLayout>} />
     </Routes>
   );
 };

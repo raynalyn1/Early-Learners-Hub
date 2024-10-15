@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
-import './MemoryGame.css'; // Import a separate CSS file for styles
+import './MemoryGame.css'; // Import your styles
 
 const icons = [
     '🌟', '🍀', '💧', '🔥', '🌈', '🌙', '⚡', '🍇',
     '🍎', '🍔', '🚗', '🎵', '🌻', '🍕', '💎', '🎨'
 ];
 
-const MemoryGame = () => {
+const MemoryGame = ({ setIsGameStarted }) => {
     const [cards, setCards] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
@@ -19,13 +19,19 @@ const MemoryGame = () => {
     const [timerStarted, setTimerStarted] = useState(false);
     const [gridCols, setGridCols] = useState('grid-cols-2');
     const [difficulty, setDifficulty] = useState('');
-    const [showStats, setShowStats] = useState(false); // Only show stats after difficulty is chosen
+    const [showStats, setShowStats] = useState(false);
+
+    // Hide the navbar when the game starts
+    useEffect(() => {
+        return () => setIsGameStarted(false); // Reset navbar visibility when the game ends
+    }, [setIsGameStarted]);
 
     const startGame = (level, levelName) => {
         resetGame();
         generateCards(level);
         setDifficulty(levelName);
-        setShowStats(true); // Set to true after choosing difficulty
+        setShowStats(true);
+        setIsGameStarted(true); // Hide the navbar when the game starts
     };
 
     const resetGame = () => {
@@ -38,7 +44,8 @@ const MemoryGame = () => {
         setShowConfetti(false);
         setTimerStarted(false);
         clearInterval(intervalId);
-        setShowStats(false); // Hide stats when restarting
+        setShowStats(false);
+        setIsGameStarted(false); // Show the navbar when resetting the game
     };
 
     const generateCards = (level) => {
@@ -124,14 +131,16 @@ const MemoryGame = () => {
                 {cards.map((icon, index) => (
                     <div
                         key={index}
-                        className={`w-28 h-28 flex items-center justify-center border-4 border-pink-400 rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105 ${
+                        className={`w-36 h-36 flex items-center justify-center border-4 border-pink-400 rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-110 ${
                             flippedCards.includes(index) || matchedCards.includes(index)
                                 ? 'bg-white text-gray-800'
                                 : 'bg-green-500 text-white'
                         }`}
                         onClick={() => flipCard(index)}
                     >
-                        {(flippedCards.includes(index) || matchedCards.includes(index)) && icon}
+                        <span className="text-6xl">
+                            {(flippedCards.includes(index) || matchedCards.includes(index)) && icon}
+                        </span>
                     </div>
                 ))}
             </div>

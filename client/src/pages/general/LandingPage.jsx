@@ -117,7 +117,7 @@ const LandingPage = () => {
               .map((pillar, idx) => (
                 <div
                   key={idx}
-                  className="text-center mb-[5rem] p-[1rem] rounded-lg w-[20%] h-[35vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
+                  className="text-center mb-[5rem] p-[1rem] rounded-lg w-[20%] h-[65vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-110 hover:shadow-lg"
                   style={{ border: '2px solid #EB9721 ' }}
                 >
                   <img src={pillar.img} alt={pillar.title} className="mx-auto mb-6 w-[30%]" />
