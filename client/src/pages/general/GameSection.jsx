@@ -11,7 +11,7 @@ import img6 from "../../images/Search.png";
 function GameSection() {
   return (
     <div>
-        <div className="bg-[#EB9721] w-full px-5 relative ">
+        <div className="bg-[#EB9721] w-full px-5 relative">
         
     <div className=" bg-[#EBCEA8] w-full px-5 ">
       
@@ -57,7 +57,7 @@ function GameSection() {
         <div className="bg-[#F0BC78] p-4 rounded-lg shadow-lg w-[100%]">
           <img src={img2} alt="Learning Numbers Song" className="rounded-md  w-full" />
           <h3 className="text-lg font-bold mt-2">Learning Numbers Song</h3>
-          <p className="text-gray-600">A catchy song that helps children learn numbers.</p>
+          <p className="text-gray-600">A catchy song that helps children learn numbers.</p> 
           <button className="mt-4 px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-yellow-600">
             WATCH
           </button>
