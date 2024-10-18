@@ -117,14 +117,14 @@ const GameSect = () => {
                             <img src={exit} alt="Exit" className=" w-10 h-10" /> {/* Use your imported exit image */}
                         </span>
                         <div className="p-[2%]" >
-                        <h2 className="text-xl font-bold mb-4 p-[1%]">Enter Child's Name</h2>
+                        <h2 className="text-xl font-bold mb-4 p-[1%]">Enter Student's Name</h2>
                         </div>
                         <input
                             type="text"
                             value={childName}
                             onChange={(e) => setChildName(e.target.value)}
                             className="w-full p-2 border border-gray-300 rounded mb-4"
-                            placeholder="Child's Name"
+                            placeholder="Student's Name"
                         />
                         <button
                             onClick={handleSubmit}

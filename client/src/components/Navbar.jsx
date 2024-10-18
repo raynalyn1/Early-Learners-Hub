@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import img from "../images/footer/logo.png"; 
-import img1 from "../images/footer/Game Controller.png"; 
-import img2 from "../images/footer/videos.png"; 
+import img2 from "../images/Vd.png";
+import img1 from "../images/Gm.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false); 
@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Section */}
-      <nav className="bg-[#F5F5F5] w-full top-0 left-0 z-999 px-[5%] shadow-custom-heavy rounded-lg ">
+      <nav className="bg-[#F5F5F5] w-full top-0 left-0 z-999 px-[5%] shadow-custom-heavy" style={{ boxShadow: '0 4px 10px rgba(0, 0, 0)', zIndex: 999 }}>
         <div className="container flex justify-between items-center">
 
           {/* Logo Section */}
@@ -29,11 +29,11 @@ const Navbar = () => {
           </div>
 
           {/* Right Section: Games, Videos, Sign In, and Burger Menu */}
-          <div className="flex items-center space-x-4 ml-[rem]"> {/* Added ml-4 to move all buttons right */}
+          <div className="flex items-center space-x-4 gap-9 mr-[-14vh]">
             
             {/* Games Button */}
             <Link to="/GamesSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
-              <span className="flex items-center bg-[#F6A619] text-black px-4 py-2 rounded-lg">
+              <span className="flex items-center border border-[#F6A619] text-black px-4 py-2 rounded-lg">
                 <img src={img1} alt="Games" className="w-6 h-6 mr-2" />
                 Games
               </span>
@@ -41,19 +41,19 @@ const Navbar = () => {
 
             {/* Videos Button */}
             <Link to="/VideoSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
-              <span className="flex items-center bg-[#F6A619] text-black px-4 py-2 rounded-lg">
+              <span className="flex items-center border border-[#F6A619] text-black px-4 py-2 rounded-lg">
                 <img src={img2} alt="Videos" className="w-6 h-6 mr-2" />
                 Videos
               </span>
             </Link>
 
             {/* Sign In Button */}
-            <Link to="/login" className="text-base px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-200 transition duration-300">
+            <Link to="/login" className="text-base px-4 py-2 rounded-md bg-[#F6A619] text-black hover:bg-[#e09316] transition duration-300 ml-[2%]">
               SIGN IN
             </Link>
 
             {/* Burger Menu Icon */}
-            <button onClick={handleMenuClick} className="text-black focus:outline-none ">
+            <button onClick={handleMenuClick} className="ml-4 text-black focus:outline-none">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
