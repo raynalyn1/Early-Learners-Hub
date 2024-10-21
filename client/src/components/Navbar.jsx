@@ -24,36 +24,36 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img src={img} alt="Logo" className="w-[12vh] h-[9vh] py-1" />
+              <img src={img} alt="Logo" className="w-[10vh] h-[8vh] sm:w-[8vh] sm:h-[6vh] md:w-[12vh] md:h-[9vh] py-1" />
             </Link>
           </div>
 
           {/* Right Section: Games, Videos, Sign In, and Burger Menu */}
-          <div className="flex items-center space-x-4 gap-9 mr-[-14vh]">
-            
+          <div className="flex items-center space-x-4 gap-4 sm:gap-6 md:gap-9 ">
+
             {/* Games Button */}
-            <Link to="/GamesSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
-              <span className="flex items-center border border-[#F6A619] text-black px-4 py-2 rounded-lg">
-                <img src={img1} alt="Games" className="w-6 h-6 mr-2" />
+            <Link to="/GamesSection" className="hidden sm:flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
+              <span className="flex items-center border border-[#F6A619] text-black px-3 sm:px-4 py-2 rounded-lg">
+                <img src={img1} alt="Games" className="w-5 sm:w-6 h-5 sm:h-6 mr-2" />
                 Games
               </span>
             </Link>
 
             {/* Videos Button */}
-            <Link to="/VideoSection" className="flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
-              <span className="flex items-center border border-[#F6A619] text-black px-4 py-2 rounded-lg">
-                <img src={img2} alt="Videos" className="w-6 h-6 mr-2" />
+            <Link to="/VideoSection" className="hidden sm:flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300">
+              <span className="flex items-center border border-[#F6A619] text-black px-3 sm:px-4 py-2 rounded-lg">
+                <img src={img2} alt="Videos" className="w-5 sm:w-6 h-5 sm:h-6 mr-2" />
                 Videos
               </span>
             </Link>
 
             {/* Sign In Button */}
-            <Link to="/login" className="text-base px-4 py-2 rounded-md bg-[#F6A619] text-black hover:bg-[#e09316] transition duration-300 ml-[2%]">
+            <Link to="/login" className="text-sm sm:text-base px-3 sm:px-4 py-2 rounded-md bg-[#F6A619] text-black hover:bg-[#e09316] transition duration-300">
               SIGN IN
             </Link>
 
-            {/* Burger Menu Icon */}
-            <button onClick={handleMenuClick} className="ml-4 text-black focus:outline-none">
+            {/* Burger Menu Icon (visible on small screens) */}
+            <button onClick={handleMenuClick} className="ml-2 sm:ml-4 text-black focus:outline-none">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
