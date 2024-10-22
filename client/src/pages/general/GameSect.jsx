@@ -56,7 +56,7 @@ const GameSect = () => {
             {!isGameStarted}
 
             <div className="bg-[#EB9721] w-full px-5 relative">
-                <div className="bg-[#F0BC78] w-full px-5 py-10">
+                <div className="bg-[#EBCEA8] w-full px-5 py-10">
                     <h1 className="text-2xl font-semibold mb-9 text-start">Educational Games</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-10">
                         {/* Memory Game Card */}

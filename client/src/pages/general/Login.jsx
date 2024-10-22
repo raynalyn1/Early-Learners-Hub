@@ -112,7 +112,7 @@ const SignIn = () => {
           {/* Sign Up Now Button */}
           <div className="text-center mt-[3rem] sm:mt-[4rem]">
             <button
-              className="bg-[#F9AF47] text-black py-1 sm:py-2 px-6 sm:px-10 font-medium text-sm sm:text-lg rounded-3xl hover:bg-yellow-500"
+              className="text-black py-1 sm:py-2 px-6 sm:px-10 font-medium text-sm sm:text-lg rounded-3xl hover:border-[#F9AF47]"
               onClick={() => navigate("/register")} // Navigate to Register page
             >
               Sign Up Now
@@ -125,3 +125,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+ 
