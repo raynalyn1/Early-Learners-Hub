@@ -17,3 +17,40 @@ h1 {
 .grid {
     padding: 20px;
 }
+@keyframes fill {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+  
+  .animate-fill {
+    animation: fill 3s linear forwards;
+  }
+  @keyframes slideInLeft {
+    from {
+        transform: translateX(-300%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(300%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(1);
+        opacity: 1;
+    }
+}
+
+.animate-slideInLeft {
+    animation-name: slideInLeft;
+}
+
+.animate-slideInRight {
+    animation-name: slideInRight;
+}
