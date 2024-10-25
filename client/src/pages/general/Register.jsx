@@ -59,7 +59,7 @@ const Register = () => {
           <img
             src={img12}
             alt="Sunset Clouds"
-            className="absolute bottom-0 left-[20%] md:left-[30%] w-[70%] md:w-[85%] opacity-100 mb-[-1rem] md:mb-[-2.5rem] ml-[4rem] sm:ml-[rem]"
+            className="absolute bottom-0 left-[20%] md:left-[30%] w-[70%] md:w-[85%] opacity-100 mb-[-1rem] md:mb-[-2.5rem] ml-[4rem] sm:ml-[9rem]"
           />
         </div>
 
@@ -104,7 +104,7 @@ const Register = () => {
             <div className="flex items-center justify-center">
               <button
                 type="submit"
-                className="flex items-center bg-[#F9AF47] text-black py-2 px-6 sm:px-8 md:px-10 font-medium text-sm sm:text-base md:text-lg rounded-3xl hover:bg-yellow-500"
+                className="flex items-center bg-[#F9AF47] text-black py-2 px-6 sm:px-8 md:px-10 font-medium text-sm sm:text-base md:text-lg rounded-3xl "
               >
             
                 Sign Up

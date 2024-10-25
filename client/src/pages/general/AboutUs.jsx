@@ -1,5 +1,5 @@
 import React from 'react';
-import about from '../../images/about.png';
+import about from '../../images/img2.jpg';
 // import book from '../../images/book-about.png';
 // import paper from '../../images/paper-about.png';
 import many from '../../images/many-book.png';
@@ -9,12 +9,14 @@ import kid from '../../images/kid.png';
 import teacher from '../../images/teacher.png';
 import confitte from '../../images/confitte.png';
 import Footer from '../../components/Footer';
-import teaching from '../../images/teaching.png';
+import teaching from '../../images/img4.jpg';
 import Buttons from '../../components/Buttons';
-import teach from '../../images/teach.png';
-import play from '../../images/play.png';
+import teach from '../../images/img6.jpg';
+import play from '../../images/img3.jpg';
 // import Card from '../../components/Card';
 import teachi from '../../images/teacher/teach.png';
+import img1 from "../../images/img1.jpg";
+import img5 from "../../images/img5.jpg";
 import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
@@ -156,14 +158,16 @@ const AboutUs = () => {
         </div>
 
         {/* Services Offered Section */}
-        <div className="w-full h-auto p-8 flex flex-col md:flex-row gap-2 ">
+        <div className="w-full h-auto p-8 flex flex-col md:flex-row gap-5 ">
           <div className="w-full md:w-[100%] h-auto flex flex-col gap-16">
             <h1 className="text-4xl font-bold mb-6 text-center text-[#181C14]">Services Offered</h1>
-            <div className="w-full flex flex-col md:flex-row gap-16 pl-[10vh]">
+            <div className="w-full flex flex-col md:flex-row gap-16 pl-[10vh] ">
               <div 
-                className="  w-[80%] h-[52vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 transform hover:scale-125" // Background opacity set to 80%
+     
+                className="  w-[50%] h-[52vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 " // Background opacity set to 80%
                 style={{ 
                   border: '2px solid #EB9721'
+                          //  <img src='' alt= "" />
                 }}
               >
                 <h1 className="font-bold" style={{ fontSize: '22px'}}>Flexible Tutoring Options</h1>
@@ -172,7 +176,7 @@ const AboutUs = () => {
                 </p>
               </div>
               <div 
-                className=" w-[80%] h-[54vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 transform hover:scale-125 " // Background opacity set to 80%
+                className=" w-[50%] h-[52vh] bg-white bg-opacity-60 rounded-lg p-5 transition-transform duration-300 " // Background opacity set to 80%
                 style={{ 
                   border: '2px solid #EB9721'
                 }}

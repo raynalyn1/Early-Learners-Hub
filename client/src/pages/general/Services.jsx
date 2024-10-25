@@ -1,5 +1,5 @@
 import React from 'react'
-import service from '../../images/service.png'
+import service from '../../images/img5.jpg'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/Footer'
 import list from '../../images/list.png'
@@ -9,18 +9,25 @@ const Services = () => {
   return (
     <div>
     <div className='flex flex-col justify-center items-center px-5 bg-[#EB9721]'>
+  
       <div
-        className='flex justify-between items-end p-9 '
+      
+        className='flex justify-between items-end p-9 mt-0 overflow-hidden '
+        
         style={{
           backgroundImage: `url(${service})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           width: '100%',
           height: '500px',
+          opacity: '50px',
           marginTop: '',
         }}
         alt="About Us Image"
+        
       >
+          <div className=" absolute  bg-white bg-opacity-50  h-[20vh]"></div>
+        
         <h1
           className='text-[#181C14] text-[5rem] font-semibold'
         >

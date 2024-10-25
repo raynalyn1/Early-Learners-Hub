@@ -60,7 +60,7 @@ const SignIn = () => {
             <div className="flex items-center justify-center">
               <button
                 type="submit"
-                className="bg-[#F9AF47] text-black py-1 sm:py-2 px-6 sm:px-10 font-medium text-sm sm:text-lg rounded-3xl hover:bg-yellow-500"
+                className="bg-[#F9AF47] text-black py-1 sm:py-2 px-6 sm:px-10 font-medium text-sm sm:text-lg rounded-3xl  shadow-lg"
               >
                 Sign In
               </button>
@@ -110,9 +110,9 @@ const SignIn = () => {
           {/* Right-side Images */}
 
           {/* Sign Up Now Button */}
-          <div className="text-center mt-[3rem] sm:mt-[4rem]">
+          <div className="text-center mt-[3rem] sm:mt-[4rem] ">
             <button
-              className="text-black py-1 sm:py-2 px-6 sm:px-10 font-medium text-sm sm:text-lg rounded-3xl hover:border-[#F9AF47]"
+              className="text-black py-1 sm:py-2 px-6  font-medium text-sm sm:text-[16px] rounded-3xl border border-[#F49713] shadow-lg w-[42%] h-[5vh]"
               onClick={() => navigate("/register")} // Navigate to Register page
             >
               Sign Up Now
