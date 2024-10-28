@@ -1,10 +1,12 @@
 // src/WordMatch.js
 import React, { useState, useEffect } from "react";
-import bg from "../../images/games/backg.png";
+import { useNavigate } from "react-router-dom";
+import bg from "../../images/games/nbg.png";
 import loading from "../../images/games/loading.gif";
 import db from "../../images/games/dog-bird.png";
 import pd from "../../images/games/pd.png";
-
+import matching from "../../images/games/matching.png";
+import arow from "../../images/games/arow.png"
 const wordsAndImages = [
   { word: "Cat", image: "https://img.icons8.com/color/96/000000/cat.png" },
   { word: "Dog", image: "https://img.icons8.com/color/96/000000/dog.png" },
@@ -40,6 +42,7 @@ const wordsAndImages = [
 ];
 
 const WordMatch = () => {
+    const navigate = useNavigate();
   const [currentWord, setCurrentWord] = useState("");
   const [options, setOptions] = useState([]);
   const [correctMatches, setCorrectMatches] = useState([]);
@@ -80,7 +83,9 @@ const WordMatch = () => {
     );
     setCurrentWord(selectedWord.word);
   };
-
+  const handleBackNavigation = () => {
+    navigate("/GamesSection"); // Update to the actual path you want to navigate to
+  };
   const handleOptionClick = (word) => {
     if (word === currentWord) {
       const updatedCorrectMatches = [...correctMatches, word];
@@ -128,31 +133,43 @@ const WordMatch = () => {
           <img src={loading} alt="" style={{ filter: "brightness(100%)" }} />
         </div>
       ) : !gameStarted ? (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen">
           <img
             src={bg}
             alt="backg"
             className=" absolute inset-0 w-full h-full object-cover opacity-90"
           />
-          <img src={db} alt="dog-bird" 
-          className="text-center mt-0"  style={{ filter: "brightness(100%)" }}/>
-          <img src={pd} alt="picture-word" 
-          className=""  style={{ filter: "brightness(100%)" }}/>
+          <img
+            src={db}
+            alt="dog-bird"
+            className="text-center mt-0"
+            style={{ filter: "brightness(100%)" }}
+          />
+          <img
+            src={pd}
+            alt="picture-word"
+            className=""
+            style={{ filter: "brightness(100%)" }}
+          />
+          <img
+            src={matching}
+            alt=""
+            className=""
+            style={{ filter: "brightness(100%)" }}
+          />
           <h1
             className="text-5xl font-extrabold mb-4 text-purple-600 "
             style={{ filter: "brightness(100%)" }}
-          >
-          
-          </h1>
+          ></h1>
           <p
             className="mb-4 text-xl text-gray-800"
             style={{ filter: "brightness(100%)" }}
           >
-            Click the button below to start the game.
+            {/* Click the button below to start the game. */}
           </p>
           <button
             onClick={startGame}
-            className="px-8 py-4 text-2xl font-bold text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600 transition-colors duration-200"
+            className="px-8 py-4 text-2xl font-bold text-[#94682A] bg-[#FFE0B5] rounded-3xl shadow-2xl hover:bg-[#FFE0B5]-600 transition-colors duration-200"
             style={{ filter: "brightness(100%)" }}
           >
             Start Game
@@ -160,7 +177,18 @@ const WordMatch = () => {
         </div>
       ) : (
         <div className="w-full max-w-lg mx-auto text-center">
-          <h1 className="text-5xl font-extrabold mb-6 text-purple-600">
+          <img src={bg}
+           alt="background" 
+           className="absolute inset-0 w-full h-full object-cover opacity-90"
+           
+          />
+          <img
+            src={arow}
+            alt="arrowback"
+            onClick={handleBackNavigation}
+            className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
+          />
+          <h1 className="text-5xl font-extrabold mb-6 text-purple-600" style={{ filter: "brightness(100%)" }}>
             Word Match Game
           </h1>
           <div className="mb-4">
@@ -168,6 +196,7 @@ const WordMatch = () => {
               src={wordsAndImages[questionIndex]?.image}
               alt={currentWord}
               className="w-40 h-40 mb-6 mx-auto rounded-lg shadow-lg"
+              style={{ filter: "brightness(100%)" }}
             />
           </div>
           <div className="flex flex-wrap justify-center mb-6">
@@ -176,6 +205,7 @@ const WordMatch = () => {
                 key={option.word}
                 className={`m-2 px-6 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-200`}
                 onClick={() => handleOptionClick(option.word)}
+                style={{ filter: "brightness(100%)" }}
               >
                 {option.word}
               </button>

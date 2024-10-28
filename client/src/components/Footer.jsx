@@ -24,7 +24,7 @@ const Footer = () => {
           <h1 className='font-bold text-center lg:text-left text-lg lg:text-xl'>About E-Learners</h1>
           <div className='flex flex-col gap-3 items-center lg:items-start mt-3'>
             <p className='text-sm lg:text-base'>Our Team</p>
-            <p className='text-sm lg:text-base'>About Us</p>
+            <p className='text-sm lg:text-base'>About Us</p > 
             <p className='text-sm lg:text-base'>FAQ's</p>
           </div>
         </div>
