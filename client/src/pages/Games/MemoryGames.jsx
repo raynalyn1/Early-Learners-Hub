@@ -94,12 +94,12 @@ const MemoryGame = () => {
     const shuffledCards = cardIcons.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
 
-    if (level === 8) {
-      setGridCols("grid-cols-4");
-    } else if (level === 16) {
-      setGridCols("grid-cols-4");
-    } else if (level === 32) {
-      setGridCols("grid-cols-8");
+    if (level === 4) {
+      setGridCols("grid-cols-2");
+    } else if (level === 6) {
+      setGridCols("grid-cols-3");
+    } else if (level === 10) {
+      setGridCols("grid-cols-5");
     }
   };
 
@@ -150,9 +150,9 @@ const MemoryGame = () => {
   };
 
   const difficultyLevels = {
-    easy: 8,
-    normal: 16,
-    hard: 32,
+    easy: 4,
+    normal: 6,
+    hard: 10,
   };
 
   return (
@@ -273,11 +273,12 @@ const MemoryGame = () => {
             {cards.map((icon, index) => (
               <div
                 key={index}
-                className={`w-40 h-40 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105 ${
-                  flippedCards.includes(index) || matchedCards.includes(index)
-                    ? "bg-white text-gray-800"
-                    : "bg-[#FFCF8C] text-white"
-                }`}
+                className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
+ ${
+   flippedCards.includes(index) || matchedCards.includes(index)
+     ? "bg-white text-gray-800"
+     : "bg-[#FFCF8C] text-white"
+ }`}
                 style={{
                   backgroundImage:
                     flippedCards.includes(index) || matchedCards.includes(index)
@@ -291,7 +292,7 @@ const MemoryGame = () => {
               >
                 {(flippedCards.includes(index) ||
                   matchedCards.includes(index)) && (
-                  <span style={{ fontSize: "5rem", color: "#7E4F0E" }}>
+                  <span style={{ fontSize: "7rem", color: "#7E4F0E" }}>
                     {icon}
                   </span>
                 )}

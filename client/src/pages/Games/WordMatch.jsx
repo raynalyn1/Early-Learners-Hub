@@ -1,9 +1,10 @@
 // src/WordMatch.js
 import React, { useState, useEffect } from "react";
+import "./WordMatch.css"; // Import your CSS file here
 import { useNavigate } from "react-router-dom";
 import bg from "../../images/games/nbg.png";
 import loading from "../../images/games/loading.gif";
-import db from "../../images/games/dog-bird.png";
+import db from "../../images/games/dogApple.png";
 import pd from "../../images/games/pd.png";
 import matching from "../../images/games/matching.png";
 import arow from "../../images/games/arow.png"
@@ -130,51 +131,62 @@ const WordMatch = () => {
             className="absolute inset-0 w-full h-full object-cover opacity-90"
             style={{ filter: "brightness(100%)" }}
           />
-          <img src={loading} alt="" style={{ filter: "brightness(100%)" }} />
+          <img src={loading} alt="loading" style={{ filter: "brightness(100%)" }} />
         </div>
       ) : !gameStarted ? (
         <div className="flex flex-col items-center justify-center h-screen">
           <img
             src={bg}
-            alt="backg"
-            className=" absolute inset-0 w-full h-full object-cover opacity-90"
+            alt="background"
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
+  
+          {/* Animate the db image dropping from above */}
           <img
             src={db}
             alt="dog-bird"
-            className="text-center mt-0"
+            className="animate-drop mt-0"
             style={{ filter: "brightness(100%)" }}
           />
+  
+          {/* Animate pd image coming from the right */}
           <img
             src={pd}
             alt="picture-word"
-            className=""
+            className="animate-slide-right"
             style={{ filter: "brightness(100%)" }}
           />
+  
+          {/* Animate matching image coming from the left */}
           <img
             src={matching}
-            alt=""
-            className=""
+            alt="matching"
+            className="animate-slide-left w-full "
             style={{ filter: "brightness(100%)" }}
           />
+  
           <h1
-            className="text-5xl font-extrabold mb-4 text-purple-600 "
+            className="text-5xl font-extrabold mb-4 text-purple-600"
             style={{ filter: "brightness(100%)" }}
           ></h1>
+  
           <p
             className="mb-4 text-xl text-gray-800"
             style={{ filter: "brightness(100%)" }}
           >
             {/* Click the button below to start the game. */}
           </p>
-          <button
-            onClick={startGame}
-            className="px-8 py-4 text-2xl font-bold text-[#94682A] bg-[#FFE0B5] rounded-3xl shadow-2xl hover:bg-[#FFE0B5]-600 transition-colors duration-200"
-            style={{ filter: "brightness(100%)" }}
-          >
-            Start Game
-          </button>
-        </div>
+  
+          {/* Button with animated cursor or icon to guide the start */}
+           <button
+          onClick={startGame}
+          className="px-8 py-4 text-2xl font-bold text-[#94682A] bg-[#FFE0B5] rounded-3xl shadow-2xl hover:bg-[#FFE0B5]-600 transition-colors duration-200 animate-pulse"
+          style={{ filter: "brightness(100%)", position: 'relative' }}
+        >
+          Start Game
+          <span className="animate-bounce pointer-icon" style={{ color: "#F4DAB5" }}>👉</span>
+        </button>
+      </div>
       ) : (
         <div className="w-full max-w-lg mx-auto text-center">
           <img src={bg}

@@ -65,14 +65,14 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Benefits Section with shadow */}
+       
         <div className="bg-[#EBCEA8] w-full px-5 lg:px-20 py-10 shadow-lg">
           <div className="flex flex-col lg:flex-row justify-between items-center">
             <div className="flex flex-col gap-4 w-full lg:w-[50%] ml-0 lg:ml-[10rem]">
-              <div className="text-[1.5rem] font-semibold">
+              {/* <div className="text-[1.5rem] font-semibold">
                 Discover more benefits:
-              </div>
-              {[{ img: img6, title: "Collaborative Learning" },
+              </div> */}
+              {/* {[{ img: img6, title: "Collaborative Learning" },
                 { img: img7, title: "Interactive Sessions" },
                 { img: img8, title: "Expert Guidance" },
                 { img: img9, title: "Enhanced Problem-Solving Skills" }].map((benefit, idx) => (
@@ -86,16 +86,11 @@ const LandingPage = () => {
                       {benefit.title}
                     </span>
                   </div>
-                ))}
+                ))} */}
             </div>
 
-            {/* Main Image on Right */}
             <div className="w-full lg:w-[50%] flex justify-center relative mt-10 lg:mt-0">
-              <img
-                src={img19}
-                alt="Kid with ABC blocks"
-                className="w-[50%] sm:w-[70%] h-[50%] transition-transform duration-300 transform hover:scale-90"
-              />
+             
             </div>
           </div>
 

@@ -1,39 +1,96 @@
-import React from 'react';
+import React from "react";
+
+import memoryIcon from "../../images/Dashboard/memory.png";
+import rectangleIcon from "../../images/Dashboard/match.png";
+import trophyIcon from "../../images/Dashboard/trophy.png";
+// import account from "../../images/Dashboard/account.png";
+import dropdownIcon from "../../images/Dashboard/dropdownIcon.png"; // Add dropdown arrow icon if available
 
 const Dashboard = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-blue-600">Dashboard</h1>
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 shadow-md rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-800">Total Users</h2>
-          <p className="text-2xl font-bold text-gray-600">1,234</p>
+    <div className="flex">
+      {/* Sidebar */}
+
+      {/* Main Content */}
+      <div className="flex-1 p-6">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-orange-500">
+            HAVE FUN AND EXPLORE
+          </h1>
+          <img src={trophyIcon} alt="Trophy" className="w-16 h-16" />
+          <div className="flex items-center">
+            {/* <img src={userIcon} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" /> */}
+            <span className="text-gray-800 font-semibold">Mizar Reim</span>
+            <img
+              src={dropdownIcon}
+              alt="Dropdown Icon"
+              className="w-4 h-4 ml-2"
+            />{" "}
+            {/* Dropdown arrow */}
+          </div>
         </div>
-        <div className="bg-white p-6 shadow-md rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-800">Active Sessions</h2>
-          <p className="text-2xl font-bold text-gray-600">456</p>
+
+        {/* Games Section */}
+        <div className="">
+          <button className="bg-orange-500 text-white py-2 px-4 rounded-full font-semibold mt-[1rem] ml-[1rem]">
+            All Games
+          </button>
+          <div className="flex justify-end mb-8">
+          <select className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md mr-[2rem]">
+            <option>Games Categories</option>
+          </select>
         </div>
-        <div className="bg-white p-6 shadow-md rounded-lg">
-          <h2 className="text-xl font-semibold text-gray-800">New Signups</h2>
-          <p className="text-2xl font-bold text-gray-600">78</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            {/* Game Cards */}
+            <div
+              className="rounded-lg p-4 shadow"
+              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
+            >
+              <img
+                src={memoryIcon}
+                alt="Memory Match Game"
+                className="w-full h-32 object-cover rounded-md"
+              />
+              <h3 className="mt-2 text-lg font-semibold text-gray-800">
+                Memory Match
+              </h3>
+              <p className="text-gray-600 text-sm">Letters from A-Z</p>
+              <button className="mt-2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm">
+                Start Game
+              </button>
+            </div>
+            <div
+              className=" rounded-lg p-4 shadow"
+              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
+            >
+              <img
+                src={rectangleIcon}
+                alt="Picture Word Matching Game"
+                className="w-full h-32 object-cover rounded-md"
+              />
+              <h3 className="mt-2 text-lg font-semibold text-gray-800">
+                Picture-Word Matching
+              </h3>
+              <p className="text-gray-600 text-sm">Dog, Bird</p>
+              <button className="mt-2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm">
+                Start Game
+              </button>
+            </div>
+            {/* Additional placeholders for empty game cards */}
+            <div
+              className=" rounded-lg p-4 shadow"
+              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
+            ></div>
+            <div
+              className=" rounded-lg p-4 shadow"
+              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
+            ></div>
+          </div>
         </div>
-      </div>
-      <div className="mt-8 bg-white p-6 shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold text-gray-800">Recent Activity</h2>
-        <ul className="mt-4 space-y-4">
-          <li className="border-b border-gray-200 pb-2">
-            <p className="text-gray-700">User John Doe registered.</p>
-            <p className="text-gray-500 text-sm">2 hours ago</p>
-          </li>
-          <li className="border-b border-gray-200 pb-2">
-            <p className="text-gray-700">Video "Fun Learning" uploaded.</p>
-            <p className="text-gray-500 text-sm">5 hours ago</p>
-          </li>
-          <li>
-            <p className="text-gray-700">Game "Math Quiz" updated.</p>
-            <p className="text-gray-500 text-sm">1 day ago</p>
-          </li>
-        </ul>
+
+        {/* Games Category Dropdown */}
+        
       </div>
     </div>
   );

@@ -68,8 +68,8 @@ const Register = () => {
           className="w-full md:w-1/2 relative rounded-r-lg p-4 sm:p-8 flex flex-col justify-center ml-[8rem]"
           style={{ borderColor: "#ECA23B" }}
         >
-          <form className="space-y-4 sm:space-y-6 relative z-10">
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg">
+          <form className="space-y-4 sm:space-y-6 relative z-10 ">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
               <img src={img9} alt="Name Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="text"
@@ -77,7 +77,7 @@ const Register = () => {
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
             </div>
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
               <img src={img6} alt="Email Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="email"
@@ -85,23 +85,23 @@ const Register = () => {
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
             </div>
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
               <img src={img11} alt="Pencil Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="text"
-                placeholder="Username*"
-                className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
-              />
-            </div>
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg">
-              <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
-              <input
-                type="password"
                 placeholder="Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
+              <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
+              <input
+                type="password"
+                placeholder="Confirm Password*"
+                className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base "
+              />
+            </div>
+            <div className="flex items-center justify-center ">
               <button
                 type="submit"
                 className="flex items-center bg-[#F9AF47] text-black py-2 px-6 sm:px-8 md:px-10 font-medium text-sm sm:text-base md:text-lg rounded-3xl "

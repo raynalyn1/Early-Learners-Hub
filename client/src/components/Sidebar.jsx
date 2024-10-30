@@ -1,39 +1,61 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../images/Dashboard/lg.png";
+import homeIcon from "../images/Dashboard/home.png";
+import listIcon from "../images/Dashboard/list.png";
+import userIcon from "../images/Dashboard/user.png";
+import video from "../images/Dashboard/video.png";
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 bg-gray-800 text-white min-h-screen">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
-        <ul className="space-y-4">
-          <li>
+    <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center">
+      {/* Logo */}
+      <img src={logo} alt="Logo" className="w-24 h-auto mb-10" />
+
+      <nav className="w-full">
+        <ul className="space-y-6 text-black text-lg">
+          <li className="flex items-center space-x-4">
+            <img src={homeIcon} alt="Dashboard" className="w-6 h-6" />
             <Link 
               to="/admin/dashboard" 
-              className="block px-4 py-2 rounded hover:bg-gray-700"
+              className="block px-4 py-2 rounded hover:bg-[#F0BC78]"
             >
               Dashboard
             </Link>
           </li>
-          <li>
+          
+          <li className="flex items-center space-x-4">
+            <img src={listIcon} alt="Users" className="w-6 h-6" />
             <Link 
-              to="/admin/games" 
-              className="block px-4 py-2 rounded hover:bg-gray-700"
+              to="/admin/user" 
+              className="block px-4 py-2 rounded hover:bg-[#F0BC78]"
             >
-              Games
+              User’s  List
             </Link>
           </li>
-          <li>
+          
+          <li className="flex items-center space-x-4">
+            <img src={userIcon} alt="Score Tracking" className="w-6 h-6" />
+            <Link 
+              to="/admin/tracking" 
+              className="block px-4 py-2 rounded hover:bg-[#F0BC78]"
+            >
+              Score Tracking
+            </Link>
+          </li>
+          
+          <li className="flex items-center space-x-4">
+            <img src={video} alt="Videos" className="w-6 h-6" />
             <Link 
               to="/admin/videos" 
-              className="block px-4 py-2 rounded hover:bg-gray-700"
+              className="block px-4 py-4 rounded hover:bg-[#F0BC78]"
             >
-              Videos
+              Upload Videos
             </Link>
           </li>
         </ul>
-      </div>
-    </aside>
+      </nav>
+    </div>
   );
 };
 

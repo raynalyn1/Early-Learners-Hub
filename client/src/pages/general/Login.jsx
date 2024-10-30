@@ -41,7 +41,7 @@ const SignIn = () => {
           </div>
 
           <form className="space-y-4 sm:space-y-6 relative z-10 flex flex-col items-center mt-[4rem] sm:mt-[9vh] gap-3 sm:gap-5">
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg w-full max-w-[250px] sm:max-w-[300px]">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg w-full max-w-[250px] sm:max-w-[300px] border-[#EB9721] border">
               <img src={img6} alt="Email Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="email"
@@ -49,7 +49,7 @@ const SignIn = () => {
                 className="w-full bg-transparent outline-none text-gray-700 pl-3 sm:pl-4 text-sm sm:text-base"
               />
             </div>
-            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg w-full max-w-[250px] sm:max-w-[300px]">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg w-full max-w-[250px] sm:max-w-[300px] border-[#EB9721] border">
               <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="password"
