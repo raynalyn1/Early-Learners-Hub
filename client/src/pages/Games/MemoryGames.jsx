@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
+import BackgroundAudio from "../../../src/Audio/backgroundAudio.mp3";
 import "./MemoryGame.css"; // Import a separate CSS file for styles
 // import img from "../../images/games/arrow.png";
 import img1 from "../../images/games/load.png";
@@ -56,9 +57,13 @@ const MemoryGame = () => {
   const [timerStarted, setTimerStarted] = useState(false);
   const [gridCols, setGridCols] = useState("grid-cols-2");
   const [difficulty, setDifficulty] = useState("");
-  const [showStats, setShowStats] = useState(false); // Only show stats after difficulty is chosen
+  const [showStats, setShowStats] = useState(false); 
   const [gameStarted, setGameStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+
+  const audio = new Audio(BackgroundAudio);
+  
 
   // Simulate loading before showing the play button
   useEffect(() => {
@@ -74,7 +79,15 @@ const MemoryGame = () => {
     setDifficulty(levelName);
     setShowStats(true); // Set to true after choosing difficulty
   };
-
+  const getUniqueMatchedLetters = () => {
+    // Create a Set from matchedCards to get unique letters
+    const uniqueIcons = [...new Set(matchedCards.map((index) => cards[index]))];
+    
+    // Sort the unique letters in alphabetical order
+    uniqueIcons.sort();
+  
+    return uniqueIcons;
+  };
   const resetGame = () => {
     setCards([]);
     setFlippedCards([]);
@@ -138,6 +151,7 @@ const MemoryGame = () => {
     if (matchedCards.length + 2 === cards.length) {
       clearInterval(intervalId);
       setGameOver(true);
+      audio.play();
       setShowConfetti(true);
     }
   };
@@ -225,6 +239,15 @@ const MemoryGame = () => {
             alt="background"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
+          {showStats && (
+            <div
+              className="text-black text-xl right"
+              style={{ filter: "brightness(100%)" }}
+            >
+              <p>Time: {flipCount} </p>
+              <p>Time: {timer} seconds</p>
+            </div>
+          )}
           <img
             src={arow}
             alt="arrowback"
@@ -243,15 +266,7 @@ const MemoryGame = () => {
             className="absolute mb-[3rem] left-0 "
             style={{ filter: "brightness(100%)" }}
           />
-          {showStats && (
-            <div
-              className="mt-4 text-black text-xl"
-              style={{ filter: "brightness(100%)" }}
-            >
-              <p>Flips: {flipCount}</p>
-              <p>Time: {timer} seconds</p>
-            </div>
-          )}
+
           <h1
             className="text-4xl font-bold text-white mb-4 "
             style={{ filter: "brightness(100%)" }}
@@ -299,11 +314,13 @@ const MemoryGame = () => {
               </div>
             ))}
           </div>
-
+         
           {gameOver && (
+           
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
               <div className="bg-[#EBCEA8] p-8 rounded-[20px] shadow-lg text-center relative z-50 w-80">
                 {/* Level and Message */}
+                <backgroundAudio/>
                 <div className="text-sm font-bold bg-[#DFC3A2] text-[#5C4A30] py-2 px-4 rounded-full mb-4 w-fit mx-auto">
                   LEVEL:{" "}
                   {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
@@ -313,17 +330,17 @@ const MemoryGame = () => {
                 </h2>
 
                 {/* Mission Box */}
-                <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
-                  <p className="text-[#5C4A30] font-semibold">Mission:</p>
-                  <p className="text-[#5C4A30] mb-3">
-                    Successfully Matched Letters
-                  </p>
-                  <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
-                    <span>Aa</span>
-                    <span>Bb</span>
-                    <span>Cc</span>
-                  </div>
-                </div>
+              
+  <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
+  <p className="text-[#5C4A30] font-semibold">Mission:</p>
+  <p className="text-[#5C4A30] mb-3">Successfully Matched Letters</p>
+  <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
+    {getUniqueMatchedLetters().map((icon, index) => (
+      <span key={index}>{icon}</span>
+    ))}
+    </div>
+  </div>
+
 
                 {/* Medal Icon */}
                 <img

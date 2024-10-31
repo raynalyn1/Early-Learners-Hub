@@ -32,7 +32,7 @@ const User = () => {
 
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-semibold text-black mb-4">List of User</h1>
+      <h1 className="text-3xl font-bold text-orange-500 mb-4 ">List of User</h1>
       
       <div className="flex items-center gap-4 mb-6">
         <div className="relative">
