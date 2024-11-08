@@ -1,94 +1,96 @@
 import React from "react";
+import teach from "../../images/Dashboard/teach.png";
+import glowingstar from "../../images/Dashboard/glowingstars.png";
 
-import memoryIcon from "../../images/Dashboard/memory.png";
-import rectangleIcon from "../../images/Dashboard/match.png";
-import trophyIcon from "../../images/Dashboard/trophy.png";
-import dropdownIcon from "../../images/Dashboard/dropdownIcon.png"; // Add dropdown arrow icon if available
-import dashImage from "../../images/Dashboard/dImage.png";
-
-const Dashboard = () => {
+function Dashboard() {
   return (
-    <div className="flex">
-      {/* Sidebar */}
+    <div className="">
+      {/* Header */}
+      <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E] ">
+        <div>
+          <h2 className="text-gray-700 text-lg font-semibold">Dashboard</h2>
+          <p className="text-sm text-gray-500">Wednesday, 06 November 2024</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
+            MR
+          </div>
+          <p className="text-gray-700">Mizar Reim</p>
+        </div>
+      </div>
 
-      {/* Main Content */}
-      <div className="flex-1">
-        {/* Header */}
-        <img src={dashImage} alt=""  className="absolute   object-cover top-0  w-[50%] h-[45vh]"/>
+      {/* Banner */}
+      <div className="bg-orange-100 p-6 rounded-md mb-6 relative overflow-hidden shadow-md flex items-center w-[100%] h-[31vh]">
+        {/* Glowing Stars (top-left) */}
+        <div className="absolute bottom-[6rem] flex space-x-1">
+          <img src={glowingstar} alt="Glowing Star 1" className="w-30 h-30 " />
+        </div>
+
+        {/* Text */}
+        <div className="flex-1 start font-fredoka mt-[5rem] ml-[3rem]">
+          <h3 className="text-[50px] font-bold text-[#7E4F0E]">
+            Your Classroom Awaits! Let's <br />Inspire Together
+          </h3>
+        </div>
+
+        {/* Right-side Illustration */}
+        <img
+          src={teach}
+          alt="Banner Illustration"
+          className="absolute right-4 bottom-0 w-[35%] h-[30vh] "
+        />
+      </div>
+
+      {/* Overview Cards */}
+      <div className="">
+        Overview
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         
-          
-          {/* User Info and Dropdown */}
-          <div className="flex items-center">
-            <span className="text-white font-semibold mr-2">Mizar Reim</span>
-            <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
+        {/* Total Students */}
+        <div className="bg-white p-4 rounded-md shadow">
+          <div className="flex items-center space-x-4">
+            <div className="text-5xl font-bold text-orange-500">13</div>
+            <div>
+              <h4 className="text-gray-600 font-semibold">Total Students</h4>
+              <p className="text-sm text-gray-500">Female: 5, Male: 8</p>
+            </div>
           </div>
-      
+        </div>
 
-        {/* Games Section */}
-        <div className="p-6">
-          <button className="bg-orange-500 text-white py-2 px-4 rounded-full font-semibold mt-[20rem]">
-            All Games
-          </button>
-          
-          <div className="flex justify-end mb-8 mt-4">
-            <select className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md outline-none">
-              <option>Games Categories</option>
-              <option value="Literacy">Literacy</option>
-              <option value="Phonics">Phonics</option>
-              <option value="Math">Math</option>
-            </select>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Game Cards */}
-            <div
-              className="rounded-lg p-4 shadow"
-              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
-            >
-              <img
-                src={memoryIcon}
-                alt="Memory Match Game"
-                className="w-full h-32 object-cover rounded-md"
-              />
-              <h3 className="mt-2 text-lg font-semibold text-gray-800">
-                Memory Match
-              </h3>
-              <p className="text-gray-600 text-sm">Letters from A-Z</p>
-              <button className="mt-2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm">
-                Start Game
-              </button>
-            </div>
-            <div
-              className="rounded-lg p-4 shadow"
-              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
-            >
-              <img
-                src={rectangleIcon}
-                alt="Picture Word Matching Game"
-                className="w-full h-32 object-cover rounded-md"
-              />
-              <h3 className="mt-2 text-lg font-semibold text-gray-800">
-                Picture-Word Matching
-              </h3>
-              <p className="text-gray-600 text-sm">Dog, Bird</p>
-              <button className="mt-2 bg-orange-500 text-white px-4 py-1 rounded-full text-sm">
-                Start Game
-              </button>
-            </div>
-            {/* Additional placeholders for empty game cards */}
-            <div
-              className="rounded-lg p-4 shadow"
-              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
-            ></div>
-            <div
-              className="rounded-lg p-4 shadow"
-              style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
-            ></div>
-          </div>
+        {/* Game Categories */}
+        <div className="bg-white p-4 rounded-md shadow">
+          <div className="text-5xl font-bold text-orange-500">3</div>
+          <h4 className="text-gray-600 font-semibold mt-2">Game Categories</h4>
+          <p className="text-sm text-gray-500">Total</p>
+        </div>
+
+        {/* Game Available */}
+        <div className="bg-white p-4 rounded-md shadow">
+          <div className="text-5xl font-bold text-orange-500">6</div>
+          <h4 className="text-gray-600 font-semibold mt-2">Game Available</h4>
+          <p className="text-sm text-gray-500">Overall Total</p>
+        </div>
+
+        {/* Available Tutors */}
+        <div className="bg-white p-4 rounded-md shadow">
+          <div className="text-5xl font-bold text-orange-500">5</div>
+          <h4 className="text-gray-600 font-semibold mt-2">Available Tutors</h4>
+        </div>
+      </div>
+
+      {/* Activity Log */}
+      <div className="mt-6 bg-white p-4 rounded-md shadow">
+        <h4 className="text-gray-600 font-semibold mb-4">
+          Videos Activity Log
+        </h4>
+        <div className="text-sm text-gray-500">
+          <p>November 06, 2024 - 2:15 PM: You recently uploaded one video.</p>
+          <p>November 06, 2024 - 2:15 PM: You recently uploaded one video.</p>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Dashboard;

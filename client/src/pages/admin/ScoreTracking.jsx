@@ -6,46 +6,86 @@ const ScoreTracking = () => {
   const [tournaments, setTournaments] = useState([]);
   const [gamesLevel, setGamesLevel] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState("All");
-  const [selectedTournament, setSelectedTournament] = useState("");
-  const [selectedGameLevel, setSelectedGameLevel] = useState("");
+  const [selectedTournament, setSelectedTournament] = useState("All");
+  const [selectedGameLevel, setSelectedGameLevel] = useState("All");
   const [scoreData, setScoreData] = useState([]);
 
   useEffect(() => {
     // Mock data fetch - Replace with actual API calls if available
     setStudents([
       { id: 1, name: "Marvin Tenobroso" },
-      { id: 2, name: "Juan Dela Cruz" },
+      { id: 2, name: "Rovelyn Paradero" },
       // Add more students as needed
     ]);
-    setTournaments(["Flash Card Games", "Math Quiz", "Spelling Bee"]);
+    setTournaments(["Flash Card Games", "Math Quest Adventure", "Memory Match", "Picture-Word Matching"]);
     setGamesLevel(["Easy", "Medium", "Difficult"]);
     setScoreData([
       {
         studentName: "Marvin Tenobroso",
         tournament: "Flash Card Games",
         gameLevel: "Difficult",
+        score: 10,
+      },
+      {
+        studentName: "Rovelyn Paradero",
+        tournament: "Math Quest Adventure",
+        gameLevel: "Easy",
         score: 50,
       },
-      // Add more score records as needed
+      {
+        studentName: "Rovelyn Paradero",
+        tournament: "Memory Match",
+        gameLevel: "Easy",
+        score: 50,
+      },
+      {
+        studentName: "Rovelyn Paradero",
+        tournament: "Picture-Word Matching",
+        gameLevel: "Easy",
+        score: 50,
+      },
     ]);
   }, []);
 
   const filteredScores = scoreData.filter((data) => {
     return (
       (selectedStudent === "All" || data.studentName === selectedStudent) &&
-      (selectedTournament === "" || data.tournament === selectedTournament) &&
-      (selectedGameLevel === "" || data.gameLevel === selectedGameLevel)
+      (selectedTournament === "All" || data.tournament === selectedTournament) &&
+      (selectedGameLevel === "All" || data.gameLevel === selectedGameLevel)
     );
   });
 
+  const renderStars = (score) => {
+    const stars = Math.round(score / 10);
+    return (
+      <span>
+        {Array.from({ length: 5 }, (_, index) => (
+          <span key={index} className={index < stars ? "text-yellow-500" : "text-gray-300"}>
+            ★
+          </span>
+        ))}
+      </span>
+    );
+  };
+
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="mb-4 text-3xl font-bold text-orange-500">Score Tracking</h1>
-      
-      <div className="flex items-center gap-4 mb-6">
-        <div className="relative">
+    <div className="p-8 bg-[#FAF3EB] min-h-screen">
+      <div className="flex items-center justify-between mb-10">
+        <h2 className="text-2xl font-bold">Dashboard</h2>
+        <div className="text-gray-500">Wednesday, 06 November 2024</div>
+        <div className="flex items-center">
+          <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
+            MR
+          </div>
+          <span className="ml-2">Mizar Reim</span>
+        </div>
+      </div>
+
+      <div className="flex gap-4 mb-4">
+        <div className="w-1/3">
+          <label className="font-semibold">Student Name</label>
           <select
-            className="w-48 p-2 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none pr-8"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
             value={selectedStudent}
             onChange={(e) => setSelectedStudent(e.target.value)}
           >
@@ -56,76 +96,65 @@ const ScoreTracking = () => {
               </option>
             ))}
           </select>
-          <img
-            src={dropdown}
-            alt="Dropdown Icon"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-          />
         </div>
         
-        <div className="relative">
+        <div className="w-1/3">
+          <label className="font-semibold">Tournaments</label>
           <select
-            className="w-48 p-2 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none pr-8"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
             value={selectedTournament}
             onChange={(e) => setSelectedTournament(e.target.value)}
           >
-            <option value="">Select Tournament</option>
+            <option value="All">All</option>
             {tournaments.map((tournament, index) => (
               <option key={index} value={tournament}>
                 {tournament}
               </option>
             ))}
           </select>
-          <img
-            src={dropdown}
-            alt="Dropdown Icon"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-          />
         </div>
 
-        <div className="relative">
+        <div className="w-1/3">
+          <label className="font-semibold">Games Level</label>
           <select
-            className="w-48 p-2 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none pr-8"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
             value={selectedGameLevel}
             onChange={(e) => setSelectedGameLevel(e.target.value)}
           >
-            <option value="">Select Game Level</option>
+            <option value="All">All</option>
             {gamesLevel.map((level, index) => (
               <option key={index} value={level}>
                 {level}
               </option>
             ))}
           </select>
-          <img
-            src={dropdown}
-            alt="Dropdown Icon"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
-          />
         </div>
       </div>
 
-      <table className="w-full bg-white border border-gray-300">
+      <table className="w-full bg-white border border-gray-200 rounded shadow-sm">
         <thead>
           <tr>
-            <th className="border-b border-gray-300 px-4 py-2 text-left">Student Name</th>
-            <th className="border-b border-gray-300 px-4 py-2 text-left">Tournaments</th>
-            <th className="border-b border-gray-300 px-4 py-2 text-left">Games Level</th>
-            <th className="border-b border-gray-300 px-4 py-2 text-left">Score</th>
+            <th className="px-4 py-2 text-left font-semibold text-gray-600">Student Name</th>
+            <th className="px-4 py-2 text-left font-semibold text-gray-600">Tournaments</th>
+            <th className="px-4 py-2 text-left font-semibold text-gray-600">Games Level</th>
+            <th className="px-4 py-2 text-left font-semibold text-gray-600">Score</th>
+            <th className="px-4 py-2 text-left font-semibold text-gray-600">Stars Received</th>
           </tr>
         </thead>
         <tbody>
           {filteredScores.length > 0 ? (
             filteredScores.map((data, index) => (
-              <tr key={index}>
-                <td className="border-b border-gray-200 px-4 py-2">{data.studentName}</td>
-                <td className="border-b border-gray-200 px-4 py-2">{data.tournament}</td>
-                <td className="border-b border-gray-200 px-4 py-2">{data.gameLevel}</td>
-                <td className="border-b border-gray-200 px-4 py-2">Score: {data.score}</td>
+              <tr key={index} className="border-t">
+                <td className="px-4 py-2">{data.studentName}</td>
+                <td className="px-4 py-2">{data.tournament}</td>
+                <td className="px-4 py-2">{data.gameLevel}</td>
+                <td className="px-4 py-2">{data.score}</td>
+                <td className="px-4 py-2">{renderStars(data.score)}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="border-b border-gray-200 px-4 py-2 text-center">
+              <td colSpan="5" className="px-4 py-2 text-center text-gray-500">
                 No data found
               </td>
             </tr>

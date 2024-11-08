@@ -7,12 +7,10 @@ const User = () => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    // Mock data fetch - Replace with actual API call if available
     const fetchStudents = async () => {
       const studentsData = [
         { id: 1, name: "Paradero, Rovelyn", parent: "Paradero, Rodrigo", contact: "0965012336" },
         { id: 2, name: "Dela Cruz, Juan", parent: "Dela Cruz, Maria", contact: "09123456789" },
-        // Add more data as needed
       ];
       setStudents(studentsData);
     };
@@ -21,27 +19,26 @@ const User = () => {
   }, []);
 
   const handleViewUserList = () => {
-    // Filter user data based on selected student
     if (selectedStudent) {
       const filteredData = students.filter(student => student.name === selectedStudent);
       setUserData(filteredData);
     } else {
-      setUserData(students); // Show all users if no specific student is selected
+      setUserData(students);
     }
   };
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-orange-500 mb-4 ">List of User</h1>
+    <div className="p-8 bg-[#FAF3EB] min-h-screen">
+      <h1 className="text-3xl font-bold text-[#F47C21] mb-6">List of User</h1>
       
       <div className="flex items-center gap-4 mb-6">
         <div className="relative">
           <select
-            className="w-60 p-2 border border-gray-300 rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none pr-8"
+            className="w-64 p-3 border border-gray-300 rounded bg-[#FBF7F0] focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none pr-8 text-gray-700"
             value={selectedStudent}
             onChange={(e) => setSelectedStudent(e.target.value)}
           >
-            <option value="">Select Student Name</option>
+            <option value="">Select User</option>
             {students.map((student) => (
               <option key={student.id} value={student.name}>
                 {student.name}
@@ -55,31 +52,31 @@ const User = () => {
           />
         </div>
         <button
-          className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400"
+          className="px-6 py-2 bg-[#F47C21] text-white rounded hover:bg-[#E06A1B] transition-colors"
           onClick={handleViewUserList}
         >
           View User List
         </button>
       </div>
       
-      <table className="w-full bg-white border border-gray-300">
+      <table className="w-[80%] bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden mx-auto">
+
         <thead>
-          <tr>
-            <th className="border border-gray-300 px-4 py-2 text-left">Students Name</th>
-            <th colSpan="2" className="border border-gray-300 px-4 py-2 text-center">Parents Information</th>
+          <tr className="bg-[#FBF7F0]">
+            <th className="border border-[#E5E5E5] px-4 py-3 text-center text-[#333333] font-semibold " rowSpan="2">Students Name</th>
+            <th className="border border-[#E5E5E5] px-4 py-3 text-center text-[#333333] font-semibold" colSpan="2">Parents Information</th>
           </tr>
-          <tr>
-            <th></th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Name</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Contact No.</th>
+          <tr className="bg-[#FBF7F0]">
+            <th className="border border-[#E5E5E5] px-4 py-3 text-left text-[#333333] font-semibold">Name</th>
+            <th className="border border-[#E5E5E5] px-4 py-3 text-left text-[#333333] font-semibold">Email</th>
           </tr>
         </thead>
         <tbody>
           {userData.map((user) => (
-            <tr key={user.id}>
-              <td className="border border-gray-300 px-4 py-2">{user.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{user.parent}</td>
-              <td className="border border-gray-300 px-4 py-2">{user.contact}</td>
+            <tr key={user.id} className="bg-[#FBF7F0]">
+              <td className="border border-[#E5E5E5] px-4 py-3 text-gray-700">{user.name}</td>
+              <td className="border border-[#E5E5E5] px-4 py-3 text-gray-700">{user.parent}</td>
+              <td className="border border-[#E5E5E5] px-4 py-3 text-gray-700">{user.contact}</td>
             </tr>
           ))}
         </tbody>
