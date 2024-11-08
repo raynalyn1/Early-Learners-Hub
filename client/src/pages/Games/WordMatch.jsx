@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./WordMatch.css"; // Import your CSS file here
 import { useNavigate } from "react-router-dom";
-import bg from "../../images/games/nbg.png";
+import bg from "../../images/games/matchBg.png";
 import loading from "../../images/games/loading.gif";
 import db from "../../images/games/dogApple.png";
 import pd from "../../images/games/pd.png";
@@ -191,8 +191,8 @@ const WordMatch = () => {
         <div className="w-full max-w-lg mx-auto text-center">
           <img src={bg}
            alt="background" 
-           className="absolute inset-0 w-full h-full object-cover opacity-90"
-           
+           className="absolute inset-0 w-full h-full object-cover opacity-100"
+           style={{ opacity: 0.7 }} // Adjust to your preferred opacity
           />
           <img
             src={arow}
@@ -201,21 +201,26 @@ const WordMatch = () => {
             className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
           />
           <h1 className="text-5xl font-extrabold mb-6 text-purple-600" style={{ filter: "brightness(100%)" }}>
-            Word Match Game
+            {/* Word Match Game */}
           </h1>
           <div className="mb-4">
-            <img
-              src={wordsAndImages[questionIndex]?.image}
-              alt={currentWord}
-              className="w-40 h-40 mb-6 mx-auto rounded-lg shadow-lg"
-              style={{ filter: "brightness(100%)" }}
-            />
-          </div>
+    <img
+      src={wordsAndImages[questionIndex]?.image}
+      alt={currentWord}
+      className="mb-6 mx-auto rounded-lg bg-[#ECFFD9]"
+      style={{
+        width: "400px",
+        height: "400px",
+        objectFit: "cover",
+        filter: "brightness(100%)",
+      }}
+    />
+</div>
           <div className="flex flex-wrap justify-center mb-6">
             {options.map((option) => (
               <button
                 key={option.word}
-                className={`m-2 px-6 py-3 text-lg font-bold text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-600 transition-colors duration-200`}
+                className={`m-2 px-6 py-3 text-lg font-bold text-[#7E4F0E] bg-[#E9FFEC] rounded-lg shadow-lg hover:bg-[##E9FFEC] transition-colors duration-200 border border-[#406817]`}
                 onClick={() => handleOptionClick(option.word)}
                 style={{ filter: "brightness(100%)" }}
               >

@@ -3,8 +3,8 @@ import React from "react";
 import memoryIcon from "../../images/Dashboard/memory.png";
 import rectangleIcon from "../../images/Dashboard/match.png";
 import trophyIcon from "../../images/Dashboard/trophy.png";
-// import account from "../../images/Dashboard/account.png";
 import dropdownIcon from "../../images/Dashboard/dropdownIcon.png"; // Add dropdown arrow icon if available
+import dashImage from "../../images/Dashboard/dImage.png";
 
 const Dashboard = () => {
   return (
@@ -12,36 +12,34 @@ const Dashboard = () => {
       {/* Sidebar */}
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-orange-500">
-            HAVE FUN AND EXPLORE
-          </h1>
-          <img src={trophyIcon} alt="Trophy" className="w-16 h-16" />
+        <img src={dashImage} alt=""  className="absolute   object-cover top-0  w-[50%] h-[45vh]"/>
+        
+          
+          {/* User Info and Dropdown */}
           <div className="flex items-center">
-            {/* <img src={userIcon} alt="User Avatar" className="w-8 h-8 rounded-full mr-2" /> */}
-            <span className="text-gray-800 font-semibold">Mizar Reim</span>
-            <img
-              src={dropdownIcon}
-              alt="Dropdown Icon"
-              className="w-4 h-4 ml-2"
-            />{" "}
-            {/* Dropdown arrow */}
+            <span className="text-white font-semibold mr-2">Mizar Reim</span>
+            <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
           </div>
-        </div>
+      
 
         {/* Games Section */}
-        <div className="">
-          <button className="bg-orange-500 text-white py-2 px-4 rounded-full font-semibold mt-[1rem] ml-[1rem]">
+        <div className="p-6">
+          <button className="bg-orange-500 text-white py-2 px-4 rounded-full font-semibold mt-[20rem]">
             All Games
           </button>
-          <div className="flex justify-end mb-8">
-          <select className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md mr-[2rem]">
-            <option>Games Categories</option>
-          </select>
-        </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          
+          <div className="flex justify-end mb-8 mt-4">
+            <select className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md outline-none">
+              <option>Games Categories</option>
+              <option value="Literacy">Literacy</option>
+              <option value="Phonics">Phonics</option>
+              <option value="Math">Math</option>
+            </select>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {/* Game Cards */}
             <div
               className="rounded-lg p-4 shadow"
@@ -61,7 +59,7 @@ const Dashboard = () => {
               </button>
             </div>
             <div
-              className=" rounded-lg p-4 shadow"
+              className="rounded-lg p-4 shadow"
               style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
             >
               <img
@@ -79,18 +77,15 @@ const Dashboard = () => {
             </div>
             {/* Additional placeholders for empty game cards */}
             <div
-              className=" rounded-lg p-4 shadow"
+              className="rounded-lg p-4 shadow"
               style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
             ></div>
             <div
-              className=" rounded-lg p-4 shadow"
+              className="rounded-lg p-4 shadow"
               style={{ backgroundColor: "rgba(240, 188, 120, 0.6)" }}
             ></div>
           </div>
         </div>
-
-        {/* Games Category Dropdown */}
-        
       </div>
     </div>
   );

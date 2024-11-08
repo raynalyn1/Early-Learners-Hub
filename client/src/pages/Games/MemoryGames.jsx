@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 import BackgroundAudio from "../../../src/Audio/backgroundAudio.mp3";
+import progressbar from "../../components/progressbar";
 import "./MemoryGame.css"; // Import a separate CSS file for styles
 // import img from "../../images/games/arrow.png";
 import img1 from "../../images/games/load.png";
 import img2 from "../../images/games/cbl.png";
 import img3 from "../../images/games/robot.png";
-import img4 from "../../images/games/bg.png";
+import img4 from "../../images/games/2bg.png";
 import logo from "../../images/footer/logo.png";
 import img5 from "../../images/games/memory.png";
 import img6 from "../../images/games/mct.png";
@@ -107,12 +108,12 @@ const MemoryGame = () => {
     const shuffledCards = cardIcons.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
 
-    if (level === 4) {
-      setGridCols("grid-cols-2");
-    } else if (level === 6) {
+    if (level === 6) {
       setGridCols("grid-cols-3");
     } else if (level === 10) {
       setGridCols("grid-cols-5");
+    } else if (level === 12) {
+      setGridCols("grid-cols-6");
     }
   };
 
@@ -164,9 +165,9 @@ const MemoryGame = () => {
   };
 
   const difficultyLevels = {
-    easy: 4,
-    normal: 6,
-    hard: 10,
+    easy: 6,
+    normal: 10,
+    hard: 12,
   };
 
   return (
@@ -240,10 +241,12 @@ const MemoryGame = () => {
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
           {showStats && (
+        
             <div
               className="text-black text-xl right"
               style={{ filter: "brightness(100%)" }}
             >
+              
               <p>Time: {flipCount} </p>
               <p>Time: {timer} seconds</p>
             </div>
