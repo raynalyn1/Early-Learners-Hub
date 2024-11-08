@@ -4,7 +4,8 @@ import { useWindowSize } from "react-use";
 import mathImage1 from "../../images/games/bg2.png";
 import mathLetters from "../../images/games/mathLetters.png";
 import lutters from "../../images/games/lutters.png";
-import mathcount from "../../images/games/mathcount.png"
+import mathcount from "../../images/games/mathcount.png";
+import rb from "../../images/games/rb.png";
 
 const MathGame = () => {
   const [category, setCategory] = useState(null);
@@ -21,15 +22,15 @@ const MathGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const categories = [
-    { name: "Addition", value: "addition" },
-    { name: "Subtraction", value: "subtraction" },
-    { name: "Multiplication", value: "multiplication" },
+    { name: "ADDITION", value: "addition" },
+    { name: "SUBTRACTION", value: "subtraction" },
+    { name: "MULTIPLICATION", value: "multiplication" },
   ];
 
   const difficulties = [
-    { name: "Easy", value: "easy" },
-    { name: "Normal", value: "normal" },
-    { name: "Hard", value: "hard" },
+    { name: "EASY", value: "easy" },
+    { name: "NORMAL", value: "normal" },
+    { name: "HARD", value: "hard" },
   ];
 
   const questionLimit = {
@@ -163,32 +164,41 @@ const MathGame = () => {
           </div>
         ) : (
           <>
-        
-            <div className="absolute">
-            <img src={mathcount} alt="mathcount" className="top-0" style={{ filter: "brightness(100%)" }}/>
+            <div className="flex justify-start mr-[10rem]">
+              {!category && ( // Only show the image if no category is selected
+                <img
+                  src={mathcount}
+                  alt="mathcount"
+                  className="w-[90%]"
+                  style={{ filter: "brightness(100%)" }}
+                />
+              )}
+            </div>
+
+            <div className="flex">
               <h1
                 className="text-4xl font-extrabold text-blue-700 mb-4"
                 style={{ filter: "brightness(100%)" }}
               >
-                🎉 Math Card Game 🎉
+                {/* 🎉 Math Card Game 🎉 */}
               </h1>
-             
+
               <h2
                 className="text-2xl font-semibold text-green-600"
                 style={{ filter: "brightness(100%)" }}
               >
-                Score: {score}
+                {/* Score: {score} */}
               </h2>
 
               {!category && (
                 <div
-                  className="mt-6 flex flex-col items-center space-y-4"
+                  className="flex flex-col items-center space-y-10 mr-[10rem]"
                   style={{ filter: "brightness(100%)" }}
                 >
                   {categories.map((cat) => (
                     <button
                       key={cat.value}
-                      className="bg-blue-500 text-white text-lg font-bold p-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300 w-48"
+                      className="bg-[#FFC87A] text-[#7E4F0E] text-[40px] font-bold p-7  rounded-[40px] shadow-lg hover:bg-[##7E4F0E] transition duration-300 w-[100%] gap-y-2"
                       onClick={() => handleCategorySelect(cat.value)}
                     >
                       {cat.name}
@@ -198,14 +208,27 @@ const MathGame = () => {
               )}
 
               {category && !difficulty && (
-                <div
-                  className="mt-6 flex flex-col items-center space-y-4"
-                  style={{ filter: "brightness(100%)" }}
-                >
+                <div className="mt-6 flex flex-col items-center space-y-4 gap-3">
+                  <div
+                    className="flex items-center text-[#7E4F0E] text-3xl font-bold bg-[#E1F2F4] border-8 border-[#3CA1B5] rounded-2xl px-10 py-4 shadow-md"
+                    style={{
+                      filter: "brightness(100%)",
+                      textShadow: "1px 1px 2px rgba(0, 0, 0, 0.2)",
+                      width: "100%", // Full width of the container
+                      maxWidth: "800px", // Optional: limit max width
+                    }}
+                  >
+                    <img src={rb} alt="" className="w-20 h-auto mr-5" />
+                    <p className="flex-grow text-center">
+                      CHOOSE YOUR FAVORITE LEVEL
+                    </p>
+                  </div>
+
                   {difficulties.map((diff) => (
                     <button
                       key={diff.value}
-                      className="bg-green-500 text-white text-lg font-bold p-4 rounded-lg shadow-lg hover:bg-green-600 transition duration-300 w-48"
+                      style={{ filter: "brightness(100%)" }}
+                      className="bg-[#FFCF8C] text-[#7E4F0E] text-[30px] font-bold px-9 py-3 w-[70%] rounded-[40px] shadow-lg hover:bg-[#FFCF8C] transition duration-300 border border-[#7E4F0E]"
                       onClick={() => handleDifficultySelect(diff.value)}
                     >
                       {diff.name}
@@ -226,7 +249,7 @@ const MathGame = () => {
                     <div className="mt-4 grid grid-cols-2 gap-4">
                       {question.options.map((option, idx) => (
                         <button
-                          key={idx} 
+                          key={idx}
                           className="bg-yellow-200 text-lg font-semibold p-4 rounded-lg hover:bg-yellow-300 transition duration-200"
                           onClick={() => handleAnswer(option)}
                           disabled={answered}
@@ -241,7 +264,8 @@ const MathGame = () => {
             </div>
             {answered && !showModal && (
               <button
-                className="mt-5 bg-pink-500 text-white text-lg font-bold p-4 rounded-lg shadow-lg hover:bg-pink-600 transition duration-300" style={{ filter: "brightness(100%)" }}
+                className="mt-5 bg-pink-500 text-white text-lg font-bold p-4 rounded-lg shadow-lg hover:bg-pink-600 transition duration-300"
+                style={{ filter: "brightness(100%)" }}
                 onClick={handleNextQuestion}
               >
                 Next Question
