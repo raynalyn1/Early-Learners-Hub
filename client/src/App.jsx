@@ -13,6 +13,7 @@ import WordMatch from './pages/Games/WordMatch';
 import User from './pages/admin/User';
 import ScoreTracking from './pages/admin/ScoreTracking';
 import UploadVideos from './pages/admin/UploadVideos';
+import AnimalGame from './pages/Games/AnimalGames';
 
 // Lazy load the pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
@@ -81,6 +82,7 @@ const AppRoutes = () => {
       <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame /></GeneralLayout>} />
       <Route path="/MathGames" element={<GeneralLayout><MathGame /></GeneralLayout>} />
       <Route path="/WordGames" element={<GeneralLayout><WordMatch /></GeneralLayout>} />
+      <Route path="/AnimalGames" element={<GeneralLayout><AnimalGame /></GeneralLayout>} />
     </Routes>
   );
 };

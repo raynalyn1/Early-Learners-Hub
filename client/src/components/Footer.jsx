@@ -4,6 +4,7 @@ import { PiPhoneCallFill } from "react-icons/pi";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdOutlineFacebook } from "react-icons/md";
 
+
 const Footer = () => {
   return (
     <div className='w-full flex flex-col bg-[#D9D9D9]'>
@@ -14,7 +15,7 @@ const Footer = () => {
             <FaLocationDot className='text-3xl lg:text-4xl' style={{ color: '#000000', border: '2px solid #EB9721', borderRadius: '50%' }} />
             <p className='text-[.7rem] lg:text-[.9rem] text-center lg:text-left font-poppins'>
               Unit 1 - Bajarias' Commercial Space, Cambangyao Dalaguete, near Gerboy's Residence Dalaguete,
-              Philippines, 6022
+              Philippines, 6022 
             </p>
           </div>
         </div>
