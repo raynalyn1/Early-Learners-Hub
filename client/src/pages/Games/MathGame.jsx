@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import mathImage1 from "../../images/games/bg2.png";
@@ -6,8 +8,10 @@ import mathLetters from "../../images/games/mathLetters.png";
 import lutters from "../../images/games/lutters.png";
 import mathcount from "../../images/games/mathcount.png";
 import rb from "../../images/games/rb.png";
+import arow from "../../images/games/arow.png";
 
 const MathGame = () => {
+  const navigate = useNavigate();
   const [category, setCategory] = useState(null);
   const [difficulty, setDifficulty] = useState(null);
   const [question, setQuestion] = useState(null);
@@ -134,6 +138,9 @@ const MathGame = () => {
     setGameStarted(true);
     setModalMessage(""); // Clear modal message on start
   };
+  const handleBackNavigation = () => {
+    navigate("/GamesSection"); // Update to the actual path you want to navigate to
+  };
 
   return (
     <div className="flex flex-col items-center relative min-h-screen ">
@@ -206,7 +213,12 @@ const MathGame = () => {
                   ))}
                 </div>
               )}
-
+              <img
+                src={arow}
+                alt="arrowback"
+                onClick={handleBackNavigation}
+                className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
+              />
               {category && !difficulty && (
                 <div className="mt-6 flex flex-col items-center space-y-4 gap-3">
                   <div
@@ -238,19 +250,16 @@ const MathGame = () => {
               )}
 
               {question && (
-                <div
-                  className="mt-6 w-full max-w-md"
-                  style={{ filter: "brightness(100%)" }}
-                >
-                  <div className="bg-white shadow-lg rounded-lg p-6">
-                    <h3 className="text-2xl font-bold text-purple-600">
+                <div className="" style={{ filter: "brightness(100%)" }}>
+                  <div className="bg-white shadow-lg rounded-lg p-6 w-screen">
+                    <h3 className="text-2xl font-bold text-purple-600 ">
                       {question.questionText}
                     </h3>
-                    <div className="mt-4 grid grid-cols-2 gap-4">
+                    <div className="mt-4 grid grid-cols-2 gap-4 ">
                       {question.options.map((option, idx) => (
                         <button
                           key={idx}
-                          className="bg-yellow-200 text-lg font-semibold p-4 rounded-lg hover:bg-yellow-300 transition duration-200"
+                          className="bg-yellow-200 text-2xl font-semibold p-10 rounded-lg hover:bg-yellow-300 transition duration-200 "
                           onClick={() => handleAnswer(option)}
                           disabled={answered}
                         >
