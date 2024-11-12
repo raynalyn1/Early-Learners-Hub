@@ -58,13 +58,27 @@ const MemoryGame = () => {
   const [timerStarted, setTimerStarted] = useState(false);
   const [gridCols, setGridCols] = useState("grid-cols-2");
   const [difficulty, setDifficulty] = useState("");
-  const [showStats, setShowStats] = useState(false); 
+  const [showStats, setShowStats] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showLevelSelection, setShowLevelSelection] = useState(true);
 
+  // const [progressTimer, setprogressTimer] = useState(30);
 
   const audio = new Audio(BackgroundAudio);
-  
+
+  const getButtonAnimationClass = (index) => {
+    switch (index) {
+      case 0: // "easy" (above)
+        return "animate-from-top";
+      case 1: // "normal" (from right)
+        return "animate-from-right";
+      case 2: // "hard" (from left)
+        return "animate-from-left";
+      default:
+        return "";
+    }
+  };
 
   // Simulate loading before showing the play button
   useEffect(() => {
@@ -73,20 +87,33 @@ const MemoryGame = () => {
     }, 1000); // 2-second delay
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    if (timer > 0) {
+      const intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      // Cleanup the interval when the component unmounts or timer reaches 0
+      return () => clearInterval(intervalId);
+    }
+  }, [timer]);
 
   const startGame = (level, levelName) => {
+    setShowLevelSelection(false);
     resetGame();
     generateCards(level);
     setDifficulty(levelName);
     setShowStats(true); // Set to true after choosing difficulty
+    setShowLevelSelection(false); // Hide level selection screen once a game starts
   };
+
   const getUniqueMatchedLetters = () => {
     // Create a Set from matchedCards to get unique letters
     const uniqueIcons = [...new Set(matchedCards.map((index) => cards[index]))];
-    
+
     // Sort the unique letters in alphabetical order
     uniqueIcons.sort();
-  
+
     return uniqueIcons;
   };
   const resetGame = () => {
@@ -100,8 +127,10 @@ const MemoryGame = () => {
     setTimerStarted(false);
     clearInterval(intervalId);
     setShowStats(false); // Hide stats when restarting
+    setShowLevelSelection(true); // Show level selection screen
   };
-
+  const exitGame = () => {};
+  const nextLevel = () => {};
   const generateCards = (level) => {
     const iconPool = icons.slice(0, level / 2);
     const cardIcons = [...iconPool, ...iconPool];
@@ -229,7 +258,7 @@ const MemoryGame = () => {
             <img
               src={img1}
               alt="Play Button"
-              className="inline-block mr-2  w-[35%] h-[16vh]"
+              className="inline-block mr-2  w-[25%] h-[12vh]"
             />
           </button>
         </div>
@@ -240,17 +269,26 @@ const MemoryGame = () => {
             alt="background"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
-          {showStats && (
-        
+          {/* {showStats && (
             <div
               className="text-black text-xl right"
               style={{ filter: "brightness(100%)" }}
             >
-              
-              <p>Time: {flipCount} </p>
-              <p>Time: {timer} seconds</p>
+              <div>Flip: {flipCount} </div>
+              <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
+                <div
+                  className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000"
+                  style={{
+                    width: `${
+                      (timer / difficultyLevels[difficulty].time) * 100
+                    }%`,
+                  }}
+                >
+                  Time: {timer} seconds
+                </div>
+              </div>
             </div>
-          )}
+          )} */}
           <img
             src={arow}
             alt="arrowback"
@@ -269,19 +307,49 @@ const MemoryGame = () => {
             className="absolute mb-[3rem] left-0 "
             style={{ filter: "brightness(100%)" }}
           />
+          {showLevelSelection && (
+            <h1 className="text-[100px] font-bold text-white mb-[5rem] flex space-x-1 ">
+              {"CHOOSE".split("").map((letter, index) => (
+                <span
+                  key={`choose-${index}`}
+                  className="bending-letter"
+                  style={{
+                    color: ["#FF5733", "#33FF57", "#3357FF"][index % 3], // Cycle through three colors
+                    animationDelay: `${index * 0.1}s`, // Stagger the animation for each letter
+                    filter: "brightness(100%)",
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+              <span className="bending-letter" style={{ animationDelay: "1s" }}>
+                &nbsp;
+              </span>{" "}
+              {/* Space between words */}
+              {"LEVEL".split("").map((letter, index) => (
+                <span
+                  key={`level-${index}`}
+                  className="bending-letter"
+                  style={{
+                    color: ["#FF5733", "#33FF57", "#3357FF"][index % 3], // Cycle through three colors
+                    animationDelay: `${(index + 4) * 0.1}s`, // Stagger the animation for each letter
+                    filter: "brightness(100%)",
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </h1>
+          )}
 
-          <h1
-            className="text-4xl font-bold text-white mb-4 "
-            style={{ filter: "brightness(100%)" }}
-          >
-            Choose Level
-          </h1>
-          <div className="mb-4">
-            {Object.keys(difficultyLevels).map((level) => (
+          <div className="mb-4 flex  items-center justify-center ">
+            {Object.keys(difficultyLevels).map((level, index) => (
               <button
                 key={level}
                 onClick={() => startGame(difficultyLevels[level], level)}
-                className="px-6 py-3 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-105"
+                className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] ${getButtonAnimationClass(
+                  index
+                )}`}
               >
                 {level.charAt(0).toUpperCase() + level.slice(1)}
               </button>
@@ -317,44 +385,58 @@ const MemoryGame = () => {
               </div>
             ))}
           </div>
-         
+
           {gameOver && (
-           
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
               <div className="bg-[#EBCEA8] p-8 rounded-[20px] shadow-lg text-center relative z-50 w-80">
-                {/* Level and Message */}
-                <backgroundAudio/>
+                {/* Level Badge */}
                 <div className="text-sm font-bold bg-[#DFC3A2] text-[#5C4A30] py-2 px-4 rounded-full mb-4 w-fit mx-auto">
                   LEVEL:{" "}
                   {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
                 </div>
-                <h2 className="text-2xl font-bold text-[#5C4A30] mb-2">
+
+                {/* Message */}
+                <h2 className="text-2xl font-bold text-[#5C4A30] italic mb-4">
                   That was <span className="text-[#A56922]">Awesome!</span>
                 </h2>
 
                 {/* Mission Box */}
-              
-  <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
-  <p className="text-[#5C4A30] font-semibold">Mission:</p>
-  <p className="text-[#5C4A30] mb-3">Successfully Matched Letters</p>
-  <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
-    {getUniqueMatchedLetters().map((icon, index) => (
-      <span key={index}>{icon}</span>
-    ))}
-    </div>
-  </div>
+                <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
+                  <p className="text-[#5C4A30] font-semibold">Mission:</p>
+                  <p className="text-[#5C4A30] mb-3">
+                    Successfully Matched Letters
+                  </p>
+                  <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
+                    {getUniqueMatchedLetters().map((icon, index) => (
+                      <span key={index}>{icon}</span>
+                    ))}
+                  </div>
+                </div>
 
+                {/* Star Ratings */}
+                <div className="flex justify-center space-x-4 mb-4">
+                  <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
+                  <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
+                  <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
+                </div>
 
-                {/* Medal Icon */}
-                <img
-                  src="https://img.icons8.com/color/480/gold-medal.png"
-                  alt="Medal"
-                  className="mx-auto my-4 w-16"
-                />
-
-                {/* Next Button */}
+                {/* Next, Exit, and Retry Buttons */}
+                <div className="flex justify-center space-x-4">
+                  <button
+                    onClick={handleBackNavigation}
+                    className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
+                  >
+                    Exit
+                  </button>
+                  <button
+        onClick={resetGame}
+        className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
+      >
+        Retry
+      </button>
+                </div>
                 <button
-                  onClick={() => resetGame()}
+                  onClick={() => nextLevel()}
                   className="px-10 py-2 mt-4 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-2xl"
                 >
                   Next
