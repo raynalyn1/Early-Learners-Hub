@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import teach from "../../images/Dashboard/teach.png";
 import glowingstar from "../../images/Dashboard/glowingstars.png";
 
 function Dashboard() {
+  const [username, setUserName] = useState('');
+
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    console.log(name);
+    if(name) {
+      setUserName(name);
+
+    }
+  }, []);
+
+  //Get the initail of the name 
+  const getInitials = (name) => {
+    const nameParts = name.split(" "); // Split by space to get first and last name
+    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase(); // First letter of first name
+    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();  // First letter of last name
+    return firstNameInitial + lastNameInitial; // Combine initials
+  };
+
+
+
   return (
     <div className="">
       {/* Header */}
@@ -13,9 +34,9 @@ function Dashboard() {
         </div>
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
-            MR
+            {username ? getInitials(username) : "??"} {/* Display initials */}
           </div>
-          <p className="text-gray-700">Mizar Reim</p>
+          <p className="text-gray-700">{username}</p>
         </div>
       </div>
 

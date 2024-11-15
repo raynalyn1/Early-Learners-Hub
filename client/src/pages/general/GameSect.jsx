@@ -19,7 +19,7 @@ const GameSect = () => {
   // State to handle modal visibility and input
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [childName, setChildName] = useState("");
-  const [selectedGame, setSelectedGame] = useState("");
+  const [selectedGame, setSelectedGame] = useState(""); 
 
   // State for sorting games by category
   const [selectedCategory, setSelectedCategory] = useState("");

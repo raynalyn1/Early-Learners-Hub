@@ -10,6 +10,27 @@ const ScoreTracking = () => {
   const [selectedGameLevel, setSelectedGameLevel] = useState("All");
   const [scoreData, setScoreData] = useState([]);
 
+
+  // getting the name for the login user
+  const [username, setUserName] = useState('');
+
+  //getting from the localStorage
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    console.log(name);
+    if(name) {
+      setUserName(name);
+    }
+  }, []);
+
+  //Get the initail of the name 
+  const getInitials = (name) => {
+    const nameParts = name.split(" "); // Split by space to get first and last name
+    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase(); // First letter of first name
+    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();  // First letter of last name
+    return firstNameInitial + lastNameInitial; // Combine initials
+  };
+
   useEffect(() => {
     // Mock data fetch - Replace with actual API calls if available
     setStudents([
@@ -75,9 +96,10 @@ const ScoreTracking = () => {
         <div className="text-gray-500">Wednesday, 06 November 2024</div>
         <div className="flex items-center">
           <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
-            MR
+          {username ? getInitials(username) : "??"}
+          {/* Display initials */}
           </div>
-          <span className="ml-2">Mizar Reim</span>
+          <span className="ml-2">{username}</span>
         </div>
       </div>
 

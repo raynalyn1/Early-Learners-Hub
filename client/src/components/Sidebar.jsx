@@ -1,12 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/Dashboard/lg.png";
 import homeIcon from "../images/Dashboard/home.png";
 import listIcon from "../images/Dashboard/list.png";
 import userIcon from "../images/Dashboard/user.png";
 import video from "../images/Dashboard/video.png";
+import LogoutModal from "./LogoutModal";
 
 const Sidebar = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setIsModalVisible(true);
+  };
+
+  const confirmLogout = () => {
+    localStorage.clear(); // Clear local storage
+    navigate("/"); // Redirect to landingPage
+  };
+
+
+
+
+
   return (
     <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center">
       {/* Logo */}
@@ -47,14 +64,23 @@ const Sidebar = () => {
           <li className="flex items-center space-x-4">
             <img src={video} alt="Videos" className="w-6 h-6" />
             <Link 
-              to="/admin/videos" 
+              to="/admin/upload" 
               className="block px-4 py-4 rounded hover:bg-[#F0BC78]"
             >
               Upload Videos
             </Link>
           </li>
+          <li>
+            <h1 onClick={handleLogout} className="block px-4 py-4 rounded hover:bg-[#F0BC78]">Logout</h1>
+          </li>
         </ul>
       </nav>
+
+      <LogoutModal
+        isVisible={isModalVisible}
+        onConfirm={confirmLogout}
+        onCancel={() => setIsModalVisible(false)}
+      />
     </div>
   );
 };

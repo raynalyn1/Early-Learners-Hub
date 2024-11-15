@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import img from "../../images/Registration/cloudsBirds.png"; // Background clouds and birds
 import img3 from "../../images/Registration/Comeback.png"; // Rocket mascot at the bottom left
 import img4 from "../../images/Registration/Confett.png"; // Confetti near text
@@ -10,8 +10,38 @@ import img10 from "../../images/Registration/parachute.png"; // Parachute icon
 import img11 from "../../images/Registration/Pencil.png"; // Pencil icon for Username
 import img12 from "../../images/Registration/sunsetclouds.png"; // Sunset clouds image
 import img13 from "../../images/Registration/rec.png"; // Curve image
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(password !== confirmPassword) {
+      alert('Password do not match');
+    }
+
+    const url = 'http://localhost:3000/auth/register';
+    const data = { name, email, password, confirmPassword };
+
+    try {
+      const response = await axios.post(url, data);
+      console.log('Response:', response.data);
+
+      //  Navigate to login 
+      navigate('/login');
+
+    } catch (error) {
+      console.log('Error:', error.response ? error.response.data : error.message);
+    }
+  }
+
+
   return (
     
     <div
@@ -68,11 +98,14 @@ const Register = () => {
           className="w-full md:w-1/2 relative rounded-r-lg p-4 sm:p-8 flex flex-col justify-center ml-[8rem]"
           style={{ borderColor: "#ECA23B" }}
         >
-          <form className="space-y-4 sm:space-y-6 relative z-10 ">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 relative z-10 ">
             <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
               <img src={img9} alt="Name Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
                 placeholder="Name*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -81,6 +114,9 @@ const Register = () => {
               <img src={img6} alt="Email Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 placeholder="Email*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -88,7 +124,10 @@ const Register = () => {
             <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border-[#EB9721] border">
               <img src={img11} alt="Pencil Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
-                type="text"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 placeholder="Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -97,6 +136,8 @@ const Register = () => {
               <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base "
               />

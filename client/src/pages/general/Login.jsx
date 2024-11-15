@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import img from "../../images/LogIn/CD.png"; // Clouds and Birds
 import img3 from "../../images/LogIn/Uni.png"; // Unicorn at bottom-right
@@ -9,9 +9,32 @@ import img10 from "../../images/LogIn/cute.png"; // Parachute icon
 import img7 from "../../images/LogIn/brd.png"; // Extra birds/clouds
 import img13 from "../../images/LogIn/rt.png"; // Curve background
 import img5 from "../../images/LogIn/sunset.png"; // Sunset image
+import axios from 'axios'
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate(); // Declare navigate function
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url = 'http://localhost:3000/auth/login';
+    const data = { email, password };
+
+    
+
+    try {
+      const response = await axios.post(url, data);
+      console.log('Response', response.data);
+
+      // Store token and the  user name to the local storage
+      localStorage.setItem('token', response.data.access_tokken);
+      localStorage.setItem('name', response.data.name);
+      navigate('/admin');
+    } catch (error) {
+      console.log('Error:', error.response ? error.response.data : error.message);
+    }
+  }
 
   return (
     <div
@@ -40,11 +63,14 @@ const SignIn = () => {
             Welcome Back!
           </div>
 
-          <form className="space-y-4 sm:space-y-6 relative z-10 flex flex-col items-center mt-[4rem] sm:mt-[9vh] gap-3 sm:gap-5">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 relative z-10 flex flex-col items-center mt-[4rem] sm:mt-[9vh] gap-3 sm:gap-5">
             <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg w-full max-w-[250px] sm:max-w-[300px] border-[#EB9721] border">
               <img src={img6} alt="Email Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 placeholder="Email*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-3 sm:pl-4 text-sm sm:text-base"
               />
@@ -53,6 +79,8 @@ const SignIn = () => {
               <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-3 sm:pl-4 text-sm sm:text-base"
               />
