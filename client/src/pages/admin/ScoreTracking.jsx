@@ -71,7 +71,7 @@ const ScoreTracking = () => {
   return (
     <div className="p-8 bg-[#FAF3EB] min-h-screen">
       <div className="flex items-center justify-between mb-10">
-        <h2 className="text-2xl font-bold">Dashboard</h2>
+        <h2 className="text-3xl font-bold text-[#F47C21] mb-6">Score Tracking</h2>
         <div className="text-gray-500">Wednesday, 06 November 2024</div>
         <div className="flex items-center">
           <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
