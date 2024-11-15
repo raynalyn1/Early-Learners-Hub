@@ -62,6 +62,10 @@ const MemoryGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showLevelSelection, setShowLevelSelection] = useState(true);
+  const [selectedLevel, setSelectedLevel] = useState(null);
+
+  const [isGameActive, setIsGameActive] = useState(false);
+
 
   // const [progressTimer, setprogressTimer] = useState(30);
 
@@ -99,12 +103,22 @@ const MemoryGame = () => {
   }, [timer]);
 
   const startGame = (level, levelName) => {
-    setShowLevelSelection(false);
+    setIsGameActive(true); // Game is now active
+    setSelectedLevel(levelName); // Set the selected level
     resetGame();
     generateCards(level);
     setDifficulty(levelName);
-    setShowStats(true); // Set to true after choosing difficulty
-    setShowLevelSelection(false); // Hide level selection screen once a game starts
+    setShowStats(true); // Show stats during the game
+    setShowLevelSelection(false); // Hide level selection during the game
+    console.log(`Starting game with difficulty: ${level}`);
+  };
+
+
+  const endGame = () => {
+    setIsGameActive(false); // Game has ended
+    setShowStats(false); // Hide stats
+    setSelectedLevel(null); // Reset selected level to show all buttons
+    setShowLevelSelection(true); // Show level selection again
   };
 
   const getUniqueMatchedLetters = () => {
@@ -136,6 +150,9 @@ const MemoryGame = () => {
     const cardIcons = [...iconPool, ...iconPool];
     const shuffledCards = cardIcons.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
+
+
+
 
     if (level === 6) {
       setGridCols("grid-cols-3");
@@ -269,7 +286,7 @@ const MemoryGame = () => {
             alt="background"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
-          {/* {showStats && (
+          {showStats && (
             <div
               className="text-black text-xl right"
               style={{ filter: "brightness(100%)" }}
@@ -288,7 +305,7 @@ const MemoryGame = () => {
                 </div>
               </div>
             </div>
-          )} */}
+          )}
           <img
             src={arow}
             alt="arrowback"
@@ -342,49 +359,50 @@ const MemoryGame = () => {
             </h1>
           )}
 
-          <div className="mb-4 flex  items-center justify-center ">
-            {Object.keys(difficultyLevels).map((level, index) => (
-              <button
-                key={level}
-                onClick={() => startGame(difficultyLevels[level], level)}
-                className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] ${getButtonAnimationClass(
-                  index
-                )}`}
-              >
-                {level.charAt(0).toUpperCase() + level.slice(1)}
-              </button>
-            ))}
+          <div className="mb-4 flex  items-center justify-center flex flex-col gap-9 md:w-[100%]">
+             {Object.keys(difficultyLevels).map((level, index) => (
+        (!selectedLevel || selectedLevel === level) && (
+          <button
+          key={level}
+          onClick={() => startGame(difficultyLevels[level], level)}
+          className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] font-semibold ${getButtonAnimationClass(
+            index
+          )}`}
+        >
+          {level.charAt(0).toUpperCase() + level.slice(1)}
+        </button>
+        )
+      ))}
           </div>
           <div className={`grid ${gridCols} gap-4`}>
-            {cards.map((icon, index) => (
-              <div
-                key={index}
-                className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
- ${
-   flippedCards.includes(index) || matchedCards.includes(index)
-     ? "bg-white text-gray-800"
-     : "bg-[#FFCF8C] text-white"
- }`}
-                style={{
-                  backgroundImage:
-                    flippedCards.includes(index) || matchedCards.includes(index)
-                      ? "none"
-                      : `url(${logo})`,
-                  backgroundSize: "50% auto", // Adjusts the logo size to be smaller
-                  backgroundPosition: "center center", // Centers the logo within the card
-                  backgroundRepeat: "no-repeat",
-                }}
-                onClick={() => flipCard(index)}
-              >
-                {(flippedCards.includes(index) ||
-                  matchedCards.includes(index)) && (
-                  <span style={{ fontSize: "7rem", color: "#7E4F0E" }}>
-                    {icon}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
+          {cards.map((icon, index) => (
+            <div
+              key={index}
+              className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
+                ${
+                  flippedCards.includes(index) || matchedCards.includes(index)
+                    ? "bg-white text-gray-800"
+                    : "bg-[#FFCF8C] text-white"
+                }`}
+              style={{
+                backgroundImage:
+                  flippedCards.includes(index) || matchedCards.includes(index)
+                    ? "none"
+                    : `url(${logo})`,
+                backgroundSize: "50% auto",
+                backgroundPosition: "center center",
+                backgroundRepeat: "no-repeat",
+              }}
+              onClick={() => flipCard(index)}
+            >
+              {(flippedCards.includes(index) || matchedCards.includes(index)) && (
+                <span style={{ fontSize: "7rem", color: "#7E4F0E" }}>
+                  {icon}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
 
           {gameOver && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
@@ -429,11 +447,11 @@ const MemoryGame = () => {
                     Exit
                   </button>
                   <button
-        onClick={resetGame}
-        className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
-      >
-        Retry
-      </button>
+                    onClick={resetGame}
+                    className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
+                  >
+                    Retry
+                  </button>
                 </div>
                 <button
                   onClick={() => nextLevel()}
