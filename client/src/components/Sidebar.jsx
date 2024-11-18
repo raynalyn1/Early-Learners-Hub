@@ -64,7 +64,7 @@ const Sidebar = () => {
           <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 hover:border">
             <img src={video} alt="Videos" className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200" />
             <Link 
-              to="/admin/videos" 
+              to="/admin/upload" 
               className="block text-black group-hover:scale-105 transform transition-all duration-200"
             >
               Upload Videos

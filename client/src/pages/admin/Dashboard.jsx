@@ -29,7 +29,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="">
+    <div className="overflow-auto h-[95vh] bg-red-300">
       {/* Header */}
       <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E] ">
         <div>

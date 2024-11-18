@@ -187,7 +187,7 @@ function UploadVideos() {
 
       {/* Uploaded Videos */}
       {activeSection === "uploaded" && (
-        <div className="border border-black w-full h-[60vh] rounded-lg overflow-auto">
+        <div className="shadow-lg w-full h-[60vh] rounded-lg overflow-auto">
           <div className="grid grid-cols-3 gap-4">
             {videos.map((video) => (
               <div key={video.id} className="bg-white shadow-md rounded overflow-hidden relative border border-[orange]">
