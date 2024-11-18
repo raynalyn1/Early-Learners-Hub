@@ -9,70 +9,57 @@ const ScoreTracking = () => {
   const [selectedTournament, setSelectedTournament] = useState("All");
   const [selectedGameLevel, setSelectedGameLevel] = useState("All");
   const [scoreData, setScoreData] = useState([]);
+  const [currentDate, setCurrentDate] = useState('');
 
-
-  // getting the name for the login user
   const [username, setUserName] = useState('');
 
-  //getting from the localStorage
+  // Fetch data from API
+  useEffect(() => {
+    const fetchScoreData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/games'); // Replace with your API endpoint
+        const data = await response.json();
+        
+        // Map the data for tournaments and students
+        const uniqueTournaments = [...new Set(data.map(item => item.gameName))];
+        const uniqueStudents = [...new Set(data.map(item => item.playerName))];
+
+        setScoreData(data);
+        setTournaments(uniqueTournaments);
+        setStudents(uniqueStudents.map((name, id) => ({ id, name }))); // Generate student objects
+        setGamesLevel(['Easy', 'Normal', 'Hard']); // Replace with actual levels if available
+      } catch (error) {
+        console.error('Error fetching game data:', error);
+      }
+    };
+
+    fetchScoreData();
+  }, []);
+
+  // Format current date
   useEffect(() => {
     const name = localStorage.getItem('name');
-    console.log(name);
-    if(name) {
+    const today = new Date();
+    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+    const formattedDate = today.toLocaleDateString("en-US", options);
+    setCurrentDate(formattedDate);
+    if (name) {
       setUserName(name);
     }
   }, []);
 
-  //Get the initail of the name 
   const getInitials = (name) => {
-    const nameParts = name.split(" "); // Split by space to get first and last name
-    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase(); // First letter of first name
-    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();  // First letter of last name
-    return firstNameInitial + lastNameInitial; // Combine initials
+    const nameParts = name.split(" ");
+    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase();
+    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();
+    return firstNameInitial + lastNameInitial;
   };
-
-  useEffect(() => {
-    // Mock data fetch - Replace with actual API calls if available
-    setStudents([
-      { id: 1, name: "Marvin Tenobroso" },
-      { id: 2, name: "Rovelyn Paradero" },
-      // Add more students as needed
-    ]);
-    setTournaments(["Flash Card Games", "Math Quest Adventure", "Memory Match", "Picture-Word Matching"]);
-    setGamesLevel(["Easy", "Medium", "Difficult"]);
-    setScoreData([
-      {
-        studentName: "Marvin Tenobroso",
-        tournament: "Flash Card Games",
-        gameLevel: "Difficult",
-        score: 10,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Math Quest Adventure",
-        gameLevel: "Easy",
-        score: 50,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Memory Match",
-        gameLevel: "Easy",
-        score: 50,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Picture-Word Matching",
-        gameLevel: "Easy",
-        score: 50,
-      },
-    ]);
-  }, []);
 
   const filteredScores = scoreData.filter((data) => {
     return (
-      (selectedStudent === "All" || data.studentName === selectedStudent) &&
-      (selectedTournament === "All" || data.tournament === selectedTournament) &&
-      (selectedGameLevel === "All" || data.gameLevel === selectedGameLevel)
+      (selectedStudent === "All" || data.playerName === selectedStudent) &&
+      (selectedTournament === "All" || data.gameName === selectedTournament) &&
+      (selectedGameLevel === "All" || data.difficulty === selectedGameLevel)
     );
   });
 
@@ -93,11 +80,10 @@ const ScoreTracking = () => {
     <div className="p-8 bg-[#FAF3EB] min-h-screen">
       <div className="flex items-center justify-between mb-10">
         <h2 className="text-2xl font-bold">Dashboard</h2>
-        <div className="text-gray-500">Wednesday, 06 November 2024</div>
+        <div className="text-gray-500">{currentDate}</div>
         <div className="flex items-center">
           <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
-          {username ? getInitials(username) : "??"}
-          {/* Display initials */}
+            {username ? getInitials(username) : "??"}
           </div>
           <span className="ml-2">{username}</span>
         </div>
@@ -119,7 +105,7 @@ const ScoreTracking = () => {
             ))}
           </select>
         </div>
-        
+
         <div className="w-1/3">
           <label className="font-semibold">Tournaments</label>
           <select
@@ -167,9 +153,9 @@ const ScoreTracking = () => {
           {filteredScores.length > 0 ? (
             filteredScores.map((data, index) => (
               <tr key={index} className="border-t">
-                <td className="px-4 py-2">{data.studentName}</td>
-                <td className="px-4 py-2">{data.tournament}</td>
-                <td className="px-4 py-2">{data.gameLevel}</td>
+                <td className="px-4 py-2">{data.playerName}</td>
+                <td className="px-4 py-2">{data.gameName}</td>
+                <td className="px-4 py-2">{data.difficulty}</td>
                 <td className="px-4 py-2">{data.score}</td>
                 <td className="px-4 py-2">{renderStars(data.score)}</td>
               </tr>

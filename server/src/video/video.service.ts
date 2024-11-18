@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Video } from './entities/video.entity';
+import { Video } from '../entities/video.entity';
 import { v2 as cloudinary } from 'cloudinary';
 
 @Injectable()

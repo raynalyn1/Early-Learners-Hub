@@ -17,6 +17,8 @@ function UploadVideos() {
   const [loading, setLoading] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [videoToDelete, setVideoToDelete] = useState(null);
+  // Date 
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     fetchVideos();
@@ -110,6 +112,12 @@ function UploadVideos() {
     const name = localStorage.getItem("name");
     if (name) {
       setUserName(name);
+
+      // Format the current date
+    const today = new Date();
+    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+    const formattedDate = today.toLocaleDateString("en-US", options);
+    setCurrentDate(formattedDate);
     }
   }, []);
 
@@ -156,7 +164,7 @@ function UploadVideos() {
       <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E]">
         <div>
           <h2 className="text-gray-700 text-lg font-semibold">Dashboard</h2>
-          <p className="text-sm text-gray-500">Wednesday, 06 November 2024</p>
+          <p className="text-sm text-gray-500">{currentDate}</p>
         </div>
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
@@ -168,8 +176,12 @@ function UploadVideos() {
 
       {/* Sections */}
       <h2 className="text-[1.5rem] font-bold ml-9">Videos</h2>
-      <div className="w-full bg-red-300 h-[8vh] flex gap-9 items-center pl-9">
-        <h2 onClick={() => setActiveSection("uploaded")} className={`cursor-pointer ${activeSection === "uploaded" ? "font-bold underline" : ""}`}>Uploaded</h2>
+      <div className="w-full h-[8vh] flex gap-9 items-center pl-9">
+        <h2 onClick={() => setActiveSection("uploaded")} className={`cursor-pointer
+          
+          
+          
+          ${activeSection === "uploaded" ? "font-bold underline" : ""}`}>Uploaded</h2>
         <h2 onClick={() => setActiveSection("upload")} className={`cursor-pointer ${activeSection === "upload" ? "font-bold underline" : ""}`}>Upload</h2>
       </div>
 
