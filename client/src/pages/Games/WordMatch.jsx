@@ -61,9 +61,26 @@ const WordMatch = () => {
   const [questionIndex, setQuestionIndex] = useState(0); // Track the current question index
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const [timer, setTimer] = useState(20);
+  //get the player name and the name of the game
+  const [playerName, setPlayerName] = useState('');
+  const [gameName, setGameName] = useState('');
 
   const isGameActive = gameStarted;
   const showCorrectModal = modalVisible;
+
+
+//useEffect for the retrieve name 
+
+  useEffect(() => {
+    const name = localStorage.getItem('playerName');
+    const game = localStorage.getItem('selectedGame');
+    setPlayerName(name);
+    setGameName(game);
+  }, []);
+
+
+
+
 
   useEffect(() => {
     // Simulate loading delay (e.g., API call)
@@ -314,7 +331,7 @@ const WordMatch = () => {
 
             {/* Congratulatory Message */}
             <h2 className="text-2xl font-bold mb-4 text-center text-yellow-700">
-              Congratulations!
+              Congratulations! {playerName} {gameName}
             </h2>
 
             {/* Stars Display */}

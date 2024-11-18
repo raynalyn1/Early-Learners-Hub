@@ -11,3 +11,19 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+.error-toast {
+    background-color: #f56565 !important; /* Red for error */
+    color: #fff !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .success-toast {
+    background-color: #38a169 !important; /* Green for success */
+    color: #fff !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  

@@ -9,49 +9,57 @@ const ScoreTracking = () => {
   const [selectedTournament, setSelectedTournament] = useState("All");
   const [selectedGameLevel, setSelectedGameLevel] = useState("All");
   const [scoreData, setScoreData] = useState([]);
+  const [currentDate, setCurrentDate] = useState('');
 
+  const [username, setUserName] = useState('');
+
+  // Fetch data from API
   useEffect(() => {
-    // Mock data fetch - Replace with actual API calls if available
-    setStudents([
-      { id: 1, name: "Marvin Tenobroso" },
-      { id: 2, name: "Rovelyn Paradero" },
-      // Add more students as needed
-    ]);
-    setTournaments(["Flash Card Games", "Math Quest Adventure", "Memory Match", "Picture-Word Matching"]);
-    setGamesLevel(["Easy", "Medium", "Difficult"]);
-    setScoreData([
-      {
-        studentName: "Marvin Tenobroso",
-        tournament: "Flash Card Games",
-        gameLevel: "Difficult",
-        score: 10,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Math Quest Adventure",
-        gameLevel: "Easy",
-        score: 50,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Memory Match",
-        gameLevel: "Easy",
-        score: 50,
-      },
-      {
-        studentName: "Rovelyn Paradero",
-        tournament: "Picture-Word Matching",
-        gameLevel: "Easy",
-        score: 50,
-      },
-    ]);
+    const fetchScoreData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/games'); // Replace with your API endpoint
+        const data = await response.json();
+        
+        // Map the data for tournaments and students
+        const uniqueTournaments = [...new Set(data.map(item => item.gameName))];
+        const uniqueStudents = [...new Set(data.map(item => item.playerName))];
+
+        setScoreData(data);
+        setTournaments(uniqueTournaments);
+        setStudents(uniqueStudents.map((name, id) => ({ id, name }))); // Generate student objects
+        setGamesLevel(['Easy', 'Normal', 'Hard']); // Replace with actual levels if available
+      } catch (error) {
+        console.error('Error fetching game data:', error);
+      }
+    };
+
+    fetchScoreData();
   }, []);
+
+  // Format current date
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    const today = new Date();
+    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
+    const formattedDate = today.toLocaleDateString("en-US", options);
+    setCurrentDate(formattedDate);
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
+
+  const getInitials = (name) => {
+    const nameParts = name.split(" ");
+    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase();
+    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();
+    return firstNameInitial + lastNameInitial;
+  };
 
   const filteredScores = scoreData.filter((data) => {
     return (
-      (selectedStudent === "All" || data.studentName === selectedStudent) &&
-      (selectedTournament === "All" || data.tournament === selectedTournament) &&
-      (selectedGameLevel === "All" || data.gameLevel === selectedGameLevel)
+      (selectedStudent === "All" || data.playerName === selectedStudent) &&
+      (selectedTournament === "All" || data.gameName === selectedTournament) &&
+      (selectedGameLevel === "All" || data.difficulty === selectedGameLevel)
     );
   });
 
@@ -75,9 +83,9 @@ const ScoreTracking = () => {
         <div className="text-gray-500">Wednesday, 06 November 2024</div>
         <div className="flex items-center">
           <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
-            MR
+            {username ? getInitials(username) : "??"}
           </div>
-          <span className="ml-2">Mizar Reim</span>
+          <span className="ml-2">{username}</span>
         </div>
       </div>
 
@@ -97,7 +105,7 @@ const ScoreTracking = () => {
             ))}
           </select>
         </div>
-        
+
         <div className="w-1/3">
           <label className="font-semibold">Tournaments</label>
           <select
@@ -145,9 +153,9 @@ const ScoreTracking = () => {
           {filteredScores.length > 0 ? (
             filteredScores.map((data, index) => (
               <tr key={index} className="border-t">
-                <td className="px-4 py-2">{data.studentName}</td>
-                <td className="px-4 py-2">{data.tournament}</td>
-                <td className="px-4 py-2">{data.gameLevel}</td>
+                <td className="px-4 py-2">{data.playerName}</td>
+                <td className="px-4 py-2">{data.gameName}</td>
+                <td className="px-4 py-2">{data.difficulty}</td>
                 <td className="px-4 py-2">{data.score}</td>
                 <td className="px-4 py-2">{renderStars(data.score)}</td>
               </tr>
