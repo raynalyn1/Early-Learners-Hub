@@ -7,7 +7,7 @@ import loading from "../../images/games/loading.gif";
 import db from "../../images/games/dogApple.png";
 import pd from "../../images/games/pd.png";
 import matching from "../../images/games/matching.png";
-import arow from "../../images/games/arow.png"
+import arow from "../../images/games/arow.png";
 const wordsAndImages = [
   { word: "Cat", image: "https://img.icons8.com/color/96/000000/cat.png" },
   { word: "Dog", image: "https://img.icons8.com/color/96/000000/dog.png" },
@@ -42,8 +42,15 @@ const wordsAndImages = [
   },
 ];
 
+const difficultyLevels = [
+  { level: "Easy", time: 20 },
+  { level: "Medium", time: 20 },
+  { level: "Hard", time: 10 },
+];
+const difficulty = 0;
+
 const WordMatch = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [currentWord, setCurrentWord] = useState("");
   const [options, setOptions] = useState([]);
   const [correctMatches, setCorrectMatches] = useState([]);
@@ -53,6 +60,10 @@ const WordMatch = () => {
   const [achievementVisible, setAchievementVisible] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0); // Track the current question index
   const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [timer, setTimer] = useState(20);
+
+  const isGameActive = gameStarted;
+  const showCorrectModal = modalVisible;
 
   useEffect(() => {
     // Simulate loading delay (e.g., API call)
@@ -64,10 +75,31 @@ const WordMatch = () => {
   }, []);
 
   useEffect(() => {
+    let countdown = null;
+    if (isGameActive && timer > 0 && !showCorrectModal) {
+      countdown = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      handleTimeout();
+    }
+    return () => clearInterval(countdown);
+  }, [isGameActive, timer, showCorrectModal]);
+
+  useEffect(() => {
     if (gameStarted && !isLoading) {
       generateQuestion();
     }
   }, [gameStarted, questionIndex, isLoading]);
+
+  const handleTimeout = () => {
+    setModalMessage("Time's up! Try again.");
+    setModalVisible(true);
+    setTimeout(() => {
+      setModalVisible(false);
+      startGame();
+    }, 1000);
+  };
 
   const generateQuestion = () => {
     const selectedWord = wordsAndImages[questionIndex]; // Get the current question based on index
@@ -84,9 +116,11 @@ const WordMatch = () => {
     );
     setCurrentWord(selectedWord.word);
   };
+
   const handleBackNavigation = () => {
     navigate("/GamesSection"); // Update to the actual path you want to navigate to
   };
+
   const handleOptionClick = (word) => {
     if (word === currentWord) {
       const updatedCorrectMatches = [...correctMatches, word];
@@ -115,10 +149,11 @@ const WordMatch = () => {
   };
 
   const startGame = () => {
-    setCorrectMatches([]); // Reset correct matches
-    setQuestionIndex(0); // Reset question index
+    setCorrectMatches([]);
+    setQuestionIndex(0);
     setGameStarted(true);
-    setModalMessage(""); // Clear modal message on start
+    setTimer(difficultyLevels[difficulty].time); // Reset timer on game start
+    setModalMessage("");
   };
 
   return (
@@ -131,7 +166,11 @@ const WordMatch = () => {
             className="absolute inset-0 w-full h-full object-cover opacity-90"
             style={{ filter: "brightness(100%)" }}
           />
-          <img src={loading} alt="loading" style={{ filter: "brightness(100%)" }} />
+          <img
+            src={loading}
+            alt="loading"
+            style={{ filter: "brightness(100%)" }}
+          />
         </div>
       ) : !gameStarted ? (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -140,7 +179,7 @@ const WordMatch = () => {
             alt="background"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
-  
+
           {/* Animate the db image dropping from above */}
           <img
             src={db}
@@ -148,7 +187,7 @@ const WordMatch = () => {
             className="animate-drop mt-0"
             style={{ filter: "brightness(100%)" }}
           />
-  
+
           {/* Animate pd image coming from the right */}
           <img
             src={pd}
@@ -156,7 +195,7 @@ const WordMatch = () => {
             className="animate-slide-right"
             style={{ filter: "brightness(100%)" }}
           />
-  
+
           {/* Animate matching image coming from the left */}
           <img
             src={matching}
@@ -164,35 +203,41 @@ const WordMatch = () => {
             className="animate-slide-left w-full "
             style={{ filter: "brightness(100%)" }}
           />
-  
+
           <h1
             className="text-5xl font-extrabold mb-4 text-purple-600"
             style={{ filter: "brightness(100%)" }}
           ></h1>
-  
+
           <p
             className="mb-4 text-xl text-gray-800"
             style={{ filter: "brightness(100%)" }}
           >
             {/* Click the button below to start the game. */}
           </p>
-  
+
           {/* Button with animated cursor or icon to guide the start */}
-           <button
-          onClick={startGame}
-          className="px-8 py-4 text-2xl font-bold text-[#94682A] bg-[#FFE0B5] rounded-3xl shadow-2xl hover:bg-[#FFE0B5]-600 transition-colors duration-200 animate-pulse"
-          style={{ filter: "brightness(100%)", position: 'relative' }}
-        >
-          Start Game
-          <span className="animate-bounce pointer-icon" style={{ color: "#F4DAB5" }}>👉</span>
-        </button>
-      </div>
+          <button
+            onClick={startGame}
+            className="px-8 py-4 text-2xl font-bold text-[#94682A] bg-[#FFE0B5] rounded-3xl shadow-2xl hover:bg-[#FFE0B5]-600 transition-colors duration-200 animate-pulse"
+            style={{ filter: "brightness(100%)", position: "relative" }}
+          >
+            Start Game
+            <span
+              className="animate-bounce pointer-icon"
+              style={{ color: "#F4DAB5" }}
+            >
+              👉
+            </span>
+          </button>
+        </div>
       ) : (
         <div className="w-full max-w-lg mx-auto text-center">
-          <img src={bg}
-           alt="background" 
-           className="absolute inset-0 w-full h-full object-cover opacity-100"
-           style={{ opacity: 0.7 }} // Adjust to your preferred opacity
+          <img
+            src={bg}
+            alt="background"
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
+            style={{ opacity: 0.7 }} // Adjust to your preferred opacity
           />
           <img
             src={arow}
@@ -200,22 +245,41 @@ const WordMatch = () => {
             onClick={handleBackNavigation}
             className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
           />
-          <h1 className="text-5xl font-extrabold mb-6 text-purple-600" style={{ filter: "brightness(100%)" }}>
+          <h1
+            className="text-5xl font-extrabold mb-6 text-purple-600"
+            style={{ filter: "brightness(100%)" }}
+          >
             {/* Word Match Game */}
           </h1>
           <div className="mb-4">
-    <img
-      src={wordsAndImages[questionIndex]?.image}
-      alt={currentWord}
-      className="mb-6 mx-auto rounded-lg bg-[#ECFFD9]"
-      style={{
-        width: "400px",
-        height: "400px",
-        objectFit: "cover",
-        filter: "brightness(100%)",
-      }}
-    />
-</div>
+            <div className="timer-bar bg-gray-200 rounded-full h-6 mb-10 border border-[#EE910E] relative">
+              <div
+                className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000 flex items-center justify-center"
+                style={{
+                  width: `${
+                    (timer / difficultyLevels[difficulty].time) * 100
+                  }%`,
+                }}
+              >
+                <p className="text-white font-semibold w-full text-center ">
+                  {timer}
+                </p>
+              </div>
+            </div>
+            <br />
+            <br />
+            <img
+              src={wordsAndImages[questionIndex]?.image}
+              alt={currentWord}
+              className="mb-6 mx-auto rounded-lg bg-[#ECFFD9]"
+              style={{
+                width: "400px",
+                height: "400px",
+                objectFit: "cover",
+                filter: "brightness(100%)",
+              }}
+            />
+          </div>
           <div className="flex flex-wrap justify-center mb-6">
             {options.map((option) => (
               <button
@@ -245,20 +309,63 @@ const WordMatch = () => {
       {/* Achievement Modal */}
       {achievementVisible && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-70 transition-opacity duration-300">
-          <div className="bg-white p-8 rounded-lg shadow-lg transform transition-transform duration-300 scale-100 hover:scale-105">
-            <h2 className="text-2xl font-bold mb-4 text-center text-green-600">
+          <div className="bg-[#FFE7C7] p-8 rounded-lg shadow-lg transform transition-transform duration-300 scale-100 max-w-xs w-full">
+            {/* Level Display */}
+
+            {/* Congratulatory Message */}
+            <h2 className="text-2xl font-bold mb-4 text-center text-yellow-700">
               Congratulations!
             </h2>
-            <p className="text-lg text-center">You've matched all the words!</p>
-            <button
-              className="mt-4 px-6 py-2 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition-colors duration-200"
-              onClick={() => {
-                setAchievementVisible(false);
-                startGame(); // Restart the game
-              }}
-            >
-              Play Again
-            </button>
+
+            {/* Stars Display */}
+            <div className="flex justify-center mb-4">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-yellow-500 text-3xl">
+                  ⭐
+                </span>
+              ))}
+            </div>
+
+            {/* Mission Display */}
+            <div className="text-center mb-4">
+              <p className="font-semibold text-gray-700">Mission:</p>
+              <p className="text-gray-500">
+                Successfully Matched The Names of Animals
+              </p>
+            </div>
+
+            {/* Score and Missed */}
+            <div className="flex justify-around mb-4">
+              <div className="text-center">
+                <p className="font-semibold text-gray-700">Score:</p>
+                <p className="text-gray-500">10/10</p>
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-gray-700">Missed:</p>
+                <p className="text-gray-500">0</p>
+              </div>
+            </div>
+
+            {/* Exit and Retry Buttons */}
+            <div className="flex justify-around mt-6">
+              <button
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400 transition-colors duration-200"
+                onClick={() => {
+                  setAchievementVisible(false);
+                }}
+              >
+                Exit
+              </button>
+              <button
+                className="px-4 py-2 bg-orange-300 text-orange-700 rounded-lg shadow hover:bg-orange-400 transition-colors duration-200"
+                onClick={() => {
+                  setAchievementVisible(false);
+                  startGame(); // Restart the game
+                }}
+              >
+                Retry
+              </button>
+            </div>
           </div>
         </div>
       )}

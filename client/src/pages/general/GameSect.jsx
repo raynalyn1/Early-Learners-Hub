@@ -40,8 +40,7 @@ const GameSect = () => {
       navigate("/MathGames");
     } else if (selectedGame === "word") {
       navigate("/WordGames");
-    }
-    else if (selectedGame === "AnimalGames") {
+    } else if (selectedGame === "AnimalGames") {
       navigate("/AnimalGames");
     }
   };
@@ -61,24 +60,66 @@ const GameSect = () => {
   const filteredGames = () => {
     if (selectedCategory === "Math") {
       return [
-        { image: math, title: "Math Game", description: "Simple but enjoying Math games with add, subtract and multiply symbol.", game: "math" },
+        {
+          image: math,
+          title: "Math Game",
+          description:
+            "Simple but enjoying Math games with add, subtract and multiply symbol.",
+          game: "math",
+        },
       ];
     } else if (selectedCategory === "Literacy") {
       return [
-        { image: memory, title: "Memory Game", description: "Match the elements shapes to their same elements.", game: "memory" }
+        {
+          image: memory,
+          title: "Memory Game",
+          description: "Match the elements shapes to their same elements.",
+          game: "memory",
+        },
       ];
     } else if (selectedCategory === "Phonics") {
       return [
-        { image: img12, title: "Word Pic Game", description: "Knowing the name of the picture make u know the name.", game: "word" },
-        { image: animalScrumble, title: "Animal Games", description: "Fun games to unscramble animal names!", game: "AnimalGames" },
+        {
+          image: img12,
+          title: "Word Pic Game",
+          description: "Knowing the name of the picture make u know the name.",
+          game: "word",
+        },
+        {
+          image: animalScrumble,
+          title: "Animal Games",
+          description: "Fun games to unscramble animal names!",
+          game: "AnimalGames",
+        },
         ,
       ];
     }
     return [
-      { image: memory, title: "Memory Game", description: "Match the elements shapes to their same elements.", game: "memory" },
-      { image: math, title: "Math Game", description: "Simple but enjoying Math games with add, subtract and multiply symbol.", game: "math" },
-      { image: img12, title: "Word Pic Game", description: "Knowing the name of the picture make u know the name.", game: "word" },
-      { image: animalScrumble, title: "Animal Games", description: "Fun games to unscramble animal names!", game: "AnimalGames" },
+      {
+        image: memory,
+        title: "Memory Game",
+        description: "Match the elements shapes to their same elements.",
+        game: "memory",
+      },
+      {
+        image: math,
+        title: "Math Game",
+        description:
+          "Simple but enjoying Math games with add, subtract and multiply symbol.",
+        game: "math",
+      },
+      {
+        image: img12,
+        title: "Word Pic Game",
+        description: "Knowing the name of the picture make u know the name.",
+        game: "word",
+      },
+      {
+        image: animalScrumble,
+        title: "Animal Games",
+        description: "Fun games to unscramble animal names!",
+        game: "AnimalGames",
+      },
     ];
   };
 
@@ -93,20 +134,25 @@ const GameSect = () => {
               Educational Games
             </h1>
             <select
-              className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md ml-auto"
+              className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md ml-auto outline-none"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <option value="">Games Categories</option>
+             
               <option value="Math">Math</option>
               <option value="Literacy">Literacy</option>
               <option value="Phonics">Phonics</option>
+              
             </select>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-10">
             {filteredGames().map((game, index) => (
-              <div key={index} className="bg-[#F3CA79] rounded-lg shadow-lg p-5">
+              <div
+                key={index}
+                className="bg-[#F3CA79] rounded-lg shadow-lg p-5"
+              >
                 <img
                   src={game.image}
                   alt={game.title}
