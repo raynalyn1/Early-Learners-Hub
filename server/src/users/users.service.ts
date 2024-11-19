@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import * as crypto from 'crypto';
 
@@ -12,9 +12,9 @@ export class UsersService {
         private userRepository: Repository<User>,
     ) {}
 
-    async createUser(name: string, email: string, password: string): Promise<User> {
+    async createUser(name: string, email: string, password: string, confirmPassword: string): Promise<User> {
         const hashedPassword = crypto.createHash('sha512').update(password).digest('hex');
-        const user = this.userRepository.create({ name, email, password: hashedPassword });
+        const user = this.userRepository.create({ name, email, password: hashedPassword, confirmPassword: hashedPassword });
         return await this.userRepository.save(user);
     }
 

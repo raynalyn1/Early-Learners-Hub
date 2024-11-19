@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import img from "../../images/Registration/cloudsBirds.png"; // Background clouds and birds
 import img3 from "../../images/Registration/Comeback.png"; // Rocket mascot at the bottom left
 import img4 from "../../images/Registration/Confett.png"; // Confetti near text
@@ -10,8 +10,38 @@ import img10 from "../../images/Registration/parachute.png"; // Parachute icon
 import img11 from "../../images/Registration/Pencil.png"; // Pencil icon for Username
 import img12 from "../../images/Registration/sunsetclouds.png"; // Sunset clouds image
 import img13 from "../../images/Registration/rec.png"; // Curve image
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(password !== confirmPassword) {
+      alert('Password do not match');
+    }
+
+    const url = 'http://localhost:3000/auth/register';
+    const data = { name, email, password, confirmPassword };
+
+    try {
+      const response = await axios.post(url, data);
+      console.log('Response:', response.data);
+
+      //  Navigate to login 
+      navigate('/login');
+
+    } catch (error) {
+      console.log('Error:', error.response ? error.response.data : error.message);
+    }
+  }
+
+
   return (
     <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-[#ebcea8] bg-opacity-80 overflow-auto">
       <div className="relative w-full max-w-[900px] h-full md:h-[600px] rounded-lg p-6 flex flex-col md:flex-row bg-[#fdddb1] bg-opacity-80">
@@ -64,6 +94,9 @@ const Register = () => {
               <img src={img9} alt="Name Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
                 placeholder="Name*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -72,6 +105,9 @@ const Register = () => {
               <img src={img6} alt="Email Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 placeholder="Email*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -79,7 +115,10 @@ const Register = () => {
             <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-3xl shadow-lg border border-[#EB9721]">
               <img src={img11} alt="Pencil Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
-                type="text"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 placeholder="Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />
@@ -88,6 +127,8 @@ const Register = () => {
               <img src={img8} alt="Password Icon" className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               <input
                 type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm Password*"
                 className="w-full bg-transparent outline-none text-gray-700 pl-4 text-sm sm:text-base"
               />

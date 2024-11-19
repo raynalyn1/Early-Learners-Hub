@@ -10,37 +10,34 @@ import exit from "../../images/image 126.png"; // Make sure this path is correct
 const GameSect = () => {
   const navigate = useNavigate();
 
-  // State to handle navbar visibility
   const [isGameStarted, setIsGameStarted] = useState(false);
-
-  // State to handle button click effects
   const [clicked, setClicked] = useState(null);
-
-  // State to handle modal visibility and input
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [childName, setChildName] = useState("");
   const [selectedGame, setSelectedGame] = useState("");
-
-  // State for sorting games by category
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Handle modal submission
   const handleSubmit = () => {
     if (childName.trim() === "") {
       alert("Please enter the child's name");
       return;
     }
 
+    // Store data in localStorage
+    localStorage.setItem("playerName", childName);
+    localStorage.setItem("selectedGame", selectedGame);
+
     setIsGameStarted(true);
     setIsModalOpen(false); // Close modal
 
-    if (selectedGame === "memory") {
+    // Navigate to the respective game
+    if (selectedGame === "Memory Games") {
       navigate("/MemoryGames");
-    } else if (selectedGame === "math") {
+    } else if (selectedGame === "Math Games") {
       navigate("/MathGames");
-    } else if (selectedGame === "word") {
+    } else if (selectedGame === "Word Games") {
       navigate("/WordGames");
-    } else if (selectedGame === "AnimalGames") {
+    } else if (selectedGame === "Animal Games") {
       navigate("/AnimalGames");
     }
   };
@@ -48,24 +45,22 @@ const GameSect = () => {
   const openModalForGame = (game) => {
     setClicked(game);
     setSelectedGame(game);
-    setIsModalOpen(true); // Open modal
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close modal
-    setChildName(""); // Clear the input field when closing
+    setIsModalOpen(false);
+    setChildName("");
   };
 
-  // Filter games based on selected category
   const filteredGames = () => {
     if (selectedCategory === "Math") {
       return [
         {
           image: math,
           title: "Math Game",
-          description:
-            "Simple but enjoying Math games with add, subtract and multiply symbol.",
-          game: "math",
+          description: "Simple but enjoying Math games with add, subtract and multiply symbol.",
+          game: "Math Games",
         },
       ];
     } else if (selectedCategory === "Literacy") {
@@ -74,7 +69,7 @@ const GameSect = () => {
           image: memory,
           title: "Memory Game",
           description: "Match the elements shapes to their same elements.",
-          game: "memory",
+          game: "Memory Games",
         },
       ];
     } else if (selectedCategory === "Phonics") {
@@ -83,15 +78,14 @@ const GameSect = () => {
           image: img12,
           title: "Word Pic Game",
           description: "Knowing the name of the picture make u know the name.",
-          game: "word",
+          game: "Word Games",
         },
         {
           image: animalScrumble,
           title: "Animal Games",
           description: "Fun games to unscramble animal names!",
-          game: "AnimalGames",
+          game: "Animal Games",
         },
-        ,
       ];
     }
     return [
@@ -99,26 +93,25 @@ const GameSect = () => {
         image: memory,
         title: "Memory Game",
         description: "Match the elements shapes to their same elements.",
-        game: "memory",
+        game: "Memory Games",
       },
       {
         image: math,
         title: "Math Game",
-        description:
-          "Simple but enjoying Math games with add, subtract and multiply symbol.",
-        game: "math",
+        description: "Simple but enjoying Math games with add, subtract and multiply symbol.",
+        game: "Math Games",
       },
       {
         image: img12,
         title: "Word Pic Game",
         description: "Knowing the name of the picture make u know the name.",
-        game: "word",
+        game: "Word Games",
       },
       {
         image: animalScrumble,
         title: "Animal Games",
         description: "Fun games to unscramble animal names!",
-        game: "AnimalGames",
+        game: "Animal Games",
       },
     ];
   };
@@ -139,11 +132,9 @@ const GameSect = () => {
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               <option value="">Games Categories</option>
-             
               <option value="Math">Math</option>
               <option value="Literacy">Literacy</option>
               <option value="Phonics">Phonics</option>
-              
             </select>
           </div>
 
@@ -181,7 +172,7 @@ const GameSect = () => {
               onClick={closeModal}
               className="absolute top-1 right-2 cursor-pointer"
             >
-              <img src={exit} alt="Exit" className=" w-10 h-10" />
+              <img src={exit} alt="Exit" className="w-10 h-10" />
             </span>
             <div className="p-[2%]">
               <h2 className="text-xl font-bold mb-4 p-[1%]">
