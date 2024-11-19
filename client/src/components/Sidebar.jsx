@@ -25,13 +25,13 @@ const Sidebar = () => {
 
 
   return (
-    <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center">
+    <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center overflow-auto">
       {/* Logo */}
       <img src={logo} alt="Logo" className="w-24 h-auto mb-12" />
 
-      <nav className="w-full">
-        <ul className="space-y-6 text-black text-lg">
-          <li className="group flex items-center space-x-4  hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 hover:border">
+      <nav className="w-[100%] ">
+        <ul className="space-y-6 text-black text-lg ">
+          <li className="group flex items-center space-x-4  hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-500 p-3 ">
             <img src={homeIcon} alt="Dashboard" className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200" />
             <Link 
               to="/admin/dashboard" 
@@ -41,7 +41,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 hover:border">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 ">
             <img src={listIcon} alt="Users" className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200" />
             <Link 
               to="/admin/user" 
@@ -51,7 +51,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 hover:border">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 ">
             <img src={userIcon} alt="Score Tracking" className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200" />
             <Link 
               to="/admin/tracking" 
@@ -61,7 +61,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 hover:border">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 " >
             <img src={video} alt="Videos" className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200" />
             <Link 
               to="/admin/upload" 
