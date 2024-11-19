@@ -13,7 +13,7 @@ import img13 from "../../images/Registration/rec.png"; // Curve image
 
 const Register = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-[#ebcea8] bg-opacity-80">
+    <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-[#ebcea8] bg-opacity-80 overflow-auto">
       <div className="relative w-full max-w-[900px] h-full md:h-[600px] rounded-lg p-6 flex flex-col md:flex-row bg-[#fdddb1] bg-opacity-80">
         {/* Background Curve */}
         <img

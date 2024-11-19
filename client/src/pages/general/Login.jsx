@@ -14,7 +14,8 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-opacity-80 bg-[#ebcea8]">
+    <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-opacity-80 bg-[#ebcea8] overflow-auto">
+
       <div className="relative w-full max-w-[900px] h-full md:h-[600px] rounded-lg p-6 flex flex-col md:flex-row bg-opacity-80 bg-[#fdddb1]">
         <img
           src={img13}

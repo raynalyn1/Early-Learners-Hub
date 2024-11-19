@@ -28,7 +28,7 @@ const User = () => {
   };
 
   return (
-    <div className="p-8 bg-[#FAF3EB] min-h-screen">
+    <div className="p-8 bg-[#FAF3EB] h-[95vh] overflow-auto">
       <h1 className="text-3xl font-bold text-[#F47C21] mb-6">List of User</h1>
       
       <div className="flex items-center gap-4 mb-6">

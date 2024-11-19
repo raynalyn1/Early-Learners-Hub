@@ -4,9 +4,9 @@ import glowingstar from "../../images/Dashboard/glowingstars.png";
 
 function Dashboard() {
   return (
-    <div className="">
+    <div className="overflow-auto">
       {/* Header */}
-      <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E] ">
+      <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E] overflow-auto">
         <div>
           <h2 className="text-gray-700 text-lg font-semibold">Dashboard</h2>
           <p className="text-sm text-gray-500">Wednesday, 06 November 2024</p>

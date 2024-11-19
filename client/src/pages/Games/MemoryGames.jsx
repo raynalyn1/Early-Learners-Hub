@@ -432,11 +432,11 @@ const MemoryGame = () => {
                 </div>
 
                 {/* Star Ratings */}
-                <div className="flex justify-center space-x-4 mb-4">
+                {/* <div className="flex justify-center space-x-4 mb-4">
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
-                </div>
+                </div> */}
 
                 {/* Next, Exit, and Retry Buttons */}
                 <div className="flex justify-center space-x-4">
@@ -453,12 +453,12 @@ const MemoryGame = () => {
                     Retry
                   </button>
                 </div>
-                <button
+                {/* <button
                   onClick={() => nextLevel()}
                   className="px-10 py-2 mt-4 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-2xl"
                 >
                   Next
-                </button>
+                </button> */}
               </div>
               {showConfetti && <Confetti className="fixed inset-0 z-40" />}
             </div>
