@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../images/Dashboard/lg.png";
 import homeIcon from "../images/Dashboard/home.png";
 import listIcon from "../images/Dashboard/list.png";
-import userIcon from "../images/Dashboard/scoretracking.png";
+import userIcon from "../images/Dashboard/Tracking.png"
 import video from "../images/Dashboard/video.png";
 import LogoutModal from "./LogoutModal";
 import logout from "../images/Dashboard/logout.png";

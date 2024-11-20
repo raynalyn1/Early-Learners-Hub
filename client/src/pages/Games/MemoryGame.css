@@ -124,6 +124,7 @@ h1 {
     animation: fromLeft 0.6s ease-out forwards;
   }
 
+<<<<<<< Updated upstream
   @media (max-width: 768px) {
     img {
       max-width: 90%;
@@ -134,3 +135,7 @@ h1 {
       font-size: 1.25rem;
     }
   }
+=======
+
+  
+>>>>>>> Stashed changes
