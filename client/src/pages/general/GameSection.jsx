@@ -57,13 +57,8 @@ const GameSection = () => {
     <div className="bg-[#EB9721] w-full px-5  relative min-h-screen">
       <div className="bg-[#EBCEA8] w-full px-5">
         {/* Search Section */}
-<<<<<<< Updated upstream
-        {/* <section className="flex justify-between pr-[10vh] pt-9 w-full">
-          <h2 className="text-2xl font-semibold mb-4">Educational Videos</h2>
-=======
         <section className="flex justify-between pr-[10vh] pt-9 w-full">
           <p className="text-2xl font-semibold mb-4">Educational Videos</p>
->>>>>>> Stashed changes
           <div className="relative">
             <input
               type="text"
@@ -76,26 +71,13 @@ const GameSection = () => {
               className="absolute right-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"
             />
           </div>
-        </section> */}
+        </section> 
 
-<<<<<<< Updated upstream
-     
-=======
       {/* Search Section */}
       <section className="flex justify-between pr-[10vh] pt-9 w-[]">
->>>>>>> Stashed changes
         <h2 className="text-2xl font-semibold mb-4 ">Educational Videos</h2>
-       
+        </section>
 
-<<<<<<< Updated upstream
-        
-
-       
-
-     
-
-       
-=======
       {/* Videos Section */}
       <section className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-center flex space-x-30 px-[20vh]">
         {/* Video Cards */}
@@ -153,7 +135,6 @@ const GameSection = () => {
           </button>
         </div>
       </section>
->>>>>>> Stashed changes
 
         {/* Videos Section */}
         <section className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-center px-[20vh]">

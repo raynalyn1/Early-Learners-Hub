@@ -26,9 +26,9 @@ const Sidebar = () => {
       {/* Logo */}
       <img src={logo} alt="Logo" className="w-24 h-auto mb-12" />
 
-      <nav className="w-[100%] ">
-        <ul className="space-y-6 text-black text-lg ">
-          <li className="group flex items-center space-x-4  hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-500 p-3 ">
+      <nav className="w-[100%] flex-grow flex flex-col ">
+        <ul className="space-y-6 text-black text-lg flex flex-col items-center">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E]  transition-all duration-500 p-3">
             <Link
               to="/admin/dashboard"
               className="block text-black group-hover:scale-105 transform transition-all duration-200"
@@ -41,7 +41,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 ">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] transition-all duration-200 p-3">
             <Link
               to="/admin/user"
               className="block text-black group-hover:scale-105 transform transition-all duration-200"
@@ -54,7 +54,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 ">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E]  transition-all duration-200 p-3">
             <Link
               to="/admin/tracking"
               className="block text-black group-hover:scale-105 transform transition-all duration-200"
@@ -67,7 +67,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="group flex items-center space-x-4 hover:border-[#FFC77E] hover:shadow-2xl hover:rounded-lg transition-all duration-200 p-3 ">
+          <li className="group flex items-center space-x-4 hover:border-[#FFC77E]  transition-all duration-200 p-3">
             <Link
               to="/admin/upload"
               className="block text-black group-hover:scale-105 transform transition-all duration-200"
@@ -79,16 +79,18 @@ const Sidebar = () => {
               />
             </Link>
           </li>
-          <li>
-            <img 
-              src={logout}
-              onClick={handleLogout}
-              alt="logout"
-              className="group flex items-center space-x-4 mt-[2] w-1/2"
-            />
-          </li>
         </ul>
       </nav>
+
+      {/* Logout Section */}
+      <div className="mt-auto flex items-center space-x-3 cursor-pointer" onClick={handleLogout}>
+        <img
+          src={logout}
+          alt="Logout"
+          className="w-8 h-8 transform group-hover:scale-110 transition-all duration-200"
+        />
+        <span className="text-black text-lg">Logout</span>
+      </div>
 
       <LogoutModal
         isVisible={isModalVisible}
