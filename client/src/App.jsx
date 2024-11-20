@@ -82,7 +82,7 @@ const AppRoutes = () => {
       <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame /></GeneralLayout>} />
       <Route path="/MathGames" element={<GeneralLayout><MathGame /></GeneralLayout>} />
       <Route path="/WordGames" element={<GeneralLayout><WordMatch /></GeneralLayout>} />
-      <Route path="/AnimalGames" element={<GeneralLayout><AnimalGame /></GeneralLayout>} />
+      <Route path="/AnimalGames" element={<AnimalGame />} />
     </Routes>
   );
 };

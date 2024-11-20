@@ -14,8 +14,8 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.use(bodyParser.json({ limit: '200mb' }));
-  app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
+  app.use(bodyParser.json({ limit: '500mb' }));
+  app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 
   await app.listen(3000);
 }
