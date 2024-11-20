@@ -383,25 +383,19 @@ const MemoryGame = () => {
           )}
 
           <div className="mb-4 flex  items-center justify-center flex flex-col gap-9 md:w-[100%]">
-            {Object.keys(difficultyLevels).map(
-              (level, index) =>
-                (!selectedLevel || selectedLevel === level) && (
-                  <button
-                    key={level}
-                    onClick={() => startGame(difficultyLevels[level], level)}
-                    className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] font-semibold ${getButtonAnimationClass(
-                      index
-                    )}`}
-                  >
-                    {level.charAt(0).toUpperCase() + level.slice(1)}
-                {retryCount[level] > 0 && retryCount[level] < 2 ? (
-                  <span className="text-red-500 ml-2">
-                    ({2 - retryCount[level]} )
-                  </span>
-                ) : null}
-              </button>
-                )
-            )}
+             {Object.keys(difficultyLevels).map((level, index) => (
+        (!selectedLevel || selectedLevel === level) && (
+          <button
+          key={level}
+          onClick={() => startGame(difficultyLevels[level], level)}
+          className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%]  ${getButtonAnimationClass(
+            index
+          )}`}
+        >
+          {level.charAt(0).toUpperCase() + level.slice(1)}
+        </button>
+        )
+      ))}
           </div>
           <div className={`grid ${gridCols} gap-4`}>
             {cards.map((icon, index) => (
@@ -462,11 +456,11 @@ const MemoryGame = () => {
                 </div>
 
                 {/* Star Ratings */}
-                {/* <div className="flex justify-center space-x-4 mb-4">
+                <div className="flex justify-center space-x-4 mb-4">
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
-                </div> */}
+                </div>
 
                 {/* Next, Exit, and Retry Buttons */}
                 <div className="flex justify-center space-x-4">

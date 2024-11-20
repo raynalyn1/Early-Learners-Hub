@@ -22,7 +22,7 @@ const Footer = () => {
 
         {/* Middle Section: Useful Links */}
         <div className='w-full lg:w-1/2 flex flex-col justify-center items-center'>
-          <h1 className='font-bold text-center lg:text-left text-lg lg:text-xl'>About E-Learners</h1>
+          <p className='font-bold text-center lg:text-left text-lg lg:text-xl'>About E-Learners</p>
           <div className='flex flex-col gap-3 items-center lg:items-start mt-3'>
             <p className='text-sm lg:text-base'>Our Team</p>
             <p className='text-sm lg:text-base'>About Us</p > 
@@ -32,7 +32,7 @@ const Footer = () => {
 
         {/* Right Section: Contact Info */}
         <div className='w-full lg:w-1/3 flex flex-col gap-4 justify-center pt-5 lg:pt-14 px-5'>
-          <h1 className='font-bold text-center lg:text-left text-lg lg:text-xl'>Contact Us</h1>
+          <p className='font-bold text-center lg:text-left text-lg lg:text-xl'>Contact Us</p>
           <div className='flex gap-3 justify-center lg:justify-start items-center'>
             <PiPhoneCallFill className='text-3xl lg:text-4xl' style={{ color: '#000000', border: '2px solid #EB9721', borderRadius: '70%' }} />
             <div className='text-[.8rem] lg:text-[.9rem] font-normal font-poppins'>
