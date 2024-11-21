@@ -177,17 +177,37 @@ function UploadVideos() {
       {/* Sections */}
       <h2 className="text-[1.5rem] font-bold ml-9">Videos</h2>
       <div className="w-full h-[8vh] flex gap-9 items-center pl-9">
-        <h2 onClick={() => setActiveSection("uploaded")} className={`cursor-pointer
-          
-          
-          
-          ${activeSection === "uploaded" ? "font-bold underline" : ""}`}>Uploaded</h2>
-        <h2 onClick={() => setActiveSection("upload")} className={`cursor-pointer ${activeSection === "upload" ? "font-bold underline" : ""}`}>Upload</h2>
-      </div>
+  <h2
+    onClick={() => setActiveSection("uploaded")}
+    className={`cursor-pointer relative ${activeSection === "uploaded" ? "font-bold text-[#D18A26]" : ""}`}
+  >
+    Uploaded
+    {activeSection === "uploaded" && (
+      <span
+        className="absolute bottom-[-2px] left-1/2 transform -translate-x-1/2 bg-[#D18A26] h-[2px]"
+        style={{ width: "69%" }}
+      ></span>
+    )}
+  </h2>
+  
+  <h2
+    onClick={() => setActiveSection("upload")}
+    className={`cursor-pointer relative ${activeSection === "upload" ? "font-bold text-[#D18A26]" : ""}`}
+  >
+    Upload
+    {activeSection === "upload" && (
+      <span
+        className="absolute bottom-[-2px] left-1/2 transform -translate-x-1/2 bg-[#D18A26] h-[2px]"
+        style={{ width: "69%" }}
+      ></span>
+    )}
+  </h2>
+</div>
+
 
       {/* Uploaded Videos */}
       {activeSection === "uploaded" && (
-        <div className="shadow-lg w-full h-[60vh] rounded-lg overflow-auto">
+        <div className="shadow-lg w-full h-[60vh] rounded-lg overflow-auto  ">
           <div className="grid grid-cols-3 gap-4">
             {videos.map((video) => (
               <div key={video.id} className="bg-white shadow-md rounded overflow-hidden relative border border-[orange]">
@@ -230,7 +250,7 @@ function UploadVideos() {
       {/* Upload Section */}
       {activeSection === "upload" && (
         <div className="h-[60vh] flex items-center justify-center">
-          <button onClick={() => setIsModalOpen(true)} className="bg-red-300 text-white py-2 px-4 rounded hover:bg-red-400">Upload Video</button>
+          <button onClick={() => setIsModalOpen(true)} className="bg-[#EB9721] text-white py-2 px-4 rounded hover:bg-[#EB9721]">Upload Video</button>
         </div>
       )}
 

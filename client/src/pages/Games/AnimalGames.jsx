@@ -88,12 +88,24 @@ const AnimalGame = () => {
   const [showDifficultySelection, setShowDifficultySelection] = useState(false);
   const [usedAnimals, setUsedAnimals] = useState([]);
   const [backgroundMusic] = useState(new Audio(background));
+  // Get the name and game name from the localstorage
+  const [playerName, setPlayerName] = useState("");
+  const [gameName, setGameName] = useState("");
 
   const difficultyLevels = {
     easy: { questions: 5, time: 10 },
     normal: { questions: 10, time: 8 },
     hard: { questions: 15, time: 5 },
   };
+
+
+  useEffect(() => {
+    const name = localStorage.getItem("playerName");
+    const game = localStorage.getItem("selectedGame");
+    setPlayerName(name);
+    setGameName(game);
+  }, []);
+
 
   useEffect(() => {
     if (isGameActive) {
@@ -402,6 +414,8 @@ const AnimalGame = () => {
               <div className="modal-content bg-white p-8 rounded-2xl shadow-xl text-center">
                 <h2 className="text-4xl font-bold text-purple-600 mb-6">
                   Game Over! 🏆
+                  {playerName}
+                  {gameName}
                 </h2>
                 <div className="space-y-4 mb-6">
                   <p className="text-2xl">

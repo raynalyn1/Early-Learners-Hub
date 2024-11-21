@@ -66,7 +66,6 @@ const MemoryGame = () => {
 
   const [isGameActive, setIsGameActive] = useState(false);
 
-
   // const [progressTimer, setprogressTimer] = useState(30);
 
   const audio = new Audio(BackgroundAudio);
@@ -113,7 +112,6 @@ const MemoryGame = () => {
     console.log(`Starting game with difficulty: ${level}`);
   };
 
-
   const endGame = () => {
     setIsGameActive(false); // Game has ended
     setShowStats(false); // Hide stats
@@ -142,7 +140,26 @@ const MemoryGame = () => {
     clearInterval(intervalId);
     setShowStats(false); // Hide stats when restarting
     setShowLevelSelection(true); // Show level selection screen
+
+    if (retryCount[difficulty] >= 2) {
+      alert(`You have reached the retry limit for the ${difficulty} level.`);
+      setShowLevelSelection(true); // Redirect to level selection when retries are over
+      return;
+    }
+
+    setRetryCount((prev) => ({
+      ...prev,
+      [difficulty]: prev[difficulty] + 1,
+    }));
+    
   };
+  const [retryCount, setRetryCount] = useState({
+    easy: 0,
+    normal: 0,
+    hard: 0,
+  });   
+
+
   const exitGame = () => {};
   const nextLevel = () => {};
   const generateCards = (level) => {
@@ -150,9 +167,6 @@ const MemoryGame = () => {
     const cardIcons = [...iconPool, ...iconPool];
     const shuffledCards = cardIcons.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
-
-
-
 
     if (level === 6) {
       setGridCols("grid-cols-3");
@@ -217,9 +231,12 @@ const MemoryGame = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-yellow-300 to-blue-400">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-yellow-300 to-blue-400  overflow-auto h-[50vh]">
       {isLoading ? (
-        <div className="flex items-center justify-center h-screen">
+        <div
+          className="flex flex-col items-center justify-center "
+          style={{ overflow: "hidden" }}
+        >
           <img
             src={img4}
             alt="bg"
@@ -234,50 +251,56 @@ const MemoryGame = () => {
           />
         </div>
       ) : !gameStarted ? (
-        <div className=" text-center">
+        <div className=" text-center h-[98vh]">
           <img
             src={img4}
             alt="Background"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
-          <img
-            src={img5}
-            alt="memory"
-            className="relative top-0 mb-8 z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInLeft"
-            style={{
-              animationDuration: "1.5s",
-              animationTimingFunction: "ease-in-out",
-              animationFillMode: "forwards",
-            }}
-          />
-
+          <div>
+            <img
+              src={img5}
+              alt="memory"
+              className="relative mt-[-1rem] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInLeft"
+              style={{
+                animationDuration: "1.5s",
+                animationTimingFunction: "ease-in-out",
+                animationFillMode: "forwards",
+              }}
+            />
+          </div>
+          <div className="">
           <img
             src={img6}
             alt="match"
-            className="w-full h-auto ml-5 sm:ml-10 md:ml-16 lg:ml-20 z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInRight"
+            className="  ml-5 sm:ml-10 md:ml-16 lg:ml-20 z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInRight "
             style={{
               animationDuration: "1.5s",
               animationTimingFunction: "ease-in-out",
               animationFillMode: "forwards",
             }}
           />
-          <img
-            src={img7}
-            alt="letters"
-            className="w-full h-auto mt-4 z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
-            style={{ filter: "brightness(100%)" }}
-          />
-
-          <button
-            onClick={() => setGameStarted(true)}
-            className="text-white text-3xl transform hover:scale-110 transition-all w-[80%] h-[4rem] mb-8 -translate-y-12"
-          >
+          </div>
+          <div className="text-center">
             <img
-              src={img1}
-              alt="Play Button"
-              className="inline-block mr-2  w-[25%] h-[12vh]"
+              src={img7}
+              alt="letters"
+              className="w-full h-auto mt-[-2rem]  max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl "
+              style={{ filter: "brightness(100%)" }}
             />
-          </button>
+          </div>
+          <div className="">
+            <button
+              onClick={() => setGameStarted(true)}
+              className="transform mt-[1rem] hover:scale-110 transition-all w-[80%] h-[4rem] -translate-y-12"
+            >
+              <img
+                src={img1}
+                alt="Play Button"
+                className="inline-block mr-2  w-[25%] h-[12vh]"
+              />
+            </button>
+          </div>
         </div>
       ) : (
         <div>
@@ -365,7 +388,7 @@ const MemoryGame = () => {
           <button
           key={level}
           onClick={() => startGame(difficultyLevels[level], level)}
-          className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] font-semibold ${getButtonAnimationClass(
+          className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%]  ${getButtonAnimationClass(
             index
           )}`}
         >
@@ -375,34 +398,35 @@ const MemoryGame = () => {
       ))}
           </div>
           <div className={`grid ${gridCols} gap-4`}>
-          {cards.map((icon, index) => (
-            <div
-              key={index}
-              className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
+            {cards.map((icon, index) => (
+              <div
+                key={index} 
+                className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
                 ${
                   flippedCards.includes(index) || matchedCards.includes(index)
                     ? "bg-white text-gray-800"
                     : "bg-[#FFCF8C] text-white"
                 }`}
-              style={{
-                backgroundImage:
-                  flippedCards.includes(index) || matchedCards.includes(index)
-                    ? "none"
-                    : `url(${logo})`,
-                backgroundSize: "50% auto",
-                backgroundPosition: "center center",
-                backgroundRepeat: "no-repeat",
-              }}
-              onClick={() => flipCard(index)}
-            >
-              {(flippedCards.includes(index) || matchedCards.includes(index)) && (
-                <span style={{ fontSize: "7rem", color: "#7E4F0E" }}>
-                  {icon}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
+                style={{
+                  backgroundImage:
+                    flippedCards.includes(index) || matchedCards.includes(index)
+                      ? "none"
+                      : `url(${logo})`,
+                  backgroundSize: "50% auto",
+                  backgroundPosition: "center center",
+                  backgroundRepeat: "no-repeat",
+                }}
+                onClick={() => flipCard(index)}
+              >
+                {(flippedCards.includes(index) ||
+                  matchedCards.includes(index)) && (
+                  <span style={{ fontSize: "7rem", color: "#7E4F0E" }}>
+                    {icon}
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
 
           {gameOver && (
             <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
@@ -432,11 +456,11 @@ const MemoryGame = () => {
                 </div>
 
                 {/* Star Ratings */}
-                {/* <div className="flex justify-center space-x-4 mb-4">
+                <div className="flex justify-center space-x-4 mb-4">
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
-                </div> */}
+                </div>
 
                 {/* Next, Exit, and Retry Buttons */}
                 <div className="flex justify-center space-x-4">

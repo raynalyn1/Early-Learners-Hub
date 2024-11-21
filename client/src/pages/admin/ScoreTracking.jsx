@@ -8,59 +8,55 @@ const ScoreTracking = () => {
   const [selectedStudent, setSelectedStudent] = useState("All");
   const [selectedTournament, setSelectedTournament] = useState("All");
   const [selectedGameLevel, setSelectedGameLevel] = useState("All");
+  const [selectedDate, setSelectedDate] = useState("");
   const [scoreData, setScoreData] = useState([]);
-  const [currentDate, setCurrentDate] = useState('');
-
-  const [username, setUserName] = useState('');
+  const [username, setUserName] = useState("");
 
   // Fetch data from API
   useEffect(() => {
     const fetchScoreData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/games'); // Replace with your API endpoint
+        const response = await fetch("http://localhost:3000/games"); // Replace with your API endpoint
         const data = await response.json();
-        
-        // Map the data for tournaments and students
-        const uniqueTournaments = [...new Set(data.map(item => item.gameName))];
-        const uniqueStudents = [...new Set(data.map(item => item.playerName))];
+
+        const uniqueTournaments = [...new Set(data.map((item) => item.gameName))];
+        const uniqueStudents = [...new Set(data.map((item) => item.playerName))];
 
         setScoreData(data);
         setTournaments(uniqueTournaments);
-        setStudents(uniqueStudents.map((name, id) => ({ id, name }))); // Generate student objects
-        setGamesLevel(['Easy', 'Normal', 'Hard']); // Replace with actual levels if available
+        setStudents(uniqueStudents.map((name, id) => ({ id, name })));
+        setGamesLevel(["Easy", "Normal", "Hard"]); // Replace with actual levels if available
       } catch (error) {
-        console.error('Error fetching game data:', error);
+        console.error("Error fetching game data:", error);
       }
     };
 
     fetchScoreData();
   }, []);
 
-  // Format current date
+  // Fetch username
   useEffect(() => {
-    const name = localStorage.getItem('name');
-    const today = new Date();
-    const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
-    const formattedDate = today.toLocaleDateString("en-US", options);
-    setCurrentDate(formattedDate);
-    if (name) {
-      setUserName(name);
-    }
+    const name = localStorage.getItem("name");
+    if (name) setUserName(name);
   }, []);
 
-  const getInitials = (name) => {
-    const nameParts = name.split(" ");
-    const firstNameInitial = nameParts[0]?.charAt(0).toUpperCase();
-    const lastNameInitial = nameParts[1]?.charAt(0).toUpperCase();
-    return firstNameInitial + lastNameInitial;
+  // Helper to format date input for filtering
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const year = d.getFullYear();
+    return `${year}-${month}-${day}`;
   };
 
+  // Filter scores based on selected criteria
   const filteredScores = scoreData.filter((data) => {
-    return (
-      (selectedStudent === "All" || data.playerName === selectedStudent) &&
-      (selectedTournament === "All" || data.gameName === selectedTournament) &&
-      (selectedGameLevel === "All" || data.difficulty === selectedGameLevel)
-    );
+    const dateMatch = selectedDate ? formatDate(data.date) === selectedDate : true;
+    const studentMatch = selectedStudent === "All" || data.playerName === selectedStudent;
+    const tournamentMatch = selectedTournament === "All" || data.gameName === selectedTournament;
+    const levelMatch = selectedGameLevel === "All" || data.difficulty === selectedGameLevel;
+
+    return dateMatch && studentMatch && tournamentMatch && levelMatch;
   });
 
   const renderStars = (score) => {
@@ -77,23 +73,30 @@ const ScoreTracking = () => {
   };
 
   return (
-    <div className="p-8 bg-[#FAF3EB] h-screen overflow-auto h-[95vh]">
-      <div className="flex items-center justify-between mb-10">
-        <h2 className="text-3xl font-bold text-[#F47C21] mb-6">Score Tracking</h2>
-        <div className="text-gray-500">Wednesday, 06 November 2024</div>
-        <div className="flex items-center">
-          <div className="bg-gray-200 rounded-full h-10 w-10 flex items-center justify-center">
-            {username ? getInitials(username) : "??"}
+    <div className="p-8 bg-[#FAF3EB] h-[95vh] overflow-auto">
+      {/* Header */}
+      <div className="flex justify-between items-center bg-white shadow-lg p-4 mb-6 rounded-lg">
+        <div>
+          <h1 className="text-xl font-bold">Dashboard</h1>
+          <p className="text-sm text-gray-500">Wednesday, 06 November 2024</p>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center text-white font-bold">
+            {username ? username.slice(0, 2).toUpperCase() : "??"}
           </div>
-          <span className="ml-2">{username}</span>
+          <span className="text-gray-700 font-semibold">{username}</span>
         </div>
       </div>
 
-      <div className="flex gap-4 mb-4">
-        <div className="w-1/3">
-          <label className="font-semibold">Student Name</label>
+      <h2 className="text-3xl font-bold text-[#F47C21] mb-6">Score Tracking</h2>
+
+      {/* Filters */}
+      <div className="grid grid-cols-4 gap-4 mb-6 flex justify-center">
+        {/* Student Filter */}
+        <div>
+          <label className="block font-semibold mb-2">Student Name</label>
           <select
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-1/2 p-2 border border-gray-300 rounded"
             value={selectedStudent}
             onChange={(e) => setSelectedStudent(e.target.value)}
           >
@@ -106,10 +109,22 @@ const ScoreTracking = () => {
           </select>
         </div>
 
-        <div className="w-1/3">
-          <label className="font-semibold">Tournaments</label>
+        {/* Date Filter */}
+        <div>
+          <label className="block font-semibold mb-2">Date</label>
+          <input
+            type="date"
+            className="w-1/2 p-2 border border-gray-300 rounded"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+        </div>
+
+        {/* Game Filter */}
+        <div>
+          <label className="block font-semibold mb-2">Games</label>
           <select
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-1/2 p-2 border border-gray-300 rounded"
             value={selectedTournament}
             onChange={(e) => setSelectedTournament(e.target.value)}
           >
@@ -122,10 +137,11 @@ const ScoreTracking = () => {
           </select>
         </div>
 
-        <div className="w-1/3">
-          <label className="font-semibold">Games Level</label>
+        {/* Game Level Filter */}
+        <div>
+          <label className="block font-semibold mb-2">Games Level</label>
           <select
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-1/2 p-2 border border-gray-300 rounded"
             value={selectedGameLevel}
             onChange={(e) => setSelectedGameLevel(e.target.value)}
           >
@@ -139,36 +155,49 @@ const ScoreTracking = () => {
         </div>
       </div>
 
-      <table className="w-full bg-white border border-gray-200 rounded shadow-sm">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 text-left font-semibold text-gray-600">Student Name</th>
-            <th className="px-4 py-2 text-left font-semibold text-gray-600">Tournaments</th>
-            <th className="px-4 py-2 text-left font-semibold text-gray-600">Games Level</th>
-            <th className="px-4 py-2 text-left font-semibold text-gray-600">Score</th>
-            <th className="px-4 py-2 text-left font-semibold text-gray-600">Stars Received</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredScores.length > 0 ? (
-            filteredScores.map((data, index) => (
-              <tr key={index} className="border-t">
-                <td className="px-4 py-2">{data.playerName}</td>
-                <td className="px-4 py-2">{data.gameName}</td>
-                <td className="px-4 py-2">{data.difficulty}</td>
-                <td className="px-4 py-2">{data.score}</td>
-                <td className="px-4 py-2">{renderStars(data.score)}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5" className="px-4 py-2 text-center text-gray-500">
-                No data found
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      {/* Table */}
+      <table className="w-full bg-[] border-collapse border border-[#EADFD2] rounded-lg shadow-md">
+      <thead className="bg-[#EB9721]" style={{ filter: "brightness(1.2)" }}>
+
+    <tr>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Student Name</th>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Date</th>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games</th>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games Level</th>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Score</th>
+      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Stars Received</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredScores.length > 0 ? (
+      filteredScores.map((data, index) => (
+        <tr
+          key={index}
+          className={`${
+            index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#FBF7F0]'
+          } border-t border-[#EADFD2]`}
+        >
+          <td className="px-6 py-4 rounded-l-lg">{data.playerName}</td>
+          <td className="px-6 py-4">{formatDate(data.date)}</td>
+          <td className="px-6 py-4">{data.gameName}</td>
+          <td className="px-6 py-4">{data.difficulty}</td>
+          <td className="px-6 py-4">{data.score}</td>
+          <td className="px-6 py-4 rounded-r-lg">{renderStars(data.score)}</td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td
+          colSpan="6"
+          className="px-6 py-4 text-center text-gray-500 bg-[#FBF7F0] rounded-lg"
+        >
+          No data found
+        </td>
+      </tr>
+    )}
+  </tbody>
+</table>
+
     </div>
   );
 };
