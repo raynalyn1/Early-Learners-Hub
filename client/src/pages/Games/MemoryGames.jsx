@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 import BackgroundAudio from "../../../src/Audio/backgroundAudio.mp3";
 import progressbar from "../../components/progressbar";
-import "./MemoryGame.css"; // Import a separate CSS file for styles
-// import img from "../../images/games/arrow.png";
+import "./MemoryGame.css"; // Import separate CSS file
 import img1 from "../../images/games/load.png";
 import img2 from "../../images/games/cbl.png";
 import img3 from "../../images/games/robot.png";
@@ -18,31 +17,8 @@ import GameModal from "../general/GameModal";
 import arow from "../../images/games/arow.png";
 
 const icons = [
-  "Aa",
-  "Bb",
-  "Cc",
-  "Dd",
-  "Ee",
-  "Ff",
-  "Gg",
-  "Hh",
-  "Ii",
-  "Jj",
-  "Kk",
-  "Ll",
-  "Mm",
-  "Oo",
-  "Pp",
-  "Qr",
-  "Rr",
-  "Ss",
-  "Tt",
-  "Uu",
-  "Vv",
-  "Ww",
-  "Xx",
-  "Yy",
-  "Zz",
+  "Aa", "Bb", "Cc", "Dd", "Ee", "Ff", "Gg", "Hh", "Ii", "Jj", "Kk", "Ll", 
+  "Mm", "Oo", "Pp", "Qr", "Rr", "Ss", "Tt", "Uu", "Vv", "Ww", "Xx", "Yy", "Zz"
 ];
 
 const MemoryGame = () => {
@@ -65,21 +41,18 @@ const MemoryGame = () => {
   const [selectedLevel, setSelectedLevel] = useState(null);
 
   const [isGameActive, setIsGameActive] = useState(false);
-
-  // const [progressTimer, setprogressTimer] = useState(30);
+  const [score, setScore] = useState(0);
+  const [timeLimit, setTimeLimit] = useState(0);
+  const [gameEnded, setGameEnded] = useState(false);
 
   const audio = new Audio(BackgroundAudio);
 
   const getButtonAnimationClass = (index) => {
     switch (index) {
-      case 0: // "easy" (above)
-        return "animate-from-top";
-      case 1: // "normal" (from right)
-        return "animate-from-right";
-      case 2: // "hard" (from left)
-        return "animate-from-left";
-      default:
-        return "";
+      case 0: return "animate-from-top";
+      case 1: return "animate-from-right";
+      case 2: return "animate-from-left";
+      default: return "";
     }
   };
 
@@ -90,26 +63,41 @@ const MemoryGame = () => {
     }, 1000); // 2-second delay
     return () => clearTimeout(timer);
   }, []);
-  useEffect(() => {
-    if (timer > 0) {
-      const intervalId = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
 
-      // Cleanup the interval when the component unmounts or timer reaches 0
-      return () => clearInterval(intervalId);
+  useEffect(() => {
+    if (isGameActive && timer > 0) {
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(interval); // Clear interval when timer changes or game ends
     }
-  }, [timer]);
+    if (timer === 0 && isGameActive) endGame();
+  }, [isGameActive, timer]);
+  
 
   const startGame = (level, levelName) => {
-    setIsGameActive(true); // Game is now active
-    setSelectedLevel(levelName); // Set the selected level
+    setIsGameActive(true);
+    setSelectedLevel(levelName);
     resetGame();
     generateCards(level);
     setDifficulty(levelName);
-    setShowStats(true); // Show stats during the game
-    setShowLevelSelection(false); // Hide level selection during the game
-    console.log(`Starting game with difficulty: ${level}`);
+
+    const timeMapping = { easy: 40, normal: 30, hard: 20 };
+    setTimeLimit(timeMapping[levelName]);
+    setTimer(timeMapping[levelName]); // Start timer based on level
+    console.log("timeMapping:", timeMapping);
+    console.log("timeMapping1",timeMapping[levelName]);
+    
+  
+    setShowStats(true);
+    setShowLevelSelection(false);
+  };
+ 
+  const calculateScore = () => {
+    // Score calculation based on flips
+    const flipScore = Math.max(0, 20 - flipCount); // Higher flips reduce the score, capped at 20
+
+    const finalScore = flipScore;
+    setScore(finalScore);
+    return finalScore;
   };
 
   const endGame = () => {
@@ -117,6 +105,10 @@ const MemoryGame = () => {
     setShowStats(false); // Hide stats
     setSelectedLevel(null); // Reset selected level to show all buttons
     setShowLevelSelection(true); // Show level selection again
+    clearInterval(intervalId);
+    setGameEnded(true);
+    const finalScore = calculateScore();
+    alert(`Game Over! Your Score: ${finalScore}`);
   };
 
   const getUniqueMatchedLetters = () => {
@@ -128,7 +120,9 @@ const MemoryGame = () => {
 
     return uniqueIcons;
   };
+
   const resetGame = () => {
+    // Reset all game states to initial values
     setCards([]);
     setFlippedCards([]);
     setMatchedCards([]);
@@ -141,24 +135,26 @@ const MemoryGame = () => {
     setShowStats(false); // Hide stats when restarting
     setShowLevelSelection(true); // Show level selection screen
 
-    if (retryCount[difficulty] >= 2) {
-      alert(`You have reached the retry limit for the ${difficulty} level.`);
-      setShowLevelSelection(true); // Redirect to level selection when retries are over
+    // Reset the retry count
+    if (retryCount[difficulty] >= 3) {
+      setGameEnded(true);
+      setShowLevelSelection(true);
+      setTimeout(() => alert(`Retry limit reached for ${difficulty}.`), 500);
       return;
     }
 
+    // Increase the retry count if the game is being reset
     setRetryCount((prev) => ({
       ...prev,
       [difficulty]: prev[difficulty] + 1,
     }));
-    
   };
+
   const [retryCount, setRetryCount] = useState({
     easy: 0,
     normal: 0,
     hard: 0,
-  });   
-
+  });
 
   const exitGame = () => {};
   const nextLevel = () => {};
@@ -177,25 +173,24 @@ const MemoryGame = () => {
     }
   };
 
-  const flipCard = (index) => {
-    if (!timerStarted) {
-      setTimerStarted(true);
-      startTimer();
-    }
-
-    if (
-      flippedCards.length < 2 &&
-      !flippedCards.includes(index) &&
-      !matchedCards.includes(index)
-    ) {
-      setFlippedCards((prev) => [...prev, index]);
+  const flipCard = useCallback(
+    (index) => {
+      if (
+        flippedCards.length >= 2 ||
+        flippedCards.includes(index) ||
+        matchedCards.includes(index)
+      )
+        return;
+      setFlippedCards([...flippedCards, index]);
       setFlipCount((prev) => prev + 1);
-
+  
       if (flippedCards.length === 1) {
         setTimeout(() => checkForMatch(index), 1000);
       }
-    }
-  };
+    },
+    [flippedCards, matchedCards]
+  );
+
   const handleBackNavigation = () => {
     navigate("/GamesSection"); // Update to the actual path you want to navigate to
   };
@@ -212,8 +207,11 @@ const MemoryGame = () => {
     if (matchedCards.length + 2 === cards.length) {
       clearInterval(intervalId);
       setGameOver(true);
-      audio.play();
+      setGameEnded(true);
+
+      const finalScore = calculateScore();
       setShowConfetti(true);
+      console.log("Final Score:", finalScore);
     }
   };
 
@@ -261,7 +259,7 @@ const MemoryGame = () => {
             <img
               src={img5}
               alt="memory"
-              className="relative mt-[-1rem] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInLeft"
+              className="relative lg:mt-[6rem] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInLeft "
               style={{
                 animationDuration: "1.5s",
                 animationTimingFunction: "ease-in-out",
@@ -270,16 +268,16 @@ const MemoryGame = () => {
             />
           </div>
           <div className="">
-          <img
-            src={img6}
-            alt="match"
-            className="  ml-5 sm:ml-10 md:ml-16 lg:ml-20 z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInRight "
-            style={{
-              animationDuration: "1.5s",
-              animationTimingFunction: "ease-in-out",
-              animationFillMode: "forwards",
-            }}
-          />
+            <img
+              src={img6}
+              alt="match"
+              className=" lg:w-full   sm:ml-10 md:ml-16 lg:ml-20 z-10 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl animate-slideInRight "
+              style={{
+                animationDuration: "1.5s",
+                animationTimingFunction: "ease-in-out",
+                animationFillMode: "forwards",
+              }}
+            />
           </div>
           <div className="text-center">
             <img
@@ -297,7 +295,7 @@ const MemoryGame = () => {
               <img
                 src={img1}
                 alt="Play Button"
-                className="inline-block mr-2  w-[25%] h-[12vh]"
+                className="inline-block mr-2  w-[20%] h-[9vh]"
               />
             </button>
           </div>
@@ -314,7 +312,9 @@ const MemoryGame = () => {
               className="text-black text-xl right"
               style={{ filter: "brightness(100%)" }}
             >
-              <div>Flip: {flipCount} </div>
+              <div>Flips: {flipCount} </div>
+              {/* <div>Time Left: {timer} seconds </div> */}
+              {gameEnded && <div>Your Score: {score}</div>}
               <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
                 <div
                   className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000"
@@ -324,7 +324,16 @@ const MemoryGame = () => {
                     }%`,
                   }}
                 >
-                  Time: {timer} seconds
+                  <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
+                    <div
+                      className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000 flex justify-center items-center text-white font-bold"
+                      style={{
+                        width: `${(timer / timeLimit) * 100}%`, // Adjust the width of the bar based on time left
+                      }}
+                    >
+                      {timer} {/* Display only the timer number */}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -383,24 +392,25 @@ const MemoryGame = () => {
           )}
 
           <div className="mb-4 flex  items-center justify-center flex flex-col gap-9 md:w-[100%]">
-             {Object.keys(difficultyLevels).map((level, index) => (
-        (!selectedLevel || selectedLevel === level) && (
-          <button
-          key={level}
-          onClick={() => startGame(difficultyLevels[level], level)}
-          className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%]  ${getButtonAnimationClass(
-            index
-          )}`}
-        >
-          {level.charAt(0).toUpperCase() + level.slice(1)}
-        </button>
-        )
-      ))}
+            {Object.keys(difficultyLevels).map(
+              (level, index) =>
+                (!selectedLevel || selectedLevel === level) && (
+                  <button
+                    key={level}
+                    onClick={() => startGame(difficultyLevels[level], level)}
+                    className={`px-5 py-4 mx-2 text-[#7E4F0E] bg-[#FFCF8C] rounded-full hover:bg-[#FFCF8C]-600 transition-transform transform hover:scale-110 text-2xl w-[40%] ${getButtonAnimationClass(
+                      index
+                    )}`}
+                  >
+                    {level.charAt(0).toUpperCase() + level.slice(1)}
+                  </button>
+                )
+            )}
           </div>
           <div className={`grid ${gridCols} gap-4`}>
             {cards.map((icon, index) => (
               <div
-                key={index} 
+                key={index}
                 className={`w-60 h-60 flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
                 ${
                   flippedCards.includes(index) || matchedCards.includes(index)
@@ -455,12 +465,12 @@ const MemoryGame = () => {
                   </div>
                 </div>
 
-                {/* Star Ratings */}
+{/*           
                 <div className="flex justify-center space-x-4 mb-4">
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
-                </div>
+                </div> */}
 
                 {/* Next, Exit, and Retry Buttons */}
                 <div className="flex justify-center space-x-4">
