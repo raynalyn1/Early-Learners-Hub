@@ -29,7 +29,7 @@ const Navbar = () => {
           </div>
 
         
-          <div className="flex items-center space-x-4 gap-4 sm:gap-6 md:gap-9">
+          <div className="flex items-center space-x-22 gap-6 sm:gap-4 md:gap-9">
   {/* Games Button */}
   <Link to="/GamesSection" className="hidden sm:flex items-center space-x-2 text-black hover:text-gray-700 transition duration-300 ">
     <span className="flex items-center border border-[#F6A619] text-black px-3 sm:px-4 py-2 rounded-lg">
@@ -47,7 +47,7 @@ const Navbar = () => {
   </Link>
 
   {/* Sign In Button */}
-  <Link to="/login" className="text-sm sm:text-base px-3 sm:px-4 py-2 rounded-md bg-[#F6A619] text-black hover:bg-[#e09316] transition duration-300">
+  <Link to="/login" className="text-sm sm:text-base px-3 sm:px-9 py-2 rounded-md bg-[#F6A619] text-black hover:bg-[#e09316] transition duration-300">
     SIGN IN
   </Link>
 
