@@ -41,17 +41,17 @@ const ScoreTracking = () => {
   }, []);
 
   // Helper to format date input for filtering
-  const formatDate = (date) => {
-    const d = new Date(date);
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    const year = d.getFullYear();
-    return `${year}-${month}-${day}`;
-  };
+  // const formatDate = (date) => {
+  //   const d = new Date(date);
+  //   const month = String(d.getMonth() + 1).padStart(2, "0");
+  //   const day = String(d.getDate()).padStart(2, "0");
+  //   const year = d.getFullYear();
+  //   return `${year}-${month}-${day}`;
+  // };
 
   // Filter scores based on selected criteria
   const filteredScores = scoreData.filter((data) => {
-    const dateMatch = selectedDate ? formatDate(data.date) === selectedDate : true;
+    const dateMatch = selectedDate ? data.playDate === selectedDate : true;
     const studentMatch = selectedStudent === "All" || data.playerName === selectedStudent;
     const tournamentMatch = selectedTournament === "All" || data.gameName === selectedTournament;
     const levelMatch = selectedGameLevel === "All" || data.difficulty === selectedGameLevel;
@@ -73,7 +73,7 @@ const ScoreTracking = () => {
   };
 
   return (
-    <div className="p-8 bg-[#FAF3EB] h-[95vh] overflow-auto">
+    <div className="p-8 bg-[#FAF3EB] h-[92vh] overflow-auto">
       {/* Header */}
       <div className="flex justify-between items-center bg-white shadow-lg p-4 mb-6 rounded-lg">
         <div>
@@ -91,7 +91,7 @@ const ScoreTracking = () => {
       <h2 className="text-3xl font-bold text-[#F47C21] mb-6">Score Tracking</h2>
 
       {/* Filters */}
-      <div className="grid grid-cols-4 gap-4 mb-6 flex justify-center">
+      <div className="grid grid-cols-4 gap-4 mb-6 justify-center">
         {/* Student Filter */}
         <div>
           <label className="block font-semibold mb-2">Student Name</label>
@@ -155,49 +155,49 @@ const ScoreTracking = () => {
         </div>
       </div>
 
-      {/* Table */}
+      {/* Updated Table */}
       <table className="w-full bg-[] border-collapse border border-[#EADFD2] rounded-lg shadow-md">
-      <thead className="bg-[#EB9721]" style={{ filter: "brightness(1.2)" }}>
-
-    <tr>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Student Name</th>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Date</th>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games</th>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games Level</th>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Score</th>
-      <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Stars Received</th>
-    </tr>
-  </thead>
-  <tbody>
-    {filteredScores.length > 0 ? (
-      filteredScores.map((data, index) => (
-        <tr
-          key={index}
-          className={`${
-            index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#FBF7F0]'
-          } border-t border-[#EADFD2]`}
-        >
-          <td className="px-6 py-4 rounded-l-lg">{data.playerName}</td>
-          <td className="px-6 py-4">{formatDate(data.date)}</td>
-          <td className="px-6 py-4">{data.gameName}</td>
-          <td className="px-6 py-4">{data.difficulty}</td>
-          <td className="px-6 py-4">{data.score}</td>
-          <td className="px-6 py-4 rounded-r-lg">{renderStars(data.score)}</td>
-        </tr>
-      ))
-    ) : (
-      <tr>
-        <td
-          colSpan="6"
-          className="px-6 py-4 text-center text-gray-500 bg-[#FBF7F0] rounded-lg"
-        >
-          No data found
-        </td>
-      </tr>
-    )}
-  </tbody>
-</table>
-
+        <thead className="bg-[#EB9721]" style={{ filter: "brightness(1.2)" }}>
+          <tr>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Student Name</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Date</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games Level</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Score</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Missed</th>
+            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Stars Received</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredScores.length > 0 ? (
+            filteredScores.map((data, index) => (
+              <tr
+                key={index}
+                className={`${
+                  index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#FBF7F0]'
+                } border-t border-[#EADFD2]`}
+              >
+                <td className="px-6 py-4 rounded-l-lg truncate">{data.playerName}</td>
+                <td className="px-6 py-4 truncate">{data.playDate}</td>
+                <td className="px-6 py-4 truncate">{data.gameName}</td>
+                <td className="px-6 py-4 truncate">{data.difficulty}</td> 
+                <td className="px-6 py-4 truncate">{data.score}</td>
+                <td className="px-6 py-4 truncate">{data.missedScore || 0}</td>
+                <td className="px-6 py-4 rounded-r-lg truncate">{renderStars(data.score)}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan="7" // Updated colspan to match new column count
+                className="px-6 py-4 text-center text-gray-500 bg-[#FBF7F0] rounded-lg"
+              >
+                No data found
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

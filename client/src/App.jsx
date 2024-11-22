@@ -79,9 +79,9 @@ const AppRoutes = () => {
       <Route path="/admin/upload" element={<AdminLayout><UploadVideos /></AdminLayout>} />
 
       {/* Game Pages */}
-      <Route path="/MemoryGames" element={<GeneralLayout><MemoryGame /></GeneralLayout>} />
-      <Route path="/MathGames" element={<GeneralLayout><MathGame /></GeneralLayout>} />
-      <Route path="/WordGames" element={<GeneralLayout><WordMatch /></GeneralLayout>} />
+      <Route path="/MemoryGames" element={<MemoryGame />} />
+      <Route path="/MathGames" element={<MathGame />} />
+      <Route path="/WordGames" element={<WordMatch />} />
       <Route path="/AnimalGames" element={<AnimalGame />} />
     </Routes>
   );
