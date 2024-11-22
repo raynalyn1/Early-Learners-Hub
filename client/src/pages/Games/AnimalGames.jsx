@@ -74,7 +74,7 @@ const AnimalGame = () => {
   const [guess, setGuess] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
-  const [failedQuestions, setFailedQuestions] = useState(0);
+  const [failedQuestions,  setFailedQuestions] = useState(0);
   const [showCorrectModal, setShowCorrectModal] = useState(false);
   const [showIncorrectModal, setShowIncorrectModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
