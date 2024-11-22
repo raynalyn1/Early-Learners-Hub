@@ -210,9 +210,40 @@ const AnimalGame = () => {
     }, 5000);
   };
 
+  const postGameResults = async () => {
+    try {
+      const missedScore = failedQuestions || 0; // Use 0 if no missed answers
+
+      const gameData = {
+        playerName: playerName,
+        gameName: gameName,
+        difficulty: difficulty.charAt(0).toUpperCase() + difficulty.slice(1),
+        score: score.toString(),
+        missedScore: missedScore // Add missed score to the request
+      };
+
+      const response = await fetch('http://localhost:3000/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post game results');
+      }
+
+      console.log('Game results posted successfully:', gameData);
+    } catch (error) {
+      console.error('Error posting game results:', error);
+    }
+  };
+
   const endGame = () => {
     setIsGameActive(false);
     handleGameEnd();
+    postGameResults();
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
   };
@@ -414,8 +445,6 @@ const AnimalGame = () => {
               <div className="modal-content bg-white p-8 rounded-2xl shadow-xl text-center">
                 <h2 className="text-4xl font-bold text-purple-600 mb-6">
                   Game Over! 🏆
-                  {playerName}
-                  {gameName}
                 </h2>
                 <div className="space-y-4 mb-6">
                   <p className="text-2xl">

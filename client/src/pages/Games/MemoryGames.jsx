@@ -71,6 +71,7 @@ const MemoryGame = () => {
     }
     if (timer === 0 && isGameActive) endGame();
   }, [isGameActive, timer]);
+ 
   
 
   const startGame = (level, levelName) => {
@@ -108,7 +109,7 @@ const MemoryGame = () => {
     clearInterval(intervalId);
     setGameEnded(true);
     const finalScore = calculateScore();
-    alert(`Game Over! Your Score: ${finalScore}`);
+    alert(` ${finalScore}`);
   };
 
   const getUniqueMatchedLetters = () => {
