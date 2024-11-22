@@ -17,6 +17,9 @@ export class Game {
   @Column('float')
   score: number;
 
+  @Column('int')
+  missedScore: number;
+
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   playDate: Date;
 }
