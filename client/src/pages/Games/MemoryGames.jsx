@@ -3,6 +3,8 @@ import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 import BackgroundAudio from "../../../src/Audio/backgroundAudio.mp3";
 import progressbar from "../../components/progressbar";
+import ArrowBackModal from "../../components/ArrowBackModal";
+import RetryLimitModal from "../../components/RetryLimitModal";
 import "./MemoryGame.css"; // Import separate CSS file
 import img1 from "../../images/games/load.png";
 import img2 from "../../images/games/cbl.png";
@@ -17,8 +19,31 @@ import GameModal from "../general/GameModal";
 import arow from "../../images/games/arow.png";
 
 const icons = [
-  "Aa", "Bb", "Cc", "Dd", "Ee", "Ff", "Gg", "Hh", "Ii", "Jj", "Kk", "Ll", 
-  "Mm", "Oo", "Pp", "Qr", "Rr", "Ss", "Tt", "Uu", "Vv", "Ww", "Xx", "Yy", "Zz"
+  "Aa",
+  "Bb",
+  "Cc",
+  "Dd",
+  "Ee",
+  "Ff",
+  "Gg",
+  "Hh",
+  "Ii",
+  "Jj",
+  "Kk",
+  "Ll",
+  "Mm",
+  "Oo",
+  "Pp",
+  "Qr",
+  "Rr",
+  "Ss",
+  "Tt",
+  "Uu",
+  "Vv",
+  "Ww",
+  "Xx",
+  "Yy",
+  "Zz",
 ];
 
 const MemoryGame = () => {
@@ -44,35 +69,38 @@ const MemoryGame = () => {
   const [score, setScore] = useState(0);
   const [timeLimit, setTimeLimit] = useState(0);
   const [gameEnded, setGameEnded] = useState(false);
+  
 
   const audio = new Audio(BackgroundAudio);
 
   const getButtonAnimationClass = (index) => {
     switch (index) {
-      case 0: return "animate-from-top";
-      case 1: return "animate-from-right";
-      case 2: return "animate-from-left";
-      default: return "";
+      case 0:
+        return "animate-from-top";
+      case 1:
+        return "animate-from-right";
+      case 2:
+        return "animate-from-left";
+      default:
+        return "";
     }
   };
 
   // Simulate loading before showing the play button
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsLoading(false); // After loading, hide the loading screen
-    }, 1000); // 2-second delay
+      setIsLoading(false);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (isGameActive && timer > 0) {
+    if (flipCount && timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval); // Clear interval when timer changes or game ends
     }
-    if (timer === 0 && isGameActive) endGame();
-  }, [isGameActive, timer]);
- 
-  
+    if (timer === 0 && flipCount) endGame();
+  }, [flipCount, timer]); 
 
   const startGame = (level, levelName) => {
     setIsGameActive(true);
@@ -85,16 +113,17 @@ const MemoryGame = () => {
     setTimeLimit(timeMapping[levelName]);
     setTimer(timeMapping[levelName]); // Start timer based on level
     console.log("timeMapping:", timeMapping);
-    console.log("timeMapping1",timeMapping[levelName]);
-    
-  
+    console.log("timeMapping1", timeMapping[levelName]);
+
     setShowStats(true);
     setShowLevelSelection(false);
   };
- 
+
+  
+
   const calculateScore = () => {
     // Score calculation based on flips
-    const flipScore = Math.max(0, 20 - flipCount); // Higher flips reduce the score, capped at 20
+    const flipScore = Math.max(0, 30 - flipCount); // Higher flips reduce the score, capped at 20
 
     const finalScore = flipScore;
     setScore(finalScore);
@@ -108,8 +137,8 @@ const MemoryGame = () => {
     setShowLevelSelection(true); // Show level selection again
     clearInterval(intervalId);
     setGameEnded(true);
-    const finalScore = calculateScore();
-    alert(` ${finalScore}`);
+    // const finalScore = calculateScore();
+    // alert(`Game Over! Your Score: ${finalScore}`);
   };
 
   const getUniqueMatchedLetters = () => {
@@ -137,7 +166,7 @@ const MemoryGame = () => {
     setShowLevelSelection(true); // Show level selection screen
 
     // Reset the retry count
-    if (retryCount[difficulty] >= 3) {
+    if (retryCount[difficulty] <3) {
       setGameEnded(true);
       setShowLevelSelection(true);
       setTimeout(() => alert(`Retry limit reached for ${difficulty}.`), 500);
@@ -171,7 +200,7 @@ const MemoryGame = () => {
       setGridCols("grid-cols-5");
     } else if (level === 12) {
       setGridCols("grid-cols-6");
-    }
+    } 
   };
 
   const flipCard = useCallback(
@@ -184,7 +213,7 @@ const MemoryGame = () => {
         return;
       setFlippedCards([...flippedCards, index]);
       setFlipCount((prev) => prev + 1);
-  
+
       if (flippedCards.length === 1) {
         setTimeout(() => checkForMatch(index), 1000);
       }
@@ -193,7 +222,11 @@ const MemoryGame = () => {
   );
 
   const handleBackNavigation = () => {
-    navigate("/GamesSection"); // Update to the actual path you want to navigate to
+    if (
+      window.confirm("Are you sure you want to exit? Progress will be lost.")
+    ) {
+      navigate("/GamesSection");
+    }
   };
   const checkForMatch = (secondIndex) => {
     const firstIndex = flippedCards[0];
@@ -279,7 +312,7 @@ const MemoryGame = () => {
                 animationFillMode: "forwards",
               }}
             />
-          </div>
+          </div>    
           <div className="text-center">
             <img
               src={img7}
@@ -313,10 +346,9 @@ const MemoryGame = () => {
               className="text-black text-xl right"
               style={{ filter: "brightness(100%)" }}
             >
-              <div>Flips: {flipCount} </div>
               {/* <div>Time Left: {timer} seconds </div> */}
-              {gameEnded && <div>Your Score: {score}</div>}
-              <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
+
+              <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6 w-[100%] flex- justify-center" >
                 <div
                   className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000"
                   style={{
@@ -327,7 +359,7 @@ const MemoryGame = () => {
                 >
                   <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
                     <div
-                      className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000 flex justify-center items-center text-white font-bold"
+                      className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000 flex justify-center items-center text-white font-bold border border-[#EB9721]"
                       style={{
                         width: `${(timer / timeLimit) * 100}%`, // Adjust the width of the bar based on time left
                       }}
@@ -339,12 +371,15 @@ const MemoryGame = () => {
               </div>
             </div>
           )}
+        
           <img
             src={arow}
             alt="arrowback"
             onClick={handleBackNavigation}
             className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
+           
           />
+
           <img
             src={img3}
             alt="Robot"
@@ -459,6 +494,13 @@ const MemoryGame = () => {
                   <p className="text-[#5C4A30] mb-3">
                     Successfully Matched Letters
                   </p>
+                  <br />
+                  <div className="flipCount">Flips: {flipCount}</div>
+                  {gameEnded && (
+                    <div className="score"> Score: {score}</div>
+                  )}
+
+                  <br />
                   <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
                     {getUniqueMatchedLetters().map((icon, index) => (
                       <span key={index}>{icon}</span>
@@ -466,7 +508,7 @@ const MemoryGame = () => {
                   </div>
                 </div>
 
-{/*           
+                {/*           
                 <div className="flex justify-center space-x-4 mb-4">
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
                   <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
