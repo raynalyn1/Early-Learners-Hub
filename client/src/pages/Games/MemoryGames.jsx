@@ -58,7 +58,7 @@ const MemoryGame = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [timerStarted, setTimerStarted] = useState(false);
   const [gridCols, setGridCols] = useState("grid-cols-2");
-  const [difficulty, setDifficulty] = useState("");
+  const [difficulty, setDifficulty] = useState("easy");
   const [showStats, setShowStats] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,6 +69,13 @@ const MemoryGame = () => {
   const [score, setScore] = useState(0);
   const [timeLimit, setTimeLimit] = useState(0);
   const [gameEnded, setGameEnded] = useState(false);
+  const [missionStatus, setMissionStatus] = useState("Ongoing"); // Initial mission status
+  const [timeLeft, setTimeLeft] = useState(40); // Example initial time
+
+ 
+ 
+
+
   
 
   const audio = new Audio(BackgroundAudio);
@@ -86,6 +93,14 @@ const MemoryGame = () => {
     }
   };
 
+  useEffect(() => {
+    if (timeLeft > 0) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0) {
+      handleTimeUp(); // Show modal immediately
+    }
+  }, [timeLeft]);
   // Simulate loading before showing the play button
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -101,6 +116,41 @@ const MemoryGame = () => {
     }
     if (timer === 0 && flipCount) endGame();
   }, [flipCount, timer]); 
+
+  useEffect(() => {
+    const gameFinishedSuccessfully = true; // Replace with actual game logic
+    if (gameFinishedSuccessfully) {
+      onGameComplete();
+    } else {
+      onTimerEnd();
+    }
+  }, []); // Add dependencies to monitor actual game state or timer
+
+  useEffect(() => {
+    setTimeLeft(getInitialTime(difficulty));
+  }, [difficulty]);
+
+
+
+  const getInitialTime = (level) => {
+    switch (level) {
+      case "easy":
+        return 40;
+      case "normal":
+        return 30;
+      case "hard":
+        return 20;
+      default:
+        return 40;
+    }
+  };
+
+
+  const handleTimeUp = () => {
+    setGameOver(true); // Immediately show modal
+    setMissionStatus("Failed"); // Set mission status to failed
+    setShowConfetti(false); // Disable confetti
+  };
 
   const startGame = (level, levelName) => {
     setIsGameActive(true);
@@ -119,7 +169,21 @@ const MemoryGame = () => {
     setShowLevelSelection(false);
   };
 
-  
+  const handleGameOver = (isSuccess) => {
+    if (isSuccess) {
+      setMissionStatus("Success");
+    } else {
+      setMissionStatus("Failed");
+    }
+  };
+
+  const onTimerEnd = () => {
+    handleGameOver(false); // Mission failed if timer runs out
+  };
+
+  const onGameComplete = () => {
+    handleGameOver(true); // Mission successful if game completed
+  };
 
   const calculateScore = () => {
     // Score calculation based on flips
@@ -150,9 +214,16 @@ const MemoryGame = () => {
 
     return uniqueIcons;
   };
+  
+  
 
-  const resetGame = () => {
+
+  const resetGame = (newDifficulty) => {
     // Reset all game states to initial values
+    setDifficulty(newDifficulty);
+    setTimeLeft(60); // Reset timer
+    setMissionStatus("Ongoing");
+    setGameOver(false);
     setCards([]);
     setFlippedCards([]);
     setMatchedCards([]);
@@ -186,8 +257,7 @@ const MemoryGame = () => {
     hard: 0,
   });
 
-  const exitGame = () => {};
-  const nextLevel = () => {};
+
   const generateCards = (level) => {
     const iconPool = icons.slice(0, level / 2);
     const cardIcons = [...iconPool, ...iconPool];
@@ -475,71 +545,64 @@ const MemoryGame = () => {
           </div>
 
           {gameOver && (
-            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-              <div className="bg-[#EBCEA8] p-8 rounded-[20px] shadow-lg text-center relative z-50 w-80">
-                {/* Level Badge */}
-                <div className="text-sm font-bold bg-[#DFC3A2] text-[#5C4A30] py-2 px-4 rounded-full mb-4 w-fit mx-auto">
-                  LEVEL:{" "}
-                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
-                </div>
-
-                {/* Message */}
-                <h2 className="text-2xl font-bold text-[#5C4A30] italic mb-4">
-                  That was <span className="text-[#A56922]">Awesome!</span>
-                </h2>
-
-                {/* Mission Box */}
-                <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
-                  <p className="text-[#5C4A30] font-semibold">Mission:</p>
-                  <p className="text-[#5C4A30] mb-3">
-                    Successfully Matched Letters
-                  </p>
-                  <br />
-                  <div className="flipCount">Flips: {flipCount}</div>
-                  {gameEnded && (
-                    <div className="score"> Score: {score}</div>
-                  )}
-
-                  <br />
-                  <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
-                    {getUniqueMatchedLetters().map((icon, index) => (
-                      <span key={index}>{icon}</span>
-                    ))}
-                  </div>
-                </div>
-
-                {/*           
-                <div className="flex justify-center space-x-4 mb-4">
-                  <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
-                  <img src="star-filled.png" alt="Star" className="w-8 h-8" />{" "}
-                  <img src="star-outline.png" alt="Star" className="w-8 h-8" />{" "}
-                </div> */}
-
-                {/* Next, Exit, and Retry Buttons */}
-                <div className="flex justify-center space-x-4">
-                  <button
-                    onClick={handleBackNavigation}
-                    className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
-                  >
-                    Exit
-                  </button>
-                  <button
-                    onClick={resetGame}
-                    className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
-                  >
-                    Retry
-                  </button>
-                </div>
-                {/* <button
-                  onClick={() => nextLevel()}
-                  className="px-10 py-2 mt-4 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-2xl"
-                >
-                  Next
-                </button> */}
-              </div>
-              {showConfetti && <Confetti className="fixed inset-0 z-40" />}
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+          <div className="bg-[#EBCEA8] p-8 rounded-[20px] shadow-lg text-center relative z-50 w-80">
+            {/* Level Badge */}
+            <div className="text-sm font-bold bg-[#DFC3A2] text-[#5C4A30] py-2 px-4 rounded-full mb-4 w-fit mx-auto">
+              LEVEL:{" "}
+              {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
             </div>
-          )}
+
+            {/* Message */}
+            <h2 className="text-2xl font-bold text-[#5C4A30] italic mb-4">
+              {missionStatus === "Failed" ? "Oh no!" : "That was"}{" "}
+              <span className="text-[#A56922]">
+                {missionStatus === "Failed" ? "Better Luck Next Time!" : "Awesome!"}
+              </span>
+            </h2>
+
+            {/* Mission Box */}
+            <div className="bg-[#F3E2C5] border border-[#A56922] rounded-md p-4 mb-4">
+              <p className="text-[#5C4A30] font-semibold">Mission:</p>
+              <p
+                className={`text-[#5C4A30] mb-3 ${
+                  missionStatus === "Failed" ? "text-red-500" : "text-[#AC854D]"
+                }`}
+              >
+                {missionStatus === "Failed"
+                  ? "Mission Failed!"
+                  : "Successfully Matched Letters"}
+              </p>
+              <br />
+              <div className="flipCount">Flips: {flipCount}</div>
+              {gameEnded && <div className="score"> Score: {score}</div>}
+              <br />
+              <div className="flex justify-around text-[#5C4A30] font-bold text-xl">
+                {getUniqueMatchedLetters().map((icon, index) => (
+                  <span key={index}>{icon}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Next, Exit, and Retry Buttons */}
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleBackNavigation}
+                className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
+              >
+                Exit
+              </button>
+              <button
+                onClick={resetGame}
+                className="px-6 py-2 text-white bg-[#F2B053] rounded-full hover:bg-[#E1A443] shadow-lg"
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+          {showConfetti && <Confetti className="fixed inset-0 z-40" />}
+        </div>
+      )}
         </div>
       )}
     </div>
