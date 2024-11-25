@@ -83,7 +83,7 @@ const LandingPage = () => {
           </div>
 
           {/* Mission, Vision, Values Section with shadow */}
-          <div className="flex flex-wrap justify-around mt-10">
+          <div className="flex flex-wrap justify-around mt-10 mb-9">
             {[{ img: img10, title: "Our Mission", description: "To create a safe, engaging, and enjoyable learning platform that supports early childhood education, providing interactive content that helps kids learn and grow." },
               { img: img17, title: "Our Vision", description: "To inspire a love of learning in kindergarten kids through fun, interactive, and educational activities." },
               { img: img18, title: "Our Values", description: "Our values prioritize fun, basic skills, creativity, safety, and inclusion collaborating with teachers, parents, and experts to create a secure, kid-friendly platform." }].map((pillar, idx) => (
@@ -103,7 +103,7 @@ const LandingPage = () => {
               ))}
           </div>
           {/* Additional Section */}
-     <div className="w-full h-[20vh] flex gap-9 justify-center items-center mt-5">
+     <div className="w-full h-[20vh] flex gap-9 justify-center items-center mt-[5rem]">
       <h2 className="w-[50vw] text-[1.3rem] text-center">
       Choose EarlyLearners Hub for an engaging, supportive, and effective learning journey that empowers your child to succeed!
     </h2>

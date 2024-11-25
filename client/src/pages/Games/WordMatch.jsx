@@ -71,6 +71,14 @@ const WordMatch = () => {
   const isGameActive = gameStarted;
   const showCorrectModal = modalVisible;
 
+
+  useEffect(() => {
+    const name = localStorage.getItem("playerName");
+    const game = localStorage.getItem("selectedGame");
+    setPlayerName(name);
+    setGameName(game);
+  }, []);
+
   useEffect(() => {
     // Simulate loading delay (e.g., API call)
     const loadingTimeout = setTimeout(() => {

@@ -1,5 +1,6 @@
+// src/App.js
 import React, { Suspense, lazy, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import AdminLayout from './layouts/AdminLayout';
 import GeneralLayout from './layouts/GeneralLayout';
@@ -14,6 +15,8 @@ import User from './pages/admin/User';
 import ScoreTracking from './pages/admin/ScoreTracking';
 import UploadVideos from './pages/admin/UploadVideos';
 import AnimalGame from './pages/Games/AnimalGames';
+import PrivateRoute from "./components/PrivateRoute"; // Import the private route component
+import FAQs from './pages/general/FAQs';
 
 // Lazy load the pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
@@ -70,13 +73,14 @@ const AppRoutes = () => {
       <Route path="/services" element={<GeneralLayout><Services /></GeneralLayout>} />
       <Route path="/VideoSection" element={<GeneralLayout><GameSection /></GeneralLayout>} />
       <Route path="/GamesSection" element={<GeneralLayout><GameSect /></GeneralLayout>} />
+      <Route path="/Faqs" element={<GeneralLayout><FAQs /></GeneralLayout>}/>
 
-      {/* Admin Pages */}
+      {/* Admin Pages - Protected Routes */}
       <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
-      <Route path="/admin/dashboard" element={<AdminLayout><Dashboard /></AdminLayout>} />
-      <Route path="/admin/user" element={<AdminLayout><User /></AdminLayout>} />
-      <Route path="/admin/tracking" element={<AdminLayout><ScoreTracking /></AdminLayout>} />
-      <Route path="/admin/upload" element={<AdminLayout><UploadVideos /></AdminLayout>} />
+      <Route path="/admin/dashboard" element={<PrivateRoute><AdminLayout><Dashboard /></AdminLayout></PrivateRoute>} />
+      <Route path="/admin/user" element={<PrivateRoute><AdminLayout><User /></AdminLayout></PrivateRoute>} />
+      <Route path="/admin/tracking" element={<PrivateRoute><AdminLayout><ScoreTracking /></AdminLayout></PrivateRoute>} />
+      <Route path="/admin/upload" element={<PrivateRoute><AdminLayout><UploadVideos /></AdminLayout></PrivateRoute>} />
 
       {/* Game Pages */}
       <Route path="/MemoryGames" element={<MemoryGame />} />

@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt'
 import * as crypto from 'crypto'
 import { access } from 'fs';
 import { use } from 'passport';
+import { User } from '../entities/user.entity'
 
 @Injectable()
 export class AuthService {
@@ -34,5 +35,9 @@ export class AuthService {
             name: user.name,
             email: user.email,
         };
+    }
+
+    async getAllUsers(): Promise<Pick<User, 'name' | 'email'>[]> {
+        return this.usersService.getAllUsers();
     }
 }
