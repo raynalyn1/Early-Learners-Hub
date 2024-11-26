@@ -14,7 +14,7 @@ import lets from "../../images/lets.png";
 
 const LandingPage = () => {
   return (
-    <div style={{ fontFamily: 'Poppins' }}>
+    <div style={{ fontFamily: "Poppins" }}>
       {/* Main Container */}
       <div className="bg-[#EB9721] w-full px-5 sm:px-5 relative">
         {/* Tagline Section with shadow */}
@@ -90,7 +90,9 @@ const LandingPage = () => {
           </div>
 
           {/* Mission, Vision, Values Section with shadow */}
-          <div className="flex flex-wrap justify-around mt-10">
+
+          <div className="flex flex-wrap justify-center gap-6 mt-10">
+
             {[
               {
                 img: img10,
@@ -113,21 +115,22 @@ const LandingPage = () => {
             ].map((pillar, idx) => (
               <div
                 key={idx}
-                className="text-center mb-10 lg:mb-0 p-4 lg:p-6 rounded-lg w-full sm:w-[45%] lg:w-[20%] h-auto lg:h-[38vh] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg"
-                style={{ border: "2px solid #EB9721 " }}
+                className="text-center p-4 md:p-6 rounded-lg w-[90%] sm:w-[45%] lg:w-[30%] bg-white bg-opacity-60 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg"
+                style={{ border: "2px solid #EB9721" }}
               >
                 <img
                   src={pillar.img}
                   alt={pillar.title}
-                  className="mx-auto mb-4 lg:mb-6 w-[20%] lg:w-[30%]"
+                  className="mx-auto mb-4 lg:mb-6 w-[30%] sm:w-[25%] lg:w-[20%]"
                 />
-                <h3 className="text-md lg:text-lg font-semibold mb-2 lg:mb-4">
+                <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-4">
                   {pillar.title}
                 </h3>
-                <p className="text-sm lg:text-base">{pillar.description}</p>
+                <p className="text-sm md:text-base">{pillar.description}</p>
               </div>
             ))}
           </div>
+
           {/* Additional Section */}
           <div className="w-full h-[20vh] flex gap-9 justify-center items-center mt-5">
             <h2 className="w-[50vw] text-[1.3rem] text-center">
@@ -136,6 +139,7 @@ const LandingPage = () => {
             </h2>
             <img src={lets} alt="run" className="w-[10%] object-center" />
           </div>
+
         </div>
       </div>
 

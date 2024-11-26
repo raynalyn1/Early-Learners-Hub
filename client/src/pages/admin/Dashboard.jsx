@@ -27,7 +27,11 @@ function Dashboard() {
   };
 
   return (
+<<<<<<< HEAD
+    <div className="overflow-auto h-[93vh] bg-red-300">
+=======
     <div className="h-[90vh] bg-white-300">
+>>>>>>> cb44032a13d5fe8171ec5759395d24f33bf09a7d
       {/* Header */}
       <div className="flex flex-col md:flex-row items-center justify-between bg-white p-3 shadow-m rounded-md mb-6 border border-[#E9AF5E]">
         <div>

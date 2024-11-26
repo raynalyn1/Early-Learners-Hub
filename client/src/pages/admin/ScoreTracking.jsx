@@ -40,15 +40,6 @@ const ScoreTracking = () => {
     if (name) setUserName(name);
   }, []);
 
-  // Helper to format date input for filtering
-  // const formatDate = (date) => {
-  //   const d = new Date(date);
-  //   const month = String(d.getMonth() + 1).padStart(2, "0");
-  //   const day = String(d.getDate()).padStart(2, "0");
-  //   const year = d.getFullYear();
-  //   return `${year}-${month}-${day}`;
-  // };
-
   // Filter scores based on selected criteria
   const filteredScores = scoreData.filter((data) => {
     const dateMatch = selectedDate ? data.playDate === selectedDate : true;
@@ -64,30 +55,14 @@ const ScoreTracking = () => {
     return (
       <span>
         {Array.from({ length: 5 }, (_, index) => (
-          <span key={index} className={index < stars ? "text-yellow-500" : "text-gray-300"}>
-            ★
-          </span>
+          <span key={index} className={index < stars ? "text-yellow-500" : "text-gray-300"}>★</span>
         ))}
       </span>
     );
   };
 
   return (
-    <div className="p-8 bg-[#FAF3EB] h-[92vh] overflow-auto">
-      {/* Header */}
-      <div className="flex justify-between items-center bg-white shadow-lg p-4 mb-6 rounded-lg">
-        <div>
-          <h1 className="text-xl font-bold">Dashboard</h1>
-          <p className="text-sm text-gray-500">Wednesday, 06 November 2024</p>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center text-white font-bold">
-            {username ? username.slice(0, 2).toUpperCase() : "??"}
-          </div>
-          <span className="text-gray-700 font-semibold">{username}</span>
-        </div>
-      </div>
-
+    <div className="p-8 bg-[#FAF3EB] h-[92vh]">
       <h2 className="text-3xl font-bold text-[#F47C21] mb-6">Score Tracking</h2>
 
       {/* Filters */}
@@ -155,49 +130,51 @@ const ScoreTracking = () => {
         </div>
       </div>
 
-      {/* Updated Table */}
-      <table className="w-full bg-[] border-collapse border border-[#EADFD2] rounded-lg shadow-md">
-        <thead className="bg-[#EB9721]" style={{ filter: "brightness(1.2)" }}>
-          <tr>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Student Name</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Date</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games Level</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Score</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Missed</th>
-            <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Stars Received</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredScores.length > 0 ? (
-            filteredScores.map((data, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#FBF7F0]'
-                } border-t border-[#EADFD2]`}
-              >
-                <td className="px-6 py-4 rounded-l-lg truncate">{data.playerName}</td>
-                <td className="px-6 py-4 truncate">{data.playDate}</td>
-                <td className="px-6 py-4 truncate">{data.gameName}</td>
-                <td className="px-6 py-4 truncate">{data.difficulty}</td> 
-                <td className="px-6 py-4 truncate">{data.score}</td>
-                <td className="px-6 py-4 truncate">{data.missedScore || 0}</td>
-                <td className="px-6 py-4 rounded-r-lg truncate">{renderStars(data.score)}</td>
-              </tr>
-            ))
-          ) : (
+      {/* Updated Table with Sticky Header */}
+      <div className="overflow-auto" style={{ height: '55vh' }}>
+        <table className="w-full border-collapse border border-[#EADFD2] rounded-lg shadow-md">
+          <thead className="bg-[#EB9721] sticky top-0" style={{ filter: "brightness(1.2)" }}>
             <tr>
-              <td
-                colSpan="7" // Updated colspan to match new column count
-                className="px-6 py-4 text-center text-gray-500 bg-[#FBF7F0] rounded-lg"
-              >
-                No data found
-              </td>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Student Name</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Date</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Games Level</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Score</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Missed</th>
+              <th className="px-6 py-3 text-left font-semibold text-black-600 border-b border-[#EADFD2]">Stars Received</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredScores.length > 0 ? (
+              filteredScores.map((data, index) => (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#FBF7F0]'
+                  } border-t border-[#db8e30]`}
+                >
+                  <td className="px-6 py-4 rounded-l-lg truncate">{data.playerName}</td>
+                  <td className="px-6 py-4 truncate">{data.playDate}</td>
+                  <td className="px-6 py-4 truncate">{data.gameName}</td>
+                  <td className="px-6 py-4 truncate">{data.difficulty}</td> 
+                  <td className="px-6 py-4 truncate">{data.score}</td>
+                  <td className="px-6 py-4 truncate">{data.missedScore || 0}</td>
+                  <td className="px-6 py-4 rounded-r-lg truncate">{renderStars(data.score)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="7" // Updated colspan to match new column count
+                  className="px-6 py-4 text-center text-gray-500 bg-[#FBF7F0] rounded-lg"
+                >
+                  No data found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

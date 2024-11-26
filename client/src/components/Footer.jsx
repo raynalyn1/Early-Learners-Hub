@@ -3,6 +3,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { PiPhoneCallFill } from "react-icons/pi";
 import { BiLogoGmail } from "react-icons/bi";
 import { MdOutlineFacebook } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 const Footer = () => {
@@ -24,9 +25,9 @@ const Footer = () => {
         <div className='w-full lg:w-1/2 flex flex-col justify-center items-center'>
           <p className='font-bold text-center lg:text-left text-lg lg:text-xl'>About E-Learners</p>
           <div className='flex flex-col gap-3 items-center lg:items-start mt-3'>
-            <p className='text-sm lg:text-base'>Our Team</p>
+            <Link to="#" className='text-sm lg:text-base'>Our Team</Link> 
             <p className='text-sm lg:text-base'>About Us</p > 
-            <p className='text-sm lg:text-base'>FAQ's</p>
+            <Link to="/Faqs" className='text-sm lg:text-base'>FAQ's</Link>
           </div>
         </div>
 

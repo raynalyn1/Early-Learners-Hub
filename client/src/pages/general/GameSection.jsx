@@ -68,7 +68,7 @@ const GameSection = () => {
             <img
               src={img6}
               alt="Search Icon"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"
+              className="absolute right-3 top-4 transform -translate-y-1/2 h-6 w-6 text-gray-400"
             />
           </div>
         </section> 
