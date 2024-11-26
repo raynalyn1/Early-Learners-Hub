@@ -228,7 +228,7 @@ const MemoryGame = () => {
     if (retryCount[difficulty] < 3) {
       setGameEnded(true);
       setShowLevelSelection(true);
-      setTimeout(() => alert(`Retry limit reached for ${difficulty}.`), 500);
+      // setTimeout(() => alert(`Retry limit reached for ${difficulty}.`), 500);
       return;
     }
 
@@ -498,7 +498,7 @@ const MemoryGame = () => {
             {cards.map((icon, index) => (
               <div
                 key={index}
-                className={`w-30 h-30 sm:w-40 sm:h-40 md:w-30 md:h-30 lg:w-50 lg:h-50  flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
+                className={`w-30 h-30 sm:w-40 sm:h-40 md:w-30 md:h-30 lg:w-60 lg:h-60  flex items-center justify-center border-2 border-[#7E4F0E] rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105
                 ${
                   flippedCards.includes(index) || matchedCards.includes(index)
                     ? "bg-white text-gray-800"

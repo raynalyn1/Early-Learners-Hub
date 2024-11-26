@@ -14,6 +14,8 @@ import User from './pages/admin/User';
 import ScoreTracking from './pages/admin/ScoreTracking';
 import UploadVideos from './pages/admin/UploadVideos';
 import AnimalGame from './pages/Games/AnimalGames';
+import OurTeam from './pages/general/OurTeam';
+import FAQ from './pages/general/FAQ';
 
 // Lazy load the pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
@@ -70,6 +72,12 @@ const AppRoutes = () => {
       <Route path="/services" element={<GeneralLayout><Services /></GeneralLayout>} />
       <Route path="/VideoSection" element={<GeneralLayout><GameSection /></GeneralLayout>} />
       <Route path="/GamesSection" element={<GeneralLayout><GameSect /></GeneralLayout>} />
+      <Route path="/OurTeam" element={<GeneralLayout><OurTeam /></GeneralLayout>} />
+      <Route path="/FAQ" element={<GeneralLayout><FAQ /></GeneralLayout>} />
+
+      
+
+
 
       {/* Admin Pages */}
       <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
