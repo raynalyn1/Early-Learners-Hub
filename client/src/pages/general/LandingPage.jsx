@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import img1 from "../../images/happy.png";
 import img2 from "../../images/creative.png";
 import img3 from "../../images/learn.png";
@@ -9,18 +9,14 @@ import img10 from "../../images/ey.png";
 import img17 from "../../images/light.png";
 import img18 from "../../images/gem.png";
 import Footer from "../../components/Footer";
-import mainImg from "../../images/landingimg.png";
+import mainImg from "../../images/landingimg.png"; 
 import lets from "../../images/lets.png";
 
 const LandingPage = () => {
   return (
     <div style={{ fontFamily: 'Poppins' }}>
       {/* Main Container */}
-<<<<<<< Updated upstream
-      <div className="bg-[#EB9721] w-full px-5 sm:px-4 relative">
-=======
       <div className="bg-[#EB9721] w-full px-5 sm:px-5 relative">
->>>>>>> Stashed changes
         {/* Tagline Section with shadow */}
         <div className="bg-[#EBCEA8] w-full flex flex-col-reverse lg:flex-row justify-center items-center pb-10 lg:pb-20 relative h-auto lg:h-[100%]">
           {/* Center: Tagline in the center of the cover */}
@@ -31,14 +27,10 @@ const LandingPage = () => {
             >
               Early Learners Hub
             </h2>
-<<<<<<< Updated upstream
-            <p className="text-[2rem] lg:text-[1.8rem] leading-snug text-left mt-4" style={{ opacity: 0.8 }}>
-=======
             <p
               className="text-[2rem] lg:text-[1.8rem] leading-snug font-poppins text-left mt-4"
               style={{ opacity: 0.8 }}
             >
->>>>>>> Stashed changes
               Where learning meets play, You can <br /> game your way to growth!
             </p>
           </div>
