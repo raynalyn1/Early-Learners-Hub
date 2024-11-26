@@ -161,18 +161,7 @@ function UploadVideos() {
       )}
 
       {/* Dashboard */}
-      <div className="flex items-center justify-between bg-white p-4 shadow-md rounded-md mb-6 border border-[#E9AF5E]">
-        <div>
-          <h2 className="text-gray-700 text-lg font-semibold">Dashboard</h2>
-          <p className="text-sm text-gray-500">{currentDate}</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold">
-            {username ? getInitials(username) : "??"}
-          </div>
-          <p className="text-gray-700">{username}</p>
-        </div>
-      </div>
+     
 
       {/* Sections */}
       <h2 className="text-[1.5rem] font-bold ml-9">Videos</h2>
@@ -207,7 +196,7 @@ function UploadVideos() {
 
       {/* Uploaded Videos */}
       {activeSection === "uploaded" && (
-        <div className="shadow-lg w-full h-[60vh] rounded-lg overflow-auto  ">
+        <div className="shadow-lg w-full h-[80vh] rounded-lg overflow-auto  ">
           <div className="grid grid-cols-3 gap-4">
             {videos.map((video) => (
               <div key={video.id} className="bg-white shadow-md rounded overflow-hidden relative border border-[orange]">

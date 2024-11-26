@@ -1,0 +1,16 @@
+/* Custom CSS to slide in the FAQ items */
+.faq-item {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .faq-item.in-view {
+    transform: translateY(0); /* Slide in from the bottom */
+    opacity: 1; /* Fade in */
+  }
+  
+  /* Initial state when not in view */
+  .faq-item {
+    transform: translateY(50px); /* Start below the view */
+    opacity: 0; /* Hidden */
+  }
+  

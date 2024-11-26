@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Section */}
-      <nav className="bg-[#F5F5F5] w-full top-0  z-999 px-[5%] shadow-custom-heavy" style={{ boxShadow: '0 4px 10px rgba(0, 0, 0)', zIndex: 999 }}>
+      <nav className="bg-[#F5F5F5] w-full sticky top-0  z-999 px-[5%]" style={{ zIndex: 999 }}>
         <div className="container flex justify-between items-center">
 
           {/* Logo Section */}

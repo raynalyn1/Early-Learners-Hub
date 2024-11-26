@@ -90,7 +90,9 @@ const LandingPage = () => {
           </div>
 
           {/* Mission, Vision, Values Section with shadow */}
+
           <div className="flex flex-wrap justify-center gap-6 mt-10">
+
             {[
               {
                 img: img10,
@@ -137,6 +139,7 @@ const LandingPage = () => {
             </h2>
             <img src={lets} alt="run" className="w-[10%] object-center" />
           </div>
+
         </div>
       </div>
 

@@ -1,52 +1,55 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Importing Axios
 import dropdownIcon from "../../images/Dashboard/dropdownIcon.png";
 
 const User = () => {
-  const [students, setStudents] = useState([]);
-  const [selectedStudent, setSelectedStudent] = useState("");
-  const [userData, setUserData] = useState([]);
+  const [students, setStudents] = useState([]); // Stores the list of students fetched from the API
+  const [searchQuery, setSearchQuery] = useState(""); // Stores the search query entered by the user
+  const [userData, setUserData] = useState([]); // Stores the filtered user data to be displayed
 
+  // Fetch students from the API when the component mounts
   useEffect(() => {
     const fetchStudents = async () => {
-      const studentsData = [
-        { id: 1, name: "Paradero, Rovelyn", parent: "Paradero, Rodrigo", contact: "rodrigo.paradero@gmail.com" },
-        { id: 2, name: "Dela Cruz, Juan", parent: "Dela Cruz, Maria", contact: "maria.delacruz@gmail.com" },
-      ];
-      setStudents(studentsData);
+      try {
+        // Replace this with your actual API URL
+        const response = await axios.get('http://localhost:3000/auth/users');
+        setStudents(response.data); // Set the fetched data to the students state
+        setUserData(response.data); // Initially, display all users
+      } catch (error) {
+        console.error("Error fetching students:", error);
+      }
     };
 
     fetchStudents();
-  }, []);
+  }, []); // Empty dependency array means this will run only once when the component mounts
 
-  const handleViewUserList = () => {
-    if (selectedStudent) {
-      const filteredData = students.filter(student => student.name === selectedStudent);
-      setUserData(filteredData);
-    } else {
-      setUserData(students);
-    }
+  // Function to filter the user data based on the search query
+  const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    // Filter students based on the name or email
+    const filteredData = students.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(query) || 
+        student.email.toLowerCase().includes(query)
+      );
+    });
+    setUserData(filteredData); // Set filtered data to be displayed in the table
   };
 
   return (
-    <div className="p-8 bg-[#FAF3EB] h-[95vh] overflow-auto">
-      {/* Header */}
-      {/* <div className="flex justify-between items-center bg-white shadow-lg p-4 mb-6">
-       
-        <div className="flex items-center gap-4">
-          <div className="bg-gray-300 rounded-full w-10 h-10 flex items-center justify-center text-white font-bold">MR</div>
-          <span className="text-gray-700 font-semibold">Mizar Reim</span>
-          <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
-        </div>
-      </div> */}
-
-      <h1 className="text-3xl font-bold text-[#F47C21] mb-10">List of User</h1>
+    <div className="p-8 bg-[#FAF3EB] h-[93vh] overflow-auto">
+      <h1 className="text-3xl font-bold text-[#F47C21] mb-8">List of Users</h1>
 
       {/* Search Box */}
-      <div className="flex justify-end mb-10 mr-[10rem]">
-        <div className="relative w-[20%] h-[]">
+      <div className="flex justify-end mb-6">
+        <div className="relative w-[25%]">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by name or email"
+            value={searchQuery}
+            onChange={handleSearch} // Update the search query as user types
             className="w-full p-3 border border-gray-300 rounded bg-[#FBF7F0] focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-700"
           />
           <img
@@ -58,22 +61,30 @@ const User = () => {
       </div>
 
       {/* Table */}
-      <table className="w-[60%] bg-white border border-gray-300 shadow-md mx-auto mt-[5rem]">
-        <thead>
-          <tr className="bg-[#FBF7F0]">
-            <th className="border border-[#E5E5E5] px-4 py-3 text-center text-[#333333] font-semibold">User</th>
-            <th className="border border-[#E5E5E5] px-4 py-3 text-center text-[#333333] font-semibold">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {userData.map((user) => (
-            <tr key={user.id} className="bg-[#FBF7F0]">
-              <td className="border border-[#E5E5E5] px-4 py-3 text-gray-700">{user.name}</td>
-              <td className="border border-[#E5E5E5] px-4 py-3 text-gray-700">{user.contact}</td>
+      <div className="overflow-x-auto"  style={{ height: '60vh' }}>
+        <table className="w-full bg-white border border-gray-300 shadow-md rounded-lg">
+          <thead className="bg-[#EB9721] sticky top-0 z-10">
+            <tr>
+              <th className="border border-[#E5E5E5] px-6 py-3 text-center text-[#333333] font-semibold text-lg">User</th>
+              <th className="border border-[#E5E5E5] px-6 py-3 text-center text-[#333333] font-semibold text-lg">Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {userData.length > 0 ? (
+              userData.map((user) => (
+                <tr key={user.id} className="bg-[#FBF7F0] hover:bg-[#F9E1B8] cursor-pointer">
+                  <td className="border border-[#E5E5E5] px-6 py-4 text-gray-700 text-left">{user.name}</td>
+                  <td className="border border-[#E5E5E5] px-6 py-4 text-gray-700 text-left">{user.email}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="2" className="text-center py-4 text-gray-700">No users found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
