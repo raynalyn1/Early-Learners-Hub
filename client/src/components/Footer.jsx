@@ -11,7 +11,7 @@ const Footer = () => {
       <div className='w-full flex flex-col lg:flex-row gap-5 p-5'>
         {/* Left Section: Logo and Address */}
         <div className='w-full lg:w-1/3 flex flex-col gap-2 p-2'>
-          <div className='flex gap-5 mt-5 justify-center lg:justify-start'>
+          <div className='flex gap-5 mt-6 justify-center lg:justify-start'>
             <FaLocationDot className='text-3xl lg:text-4xl' style={{ color: '#000000', border: '2px solid #EB9721', borderRadius: '50%' }} />
             <p className='text-[.7rem] lg:text-[.9rem] text-center lg:text-left font-poppins'>
               Unit 1 - Bajarias' Commercial Space, Cambangyao Dalaguete, near Gerboy's Residence Dalaguete,
