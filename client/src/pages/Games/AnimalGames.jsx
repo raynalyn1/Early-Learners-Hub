@@ -74,7 +74,7 @@ const AnimalGame = () => {
   const [guess, setGuess] = useState("");
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
-  const [failedQuestions, setFailedQuestions] = useState(0);
+  const [failedQuestions,  setFailedQuestions] = useState(0);
   const [showCorrectModal, setShowCorrectModal] = useState(false);
   const [showIncorrectModal, setShowIncorrectModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -210,9 +210,40 @@ const AnimalGame = () => {
     }, 5000);
   };
 
+  const postGameResults = async () => {
+    try {
+      const missedScore = failedQuestions || 0; // Use 0 if no missed answers
+
+      const gameData = {
+        playerName: playerName,
+        gameName: gameName,
+        difficulty: difficulty.charAt(0).toUpperCase() + difficulty.slice(1),
+        score: score.toString(),
+        missedScore: missedScore // Add missed score to the request
+      };
+
+      const response = await fetch('http://localhost:3000/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post game results');
+      }
+
+      console.log('Game results posted successfully:', gameData);
+    } catch (error) {
+      console.error('Error posting game results:', error);
+    }
+  };
+
   const endGame = () => {
     setIsGameActive(false);
     handleGameEnd();
+    postGameResults();
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
   };
@@ -416,6 +447,7 @@ const AnimalGame = () => {
                   Game Over! 🏆
                   {' '}
                   {playerName}
+
                 </h2>
                 <div className="space-y-4 mb-6">
                   <p className="text-2xl">

@@ -22,7 +22,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center overflow-auto">
+    <div className="bg-[#EB9721] w-69 h-screen p-7 flex flex-col items-center">
       {/* Logo */}
       <img src={logo} alt="Logo" className="w-24 h-auto mb-12" />
 

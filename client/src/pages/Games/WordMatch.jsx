@@ -64,23 +64,12 @@ const WordMatch = () => {
   //get the player name and the name of the game
   const [playerName, setPlayerName] = useState('');
   const [gameName, setGameName] = useState('');
-
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [missedAnswers, setMissedAnswers] = useState(0);
+  const TOTAL_QUESTIONS = 10; // Adjust the value as needed.
   const isGameActive = gameStarted;
   const showCorrectModal = modalVisible;
-
-
-//useEffect for the retrieve name 
-
-  useEffect(() => {
-    const name = localStorage.getItem('playerName');
-    const game = localStorage.getItem('selectedGame');
-    setPlayerName(name);
-    setGameName(game);
-  }, []);
-
-
-
-
 
   useEffect(() => {
     // Simulate loading delay (e.g., API call)
@@ -112,14 +101,22 @@ const WordMatch = () => {
   const handleTimeout = () => {
     setModalMessage("Time's up! Try again.");
     setModalVisible(true);
+    setMissedAnswers(prev => prev + 1);
     setTimeout(() => {
       setModalVisible(false);
-      startGame();
+      if (questionIndex === TOTAL_QUESTIONS - 1) {
+        setAchievementVisible(true);
+        setGameStarted(false);
+        postGameResults(); // Post results when game ends
+      } else {
+        setQuestionIndex((prevIndex) => prevIndex + 1);
+        setTimer(10);
+      }
     }, 1000);
   };
 
   const generateQuestion = () => {
-    const selectedWord = wordsAndImages[questionIndex]; // Get the current question based on index
+    const selectedWord = shuffledQuestions[questionIndex];
 
     // Create options (4 options: 1 correct + 3 random)
     const otherWords = wordsAndImages.filter(
@@ -142,19 +139,23 @@ const WordMatch = () => {
     if (word === currentWord) {
       const updatedCorrectMatches = [...correctMatches, word];
       setCorrectMatches(updatedCorrectMatches);
+      setCorrectAnswers(prev => prev + 1);
       setModalMessage("Correct match!");
 
-      // Check if all questions have been answered
-      if (updatedCorrectMatches.length === wordsAndImages.length - 1) {
+      // Check if we've reached 10 questions
+      if (questionIndex === TOTAL_QUESTIONS - 1) {
         setAchievementVisible(true);
-        setGameStarted(false); // Stop the game when all answers are correct
+        setGameStarted(false);
+        postGameResults(); // Post results when game ends
       } else {
-        setQuestionIndex((prevIndex) => prevIndex + 1); // Move to the next question
-        showModal(); // Show correct answer modal
+        setQuestionIndex((prevIndex) => prevIndex + 1);
+        setTimer(10);
+        showModal();
       }
     } else {
+      setMissedAnswers(prev => prev + 1);
       setModalMessage("Try again!");
-      showModal(); // Show try again modal
+      showModal();
     }
   };
 
@@ -166,11 +167,57 @@ const WordMatch = () => {
   };
 
   const startGame = () => {
+    shuffleQuestions(); // Shuffle questions at the start
     setCorrectMatches([]);
     setQuestionIndex(0);
     setGameStarted(true);
-    setTimer(difficultyLevels[difficulty].time); // Reset timer on game start
+    setTimer(10);
     setModalMessage("");
+    setCorrectAnswers(0);
+    setMissedAnswers(0);
+  };
+
+  const shuffleQuestions = () => {
+    const shuffled = [...wordsAndImages]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, TOTAL_QUESTIONS); // Only take 10 questions
+    setShuffledQuestions(shuffled);
+  };
+
+  const calculateScore = () => {
+    const totalQuestions = TOTAL_QUESTIONS;
+    const scorePercentage = (correctAnswers / totalQuestions) * 100;
+    return scorePercentage.toFixed(1); // Returns score with one decimal place
+  };
+
+  const postGameResults = async () => {
+    try {
+      const scorePercentage = calculateScore();
+      
+      const gameData = {
+        playerName: playerName,
+        gameName: gameName,
+        difficulty: "Easy", // You can modify this based on your difficulty levels
+        score: scorePercentage,
+        missedScore: missedAnswers
+      };
+
+      const response = await fetch('http://localhost:3000/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(gameData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post game results');
+      }
+
+      console.log('Game results posted successfully');
+    } catch (error) {
+      console.error('Error posting game results:', error);
+    }
   };
 
   return (
@@ -269,16 +316,14 @@ const WordMatch = () => {
             {/* Word Match Game */}
           </h1>
           <div className="mb-4">
-            <div className="timer-bar bg-gray-200 rounded-full h-6 mb-10 border border-[#EE910E] relative">
+            <div className="timer-bar w-1/3 mx-auto bg-gray-200 rounded-full h-6 mb-4 border border-[#EE910E] relative">
               <div
                 className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000 flex items-center justify-center"
                 style={{
-                  width: `${
-                    (timer / difficultyLevels[difficulty].time) * 100
-                  }%`,
+                  width: `${(timer / 10) * 100}%`,
                 }}
               >
-                <p className="text-white font-semibold w-full text-center ">
+                <p className="text-white font-semibold w-full text-center">
                   {timer}
                 </p>
               </div>
@@ -286,7 +331,7 @@ const WordMatch = () => {
             <br />
             <br />
             <img
-              src={wordsAndImages[questionIndex]?.image}
+              src={shuffledQuestions[questionIndex]?.image}
               alt={currentWord}
               className="mb-6 mx-auto rounded-lg bg-[#ECFFD9]"
               style={{
@@ -331,7 +376,7 @@ const WordMatch = () => {
 
             {/* Congratulatory Message */}
             <h2 className="text-2xl font-bold mb-4 text-center text-yellow-700">
-              Congratulations! {playerName} {gameName}
+              Congratulations!
             </h2>
 
             {/* Stars Display */}
@@ -347,7 +392,7 @@ const WordMatch = () => {
             <div className="text-center mb-4">
               <p className="font-semibold text-gray-700">Mission:</p>
               <p className="text-gray-500">
-                Successfully Matched The Names of Animals
+                Completed {correctAnswers} out of {TOTAL_QUESTIONS} questions
               </p>
             </div>
 
@@ -355,11 +400,11 @@ const WordMatch = () => {
             <div className="flex justify-around mb-4">
               <div className="text-center">
                 <p className="font-semibold text-gray-700">Score:</p>
-                <p className="text-gray-500">10/10</p>
+                <p className="text-gray-500">{correctAnswers}/{correctAnswers + missedAnswers}</p>
               </div>
               <div className="text-center">
                 <p className="font-semibold text-gray-700">Missed:</p>
-                <p className="text-gray-500">0</p>
+                <p className="text-gray-500">{missedAnswers}</p>
               </div>
             </div>
 

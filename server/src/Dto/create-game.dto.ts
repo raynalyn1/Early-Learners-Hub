@@ -3,5 +3,6 @@ export class CreateGameDto {
     gameName: string;
     difficulty: string;
     score: number;
+    missedScore: number;
   }
   

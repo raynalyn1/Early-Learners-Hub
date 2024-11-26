@@ -80,8 +80,6 @@ const MathGame = () => {
     return { questionText, correctAnswer, options };
   };
 
-  
-
   const generateOptions = (correctAnswer, difficulty) => {
     const options = new Set();
     options.add(correctAnswer);
@@ -135,6 +133,20 @@ const MathGame = () => {
     }
     setAnimate(false);
     setTimeout(() => setAnimate(true), 10); // Brief delay to restart animation
+  };
+
+  const resetGame = () => {
+    setCategory(null);
+    setDifficulty(null);
+    setQuestion(null);
+    setScore(0);
+    setAnswered(false);
+    setQuestionsCount(0);
+    setShowModal(false);
+    setCorrectMatches([]);
+    setQuestionIndex(0);
+    setGameStarted(false);
+    setAnimate(false);
   };
 
   const startGame = () => {
@@ -254,48 +266,47 @@ const MathGame = () => {
                 </div>
               )}
 
-{question && (
-      <div
-        className="items-center justify-center md:mt-[15rem]"
-        style={{ filter: "brightness(100%)" }}
-      >
-        <div className="mt-4 grid grid-cols-2 gap-9">
-          {question.options.map((option, idx) => (
-            <button
-              key={idx}
-              className="bg-yellow-200 text-5xl font-bold p-10 py-8 rounded-xl hover:bg-yellow-300 transition duration-200"
-              onClick={() => handleAnswer(option)}
-              disabled={answered}
-              style={{
-                animation: animate ? `dropdown 0.5s ease-out both, bounceTwice 0.8s ease-in-out 0.5s forwards` : "none",
-              }}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        <h3 className="text-[200px] font-bold text-purple-600 border top-0 sm:mt-[2rem] border-[#FFCF8C] bg-[#FFCF8C] sm:w-[60%] sm:h-[300px] md:w-[700px] md:h-[400px] flex items-center justify-center">
-          {question.questionText}
-        </h3>
-
-        {answered && !showModal && (
-              <div className=" relative  ">
-                <button
-                  className="bg-pink-500 text-white text-lg font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-pink-600 transition duration-300 mt-8 bg-blue-500 text-white p-4 rounded md:ml-[13rem] "
+              {question && (
+                <div
+                  className="items-center justify-center md:mt-[15rem]"
                   style={{ filter: "brightness(100%)" }}
-                  onClick={handleNextQuestion}
                 >
-                  Next Question
-                </button>
-              </div>
-            )}
-        <div className="rounded-lg w-full max-w-5xl p-40"></div>
-      </div>
-    )}
- 
+                  <div className="mt-4 grid grid-cols-2 gap-9">
+                    {question.options.map((option, idx) => (
+                      <button
+                        key={idx}
+                        className="bg-yellow-200 text-5xl font-bold p-10 py-8 rounded-xl hover:bg-yellow-300 transition duration-200"
+                        onClick={() => handleAnswer(option)}
+                        disabled={answered}
+                        style={{
+                          animation: animate
+                            ? `dropdown 0.5s ease-out both, bounceTwice 0.8s ease-in-out 0.5s forwards`
+                            : "none",
+                        }}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                  <h3 className="text-[200px] font-bold text-purple-600 border top-0 sm:mt-[2rem] border-[#FFCF8C] bg-[#FFCF8C] sm:w-[60%] sm:h-[300px] md:w-[700px] md:h-[400px] flex items-center justify-center">
+                    {question.questionText}
+                  </h3>
 
+                  {answered && !showModal && (
+                    <div className=" relative  ">
+                      <button
+                        className="bg-pink-500 text-white text-lg font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-pink-600 transition duration-300 mt-8 bg-blue-500 text-white p-4 rounded md:ml-[13rem] "
+                        style={{ filter: "brightness(100%)" }}
+                        onClick={handleNextQuestion}
+                      >
+                        Next Question
+                      </button>
+                    </div>
+                  )}
+                  <div className="rounded-lg w-full max-w-5xl p-40"></div>
+                </div>
+              )}
             </div>
-           
 
             {showModal && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
@@ -303,16 +314,21 @@ const MathGame = () => {
                   <h2 className="text-3xl font-bold text-green-600">
                     🎊 Congratulations! 🎊
                   </h2>
-                  <p className="mt-4 text-lg">
-                    You completed the game with a score of {score}!
+                  <p className="mt-4 text-lg flex justify-center">
+                    You completed the game 
                   </p>
-                  <p className="mt-2 text-lg">Difficulty: {difficulty}</p>
+
+                 <p className="mt-4 text-lg flex justify-center"> score: {score} </p>
+                  <p className="mt-2 text-lg flex justify-center">Difficulty: {difficulty}</p>
+                  
                   <button
+                    onClick={resetGame} // This already links to the resetGame function
                     className="mt-6 bg-blue-500 text-white text-lg font-bold p-4 rounded-lg hover:bg-blue-600 transition duration-300"
-                    onClick={() =>  setDifficulty(null)}
-                  >
+                    >
+                  
                     Play Again
                   </button>
+               
                 </div>
               </div>
             )}
