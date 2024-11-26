@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-import mathImage1 from "../../images/games/bg2.png";
+import mathImage1 from "../../images/games/mathImage1.png";
 import mathLetters from "../../images/games/mathLetters.png";
 import lutters from "../../images/games/lutters.png";
 import mathcount from "../../images/games/mathcount.png";

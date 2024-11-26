@@ -414,8 +414,8 @@ const AnimalGame = () => {
               <div className="modal-content bg-white p-8 rounded-2xl shadow-xl text-center">
                 <h2 className="text-4xl font-bold text-purple-600 mb-6">
                   Game Over! 🏆
+                  {' '}
                   {playerName}
-                  {gameName}
                 </h2>
                 <div className="space-y-4 mb-6">
                   <p className="text-2xl">

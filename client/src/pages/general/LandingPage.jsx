@@ -18,9 +18,9 @@ import lets from '../../images/lets.png'
 
 const LandingPage = () => {
   return (
-    <div>
+    <div style={{ fontFamily: 'Poppins' }}>
       {/* Main Container */}
-      <div className="bg-[#EB9721] w-full px-5 sm:px-9 relative">
+      <div className="bg-[#EB9721] w-full px-5 sm:px-4 relative">
         {/* Tagline Section with shadow */}
         <div className="bg-[#EBCEA8] w-full flex flex-col-reverse lg:flex-row justify-center items-center pb-10 lg:pb-20 relative h-auto lg:h-[100%]">
           {/* Center: Tagline in the center of the cover */}
@@ -28,7 +28,7 @@ const LandingPage = () => {
             <h2 className="text-[3rem] lg:text-[3.8rem] font-bold leading-tight text-center mt-[4vh] lg:mt-[12vh]" style={{ textShadow: '2px 2px 2px #EB9721', opacity: 100 }}>
               Early Learners Hub
             </h2>
-            <p className="text-[2rem] lg:text-[1.8rem] leading-snug font-poppins text-left mt-4" style={{ opacity: 0.8 }}>
+            <p className="text-[2rem] lg:text-[1.8rem] leading-snug text-left mt-4" style={{ opacity: 0.8 }}>
               Where learning meets play, You can <br /> game your way to growth!
             </p>
           </div>
