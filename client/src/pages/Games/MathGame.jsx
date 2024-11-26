@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-import mathImage1 from "../../images/games/bg2.png";
+import mathImage1 from "../../images/games/mathImage1.png";
 import mathLetters from "../../images/games/mathLetters.png";
 import lutters from "../../images/games/lutters.png";
 import mathcount from "../../images/games/mathcount.png";
@@ -160,7 +160,7 @@ const MathGame = () => {
   };
 
   return (
-    <div className="flex flex-col items-center relative  ">
+    <div className="flex flex-col items-center relative overflow-auto h-[100vh] ">
       <div className="flex items-center justify-center h-screen">
         <img
           src={mathImage1}
@@ -237,7 +237,7 @@ const MathGame = () => {
                 className="absolute left-0 top-4 cursor-pointer w-40h-40 z-20"
               />
               {category && !difficulty && (
-                <div className="mt-6 flex flex-col items-center space-y-4 gap-3">
+                <div className="mt-6 flex flex-col items-center space-y-4 gap-3 justify-center">
                   <div
                     className="flex items-center text-[#7E4F0E] text-3xl font-bold bg-[#E1F2F4] border-8 border-[#3CA1B5] rounded-2xl px-10 py-4 shadow-md"
                     style={{

@@ -122,12 +122,12 @@ const GameSect = () => {
 
       <div className="bg-[#EB9721] w-full px-5 relative">
         <div className="bg-[#EBCEA8] w-full px-5 py-10">
-          <div className="flex justify-between items-center mb-9">
-            <h1 className="text-2xl font-semibold text-start">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-9">
+            <h2 className="text-2xl font-semibold text-start mb-4 md:mb-0">
               Educational Games
-            </h1>
+            </h2>
             <select
-              className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md ml-auto outline-none"
+              className="border border-[#EB9721] text-gray-800 font-semibold py-2 px-4 rounded-md ml-auto outline-none w-full md:w-auto"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
@@ -138,7 +138,7 @@ const GameSect = () => {
             </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-5 md:px-10">
             {filteredGames().map((game, index) => (
               <div
                 key={index}

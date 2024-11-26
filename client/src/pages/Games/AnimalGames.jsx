@@ -321,22 +321,22 @@ const AnimalGame = () => {
           )}
 
           {isGameActive && (
-            <div className="game-container bg-white p-10 rounded-2xl shadow-xl max-w-4xl w-full mx-4">
-              <div className="flex justify-between items-center w-full mb-6">
-                <button
-                  onClick={handleBackButtonClick}
-                  className="text-blue-500 hover:text-blue-700 text-xl font-bold"
-                >
-                  ← Back
-                </button>
-                <h1 className="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
-                  Guess the Animal!
-                </h1>
-              </div>
-
-              <div className="timer-bar bg-gray-200 rounded-full h-6 mb-6">
-                <div
-                  className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000"
+            <div className="game-container bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-full md:max-w-4xl w-full mx-4">
+            <div className="flex flex-col md:flex-row justify-between items-center w-full mb-6">
+              <button
+                onClick={handleBackButtonClick}
+                className="text-blue-500 hover:text-blue-700 text-lg md:text-xl font-bold mb-4 md:mb-0"
+              >
+                ← Back
+              </button>
+              <h1 className="text-2xl md:text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                Guess the Animal!
+              </h1>
+            </div>
+          
+            <div className="timer-bar bg-gray-200 rounded-full h-4 md:h-6 mb-4 md:mb-6 w-full">
+              <div
+                className="bg-gradient-to-r from-green-400 to-blue-500 h-full rounded-full transition-all duration-1000"
                   style={{
                     width: `${
                       (timer / difficultyLevels[difficulty].time) * 100
@@ -346,13 +346,13 @@ const AnimalGame = () => {
               </div>
 
               {currentAnimal && (
-                <div className="flex flex-col items-center ">
-                  <div className="relative mb-6 border shadow-lg ">
-                    {/* Animal Image */}
-                    <img
-                      src={currentAnimal.image}
-                      alt="Animal"
-                      className="max-w-[100%] max-h-[100%] object-cover rounded-2xl hover:scale-105 transform transition-all duration-200 md:ml-[12rem]"
+                <div className="flex flex-col items-center">
+                <div className="relative mb-6 border shadow-lg max-w-full md:max-w-lg lg:max-w-xl md:w-30 md:h-30">
+                  {/* Animal Image */}
+                  <img
+                    src={currentAnimal.image}
+                    alt="Animal"
+                    className="w-[80%] h-[30vh] object-cover rounded-2xl hover:scale-105 transform transition-all duration-200 sm:w-[60%] sm:h-[25vh] md:w-[50%] md:h-[20vh] lg:w-[55%] lg:h-[30vh] lg:ml-[12rem]"
                     />
 
                     {/* Unscrambled letters */}
@@ -445,6 +445,9 @@ const AnimalGame = () => {
               <div className="modal-content bg-white p-8 rounded-2xl shadow-xl text-center">
                 <h2 className="text-4xl font-bold text-purple-600 mb-6">
                   Game Over! 🏆
+                  {' '}
+                  {playerName}
+
                 </h2>
                 <div className="space-y-4 mb-6">
                   <p className="text-2xl">
